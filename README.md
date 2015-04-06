@@ -1,6 +1,6 @@
 dotfiles
 =========
 
-Active:![alt tag](http://peter.gs/src1.png)
+Active: ![active](http://peter.gs/scr1.png "Active")
 
-Inactive:![alt tag](http://peter.gs/src2.png)
+Inactive: ![inactive](http://peter.gs/scr2.png "Inactive")
