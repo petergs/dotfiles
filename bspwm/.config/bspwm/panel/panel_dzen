@@ -1,0 +1,145 @@
+#!/bin/bash
+# vim:fenc=utf-8:nu:ai:si:et:ts=4:sw=4:ft=sh:
+
+# Dzen settings & variables
+ICONPATH="/home/pgs/Pictures/icons/xbm"
+COLOR_ICON="#a0a0a0"
+CRIT_COLOR="#ffa200"
+DZEN_BG="#202020"
+DZEN_FG="#a0a0a0"
+HEIGHT=12
+WIDTH=0
+BAR_FG="#FFA200"
+BAR_BG="#808080"
+DWIDTH=1260
+DHEIGHT=20
+DX=10
+DY=10
+
+FONT="-*-terminus-medium-r-*-*-12-*-*-*-*-*-iso10646-*"
+
+DZEN="dzen2 -fn $FONT  -bg $DZEN_BG -fg $DZEN_FG -w $DWIDTH -h $DHEIGHT -x $DX -y $DY" 
+
+# functions
+vol ()
+{
+    VOL=$(pulseaudio-ctl | grep "Volume level" | cut -d":" -f 2 | grep -Eo "[0-9]+ %" | tr -d ' %')
+	echo -n  "^fg($COLOR_ICON)^i($ICONPATH/spkr_01.xbm)^fg()" 
+    if [[ $VOL -gt 90 ]]; then
+        echo -n " ^fg($BAR_FG)■■■■■^fg()"
+    elif [[ $VOL -gt 79 ]]; then
+        echo -n " ^fg($BAR_FG)■■■■^fg($COLOR_ICON)■^fg()"
+    elif [[ $VOL -gt 59 ]]; then
+        echo -n " ^fg($BAR_FG)■■■^fg($COLOR_ICON)■■^fg()"
+    elif [[ $VOL -gt 39 ]]; then
+        echo -n " ^fg($BAR_FG)■■^fg($COLOR_ICON)■■■^fg()"
+    elif [[ $VOL -gt 19 ]]; then
+        echo -n " ^fg($BAR_FG)■^fg($COLOR_ICON)■■■■^fg()"
+    else 
+            echo -n " ^fg($COLOR_ICON)■■■■■^fg()"
+    fi
+	return
+}
+
+brightness ()
+{
+    BRIGHTNESS=$(/home/pgs/.config/bspwm/panel/scripts/brightness)
+	echo -n  "^fg($COLOR_ICON)^i($ICONPATH/brightness.xbm)^fg() $BRIGHTNESS" 
+    return
+
+}
+
+date ()
+
+{
+	TIME=$(/usr/bin/date +"%R, %a %e")
+    echo -n "^fg($COLOR_ICON)^i($ICONPATH/clock.xbm)^fg($DZEN_FG) $TIME"
+	return
+}
+
+between ()
+{
+    #echo -n " ^fg(#A0A0A0)^r(2x2)^fg() "
+	echo -n "^fg($DZEN_FG) | ^fg()"
+    return
+}
+
+# Change logo on battery status
+battery () {
+    BAT_PERCENT=$(acpi -b | grep -Po "\d{1,}%")
+
+    BAT_CHARGING=$(acpi -b | grep -Eo "(arging|Full)")
+    if [[ -n $BAT_CHARGING ]]; then
+
+        BAT_VAL=$(echo $BAT_PERCENT | grep -Po "\d{2,}")
+        if [[ $BAT_VAL -gt 70 ]]; then
+            echo -n "^fg($COLOR_ICON)^i($ICONPATH/bat_full_01.xbm)^fg()"
+        elif [[ $BAT_VAL -gt 30 ]]; then
+            echo -n "^fg($COLOR_ICON)^i($ICONPATH/bat_full_01.xbm)^fg()"
+        else 
+            echo -n "^fg($COLOR_ICON)^i($ICONPATH/bat_low_01.xbm)^fg()"
+        fi
+        
+        echo -n " $BAT_PERCENT"
+    else
+        echo -n "^fg($COLOR_ICON)^i($ICONPATH/ac14.xbm)^fg()"
+    fi
+
+    return
+}
+
+network () {
+
+    echo -n "^fg($COLOR_ICON)^i($ICONPATH/wifi_01.xbm)^fg() "
+    NETWORK=$(/home/pgs/.config/bspwm/panel/scripts/wireless)
+    echo -n "$NETWORK"
+    return
+}
+mail ()
+{
+    GMAIL=$(tail -1 /tmp/gmail) 
+    if [ -n "$GMAIL" ]; then
+        if [[ "$GMAIL" -eq "0" ]]; then
+            echo -n "^fg($COLOR_ICON)^i($ICONPATH/mail.xbm)^fg()"
+        else
+            echo -n "^fg($BAR_FG)^i($ICONPATH/mail.xbm)^fg()"
+        fi
+        echo -n " $GMAIL"
+
+    else
+        echo -n "^fg($COLOR_ICON)^i($ICONPATH/mail.xbm)^fg()"
+        echo -n "  0"
+    fi
+    return
+}
+
+position_left="^p(_LEFT)^p(1200)"
+logo="^bg($BAR_FG) ^fg($COLOR_ICON)^i($ICONPATH/arch_10x10.xbm)^fg() ^bg()          "
+desktops=$(/home/pgs/.config/bspwm/panel/scripts/desktops) 
+position_right="^p(_RIGHT)^p(-435)"
+
+
+while true
+do
+
+    #left
+    echo $position_left
+    echo -n $logo
+    echo -n "  $desktops" 
+
+    #right
+    echo -n $position_right
+    mail
+    between
+    network
+    between
+    brightness
+    between
+    vol
+    between
+    battery
+    between
+    date
+
+    sleep 0.1
+done | $DZEN

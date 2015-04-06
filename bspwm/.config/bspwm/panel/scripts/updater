@@ -1,0 +1,6 @@
+#!/bin/bash
+
+while :; do /home/pgs/.config/bspwm/panel/scripts/gmail >> /tmp/gmail; sleep 60; done
+
+#while :; do /home/pgs/.config/bspwm/panel/scripts/battery > /tmp/battery; sleep 60; done
+
