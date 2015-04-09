@@ -1,0 +1,123 @@
+#
+# bspwm hotkeys
+#
+
+# quit bspwm
+super + shift + e
+    pkill -x dzen2;	pkill -x dzenstat; pkill -x bottombar; pkill -x workspaces, pkill -x workspaces2; pkill -x pulseaudio; pkill -x updater; pkill -x compton, pkill -x conky; bspc quit
+
+# close window
+super + shift + q
+	bspc window -c
+
+super + t
+	bspc desktop -l next
+
+# balance tree 
+super + b
+	bspc desktop -B
+
+# toggle floating or fullscreen
+super + {s,f}
+	bspc window -t {floating,fullscreen}
+
+super + {grave,Tab}
+	bspc {window,desktop} -f last
+
+super + apostrophe
+	bspc window -s last
+
+super + {o,i}
+	bspc control --record-history off; \
+	bspc window {older,newer} -f; \
+	bspc control --record-history on
+
+super + y
+	bspc window -w last.manual
+
+super + m
+	bspc window -s biggest
+
+super + {_,shift + }{h,j,k,l}
+	bspc window -{f,s} {left,down,up,right}
+
+super + {_,shift + }c
+	bspc window -f {next,prev}
+
+super + {comma,period}
+	bspc desktop -C {backward,forward}
+
+super + bracket{left,right}
+	bspc desktop -f {prev,next}
+
+super + ctrl + {h,j,k,l}
+	bspc window -p {left,down,up,right}
+
+super + ctrl + {_,shift + }space
+	bspc {window -p cancel,desktop -c}
+
+super + alt + {h,j,k,l}
+	bspc window -e {left -10,down +10,up -10,right +10}
+
+super + alt + shift + {h,j,k,l}
+	bspc window -e {right -10,up +10,down -10,left +10}
+
+super + ctrl + {1-9}
+	bspc window -r 0.{1-9}
+
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,window -d} ^{1-9,10}
+
+# focus clicked window
+~button1
+	bspc pointer -g focus
+
+# drag and resize windows
+super + button1
+    bspc pointer -g resize_corner
+
+super + !button{1-3}
+	bspc pointer -t %i %i
+
+super + @button{1-3}
+	bspc pointer -u
+
+# inc/dec window gap
+super + {minus,equal}
+    bspc config -d focused window_gap $((`bspc config -d focused window_gap` {+,-} 2 ))
+
+# reset window gap
+super + shift + {minus, equal}
+    bspc config -d focused window_gap 10
+
+#
+# wm independent hotkeys
+#
+
+super + Return
+	urxvt
+
+super + space
+	dmenu_run -h 20 -nb '#202020' -nf '#A0A0A0' -x 180 -y 10 -o 0.98 -w 570 -sf '#202020' -sb '#ffa200' 
+
+XF86MonBrightnessDown
+    xbacklight -dec 10 
+
+XF86MonBrightnessUp
+    xbacklight -inc 10
+
+XF86AudioRaiseVolume
+    pactl set-sink-volume 0 +5%
+
+XF86AudioLowerVolume
+    pactl set-sink-volume 0 -5%
+
+XF86AudioMute
+    pactl set-sink-mute 0 toggle
+
+XF86LaunchA
+    scrot /home/pgs/Pictures/screenshots/'%Y-%m-%d_%T_$wx$h.png'
+
+# make sxhkd reload its configuration files:
+super + Escape
+	pkill -USR1 -x sxhkd
