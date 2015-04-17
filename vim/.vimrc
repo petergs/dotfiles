@@ -9,6 +9,7 @@ highlight LineNr ctermfg=214
 " Tab settings
 set expandtab
 set tabstop=4
+set shiftwidth=4
 
 autocmd FileType sml setlocal shiftwidth=2 tabstop=2
 

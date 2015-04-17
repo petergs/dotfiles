@@ -116,7 +116,7 @@ mail ()
 #static variables
 position_left="^p(_LEFT)^p(1200)"
 logo="^bg($BAR_FG) ^fg($COLOR_ICON)^i($ICONPATH/arch_10x10.xbm)^fg() ^bg()          "
-position_right="^p(_RIGHT)^p(-435)"
+position_right="^p(_RIGHT)^p(-445)"
 
 
 while true
