@@ -1,6 +1,8 @@
 dotfiles
 =========
 
-Active: ![active](http://peter.gs/images/scr1.png "Active")
+My configuration files for Manjaro Linux are managed using [GNU Stow](http://gnu.org "GNU Stow"). 
 
-Inactive: ![inactive](http://peter.gs/images/scr2.png "Inactive")
+Active: ![active](http://peter.gs/static/images/scr1.png "Active")
+
+Inactive: ![inactive](http://peter.gs/static/images/scr2.png "Inactive")
