@@ -12,6 +12,7 @@ shopt -s cmdhist
 shopt -s dotglob
 shopt -s expand_aliases
 shopt -s extglob
+# append history file instead of creating a new one
 shopt -s histappend
 shopt -s hostcomplete
 shopt -s nocaseglob
@@ -28,7 +29,7 @@ alias cp="cp -i"                          # confirm before overwriting something
 alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano PKGBUILD'
-
+alias shutoff=' systemctl poweroff' 
 
 # ex - archive extractor
 # usage: ex <file>
@@ -59,11 +60,9 @@ ex ()
 #PS1='[\u@\h \W]\$ '  # Default
 PS1='\[\e[4;37m\][\u@\h \W]\$\[\e[0m\] '
 
-#rbenv
-eval "$(rbenv init -)"
 
 # load bash aliases
 source ~/.bash_aliases
 
-# load bash profile
 #source ~/.profile
+export PATH="$PATH:/opt/mssql-tools/bin"

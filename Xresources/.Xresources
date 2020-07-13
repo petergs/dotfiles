@@ -14,39 +14,30 @@ URxvt.scrollBar: off
 URxvt.urgentOnBell: True
 URxvt.visualBell: False
 
-URxvt.font: xft:Anonymous Pro Minus
+!URxvt.font: xft:Anonymous Pro Minus
 !URxvt.font: xft: dejavu sans mono
+URxvt.font: 9x15
+
 
 
 !-------Colors------!
-URxvt.background:[98]#202020
-*cursorColor:  #F3F3F3
-*foreground:   #A0A0A0
-URxvt.colorBD: #CFCFCF
-URxvt.colorUL: #969696
-URxvt.colorIT: #686868
-
-!Black
-*color0:       #3D3D3D
-*color8:       #4D4D4D 
-!Red
-*color1:       #FFA200
-*color9:       #FFAF00 
-!Green
-*color2:       #31658C
-*color10:      #477AB3
-!Yellow
-*color3:       #ffff00
-*color11:      #ffeb66
-!Blue
-*color4:       #789433
-*color12:      #91b33e
-!Magenta
-*color5:       #596196
-*color13:      #7882BF
-!Cyan
-*color6:       #8292B2
-*color14:      #95A7CC
-!White
-*color7:       #C8CACC
-*color15:      #EDEFF2   
+!URxvt.background:[98]#22313c
+URxvt.background: #22313c
+*background:  #22313c
+*foreground:  #e5e5e5
+*color0:  #aaaaaa
+*color1:  #ff081f
+*color2:  #ff6565
+*color3:  #ffa200
+*color4:  #93c7d5
+*color5:  #37b4e3
+*color6:  #fc5900
+*color7:  #e5e5e5
+*color8:  #bbbbbb
+*color9:  #ff0000
+*color10:  #ff4343
+*color11:  #ff8e0f
+*color12:  #93d8e6
+*color13:  #37c5f4
+*color14:  #fc4800
+*color15:  #e4e4e4

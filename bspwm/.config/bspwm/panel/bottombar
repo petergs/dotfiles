@@ -1,3 +1,0 @@
-#!/bin/bash
-
-~/.config/bspwm/panel/scripts/workspaces | bar -bp -g 1280x18 -u 6 -F "#00000000" -B "#00000000"

@@ -1,8 +1,14 @@
 dotfiles
 =========
 
-My configuration files for Manjaro Linux are managed using [GNU Stow](http://gnu.org "GNU Stow"). 
+My configuration files managed using [GNU Stow](http://gnu.org "GNU Stow"). 
+*bspwm
+*sxhkd
+*.Xresources
+*.vimrc
+*.bashrc
+*polybar
 
-Active: ![active](http://peter.gs/static/images/scr1.png "Active")
+Active: ![active](./scrots/active.png "Active")
 
-Inactive: ![inactive](http://peter.gs/static/images/scr2.png "Inactive")
+Inactive: ![inactive](./scrots/inactive.png "Inactive")

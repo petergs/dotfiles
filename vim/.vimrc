@@ -1,6 +1,3 @@
-execute pathogen#infect()
-filetype plugin indent on
-
 " Settings
 set nu
 syntax enable
@@ -29,3 +26,4 @@ map <F4> <C-W><C-L>
 set splitbelow
 set splitright
 
+set belloff=all
