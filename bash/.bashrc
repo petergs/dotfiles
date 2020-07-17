@@ -62,7 +62,9 @@ PS1='\[\e[4;37m\][\u@\h \W]\$\[\e[0m\] '
 
 
 # load bash aliases
+alias cls='clear'
+alias dotfiles='cd ~/.dotfiles'
 source ~/.bash_aliases
 
 #source ~/.profile
-export PATH="$PATH:/opt/mssql-tools/bin"
+source ~/.bash_profile

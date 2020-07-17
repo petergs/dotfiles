@@ -42,7 +42,7 @@ super + Return
 	urxvt
 
 super + space
-	dmenu_run -nb '#22313c' -sf '#e5e5e5' -sb '#FF081F' -nf '#e5e5e5'
+    rofi -show run
 
 super + s
     import $(date '+%Y%m%d_%H%M%S_')scrot.png 
@@ -71,3 +71,5 @@ XF86LaunchA
 # make sxhkd reload its configuration files:
 super + Escape
     pkill -USR1 -x sxhkd
+
+#dmenu_run -nb '#22313c' -sf '#e5e5e5' -sb '#FF081F' -nf '#e5e5e5'

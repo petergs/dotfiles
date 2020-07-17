@@ -1,6 +1,6 @@
 " Settings
 set nu
-syntax enable
+syntax on
 highlight LineNr ctermfg=214
 
 " Tab settings
@@ -25,5 +25,14 @@ map <F4> <C-W><C-L>
 
 set splitbelow
 set splitright
-
 set belloff=all
+
+set showcmd
+set showmatch
+set ignorecase
+
+" highlighting for rofi config
+au BufNewFile,BufRead /*.rasi setf css
+
+" base 16 colors
+set t_Co=16
