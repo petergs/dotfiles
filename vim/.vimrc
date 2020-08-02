@@ -23,7 +23,6 @@ map <F2> <C-W><C-J>
 map <F3> <C-W><C-K>
 map <F4> <C-W><C-L>
 
-set splitbelow
 set splitright
 set belloff=all
 
@@ -36,3 +35,6 @@ au BufNewFile,BufRead /*.rasi setf css
 
 " base 16 colors
 set t_Co=16
+
+" asm to nasm syntax highlightinh
+let g:asmsyntax = 'nasm'
