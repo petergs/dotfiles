@@ -36,5 +36,18 @@ au BufNewFile,BufRead /*.rasi setf css
 " base 16 colors
 set t_Co=16
 
-" asm to nasm syntax highlightinh
+" asm to nasm syntax highlighting
 let g:asmsyntax = 'nasm'
+
+" indicate insert mode
+let &t_SI = "\e[6 q"
+let &t_EI = "\e[2 q"
+
+" optional reset cursor on start:
+augroup myCmds
+au!
+autocmd VimEnter * silent !echo -ne "\e[2 q"
+augroup END
+
+":autocmd InsertEnter * set cul
+":autocmd InsertLeave * set nocul
