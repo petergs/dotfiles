@@ -2,6 +2,8 @@
 set nu
 syntax on
 highlight LineNr ctermfg=214
+set background=dark
+color default
 
 " Tab settings
 set textwidth=79  " lines longer than 79 columns will be broken
@@ -11,9 +13,6 @@ set expandtab     " insert spaces when hitting TABs
 set softtabstop=4 " insert/delete 4 spaces when hitting a TAB/BACKSPACE
 set shiftround    " round indent to multiple of 'shiftwidth'
 set autoindent    " align the new line indent with the previous line
-
-autocmd FileType sml setlocal shiftwidth=2 tabstop=2 softtabstop=2
-
 
 " Key bindings
 " split switch
@@ -51,3 +50,15 @@ augroup END
 
 ":autocmd InsertEnter * set cul
 ":autocmd InsertLeave * set nocul
+
+"unmap arrow keys
+nnoremap <Up> <nop>
+noremap <Down> <nop>
+noremap <Left> <nop>
+noremap <Right> <nop>
+
+" faster up and down
+nnoremap <C-k> 5k 
+nnoremap <C-j> 5j
+
+:imap kj <Esc>

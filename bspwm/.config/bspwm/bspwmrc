@@ -17,10 +17,11 @@ then
 # if not, then check if at least hdmi is plugged in
 elif (xrandr --query | grep -q "HDMI1 connected")
 then
-    bspc config -m HDMI1 top_padding        30
-    bspc config -m eDP1 top_padding         0
-    bspc monitor eDP1 -d 1 2 
-    bspc monitor HDMI1 -d 3 4
+    xrandr --output eDP1 --primary --left-of HDMI1 --output HDMI1 --mode "2560x1080" 
+    bspc config -m HDMI1 top_padding        0
+    bspc config -m eDP1 top_padding         30
+    bspc monitor eDP1 -d 1 2 3
+    bspc monitor HDMI1 -d "4 [Monitor]"
 # otherwise, i'm just running on the laptop
 else
     bspc config top_padding        30
@@ -52,4 +53,5 @@ compton &
 (sleep 3 && polybar -c ~/.config/polybar/config.ini bottom) &
 (sleep 3 && polybar -c ~/.config/polybar/config.ini top) &
 nm-applet &
+# helps window rendering in some java apps
 wmname LG3D

@@ -7,7 +7,7 @@ Xft.antialias: true
 !Xft.lcdfilter: lcddefault
 
 ! URxvt Appearance
-URxvt.depth: 24
+URxvt.depth: 32 
 URxvt.fading: 10
 URxvt.scrollBar: off
 URxvt.urgentOnBell: True
@@ -18,33 +18,39 @@ URxvt.internalBorder: 15
 URxvt.saveline: 2048
 
 
-*cursorColor: #ff6565
+! colors
+*.foreground:   #cac7c2
+*.background:   #212620
+*.cursorColor:  #cac7c2
 
+! black
+*.color0:       #414640
+*.color8:       #373b41
 
-!-------Colors------!
-*background:  #22313c
-*foreground:  #e5e5e5
+! red
+*.color1:       #4c7444
+*.color9:       #749c6c
 
-*color8:  #aaaaaa
-*color0:   #424f59
+! green
+*.color2:       #83401a
+*.color10:      #de935f
 
-*color9:  #ff6565
-*color1:  #ff081f
+! yellow
+*.color3:       #6e5c77
+*.color11:      #736c77
 
-*color10:  #F79862
-*color2:  #F05E23
+! blue
+*.color4:       #647c7c
+*.color12:      #81a3be
 
-*color3:  #ff8e0f
-*color11:  #ffa200
+! magenta
+*.color5:       #664c4c
+*.color13:      #9c9494
 
-*color12:  #CFF6FF
-*color4:  #9ACDD9
+! cyan
+*.color6:       #705c4f
+*.color14:      #857f55
 
-*color13:  #49A0D6
-*color5:  #36698A
-
-*color14:  #FF9191
-*color6:  #B55555
-
-*color15:  #e5e5e5
-*color7:  #e0e0e0
+! white
+*.color7:       #707880
+*.color15:      #c5c8c6

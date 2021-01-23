@@ -60,11 +60,6 @@ ex ()
 #PS1='[\u@\h \W]\$ '  # Default
 PS1='\[\e[4;37m\][\u@\h \W]\$\[\e[0m\] '
 
-
 # load bash aliases
-alias cls='clear'
-alias dotfiles='cd ~/.dotfiles'
 source ~/.bash_aliases
 
-#source ~/.profile
-source ~/.bash_profile
