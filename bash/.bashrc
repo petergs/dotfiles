@@ -20,16 +20,8 @@ shopt -s nocaseglob
 export HISTSIZE=10000
 export HISTFILESIZE=${HISTSIZE}
 export HISTCONTROL=ignoreboth
-
-alias ls='ls --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias ll='ls -l --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias la='ls -la --group-directories-first --time-style=+"%d.%m.%Y %H:%M" --color=auto -F'
-alias grep='grep --color=tty -d skip'
-alias cp="cp -i"                          # confirm before overwriting something
-alias df='df -h'                          # human-readable sizes
-alias free='free -m'                      # show sizes in MB
-alias np='nano PKGBUILD'
-alias shutoff=' systemctl poweroff' 
+export HISTIGNORE="ls:ll:la:cd:pwd"
+export HISTTIMEFORMAT="[$(tput setaf 6)%F %T$(tput sgr0)]: " # colorful date
 
 # ex - archive extractor
 # usage: ex <file>
@@ -58,8 +50,9 @@ ex ()
 # prompt
 
 #PS1='[\u@\h \W]\$ '  # Default
-PS1='\[\e[4;37m\][\u@\h \W]\$\[\e[0m\] '
+PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
 
 # load bash aliases
-source ~/.bash_aliases
-
+if [ -f ~/.bash_aliases ]; then
+    . ~/.bash_aliases
+fi

@@ -29,9 +29,6 @@ set showcmd
 set showmatch
 set ignorecase
 
-" highlighting for rofi config
-au BufNewFile,BufRead /*.rasi setf css
-
 " base 16 colors
 set t_Co=16
 
@@ -61,4 +58,18 @@ noremap <Right> <nop>
 nnoremap <C-k> 5k 
 nnoremap <C-j> 5j
 
-:imap kj <Esc>
+" exit insert mode with jj
+:imap jj <Esc>
+
+" bracket pairs 
+inoremap " ""<left>
+inoremap ' ''<left>
+inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {}<left>
+inoremap {<CR> {<CR>}<ESC>O
+inoremap {;<CR> {<CR>};<ESC>O
+" overwrite second set
+inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
+inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
+inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
