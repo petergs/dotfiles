@@ -56,3 +56,6 @@ PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+alias la='ls -la --color=auto'
+alias ls='ls --color=auto'

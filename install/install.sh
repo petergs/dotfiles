@@ -12,14 +12,14 @@ NONE='\033[0m'
 
 # available configurations
 declare -A DOTS
-DOTS[bash]="ln -s $HOME/dotfiles/bash/.bashrc $HOME/.bashrc"
-DOTS[bspwm]="ln -s $HOME/dotfiles/bspwm $HOME/.config/bspwm"
-DOTS[polybar]="ln -s $HOME/dotfiles/polybar $HOME/.config/polybar"
-DOTS[sxhkd]="ln -s $HOME/dotfiles/sxhkd $HOME/.config/sxhkd"
-DOTS[tmux]="ln -s $HOME/dotfiles/tmux/.tmux.conf $HOME/.tmux.conf"
-DOTS[vim]="ln -s $HOME/dotfiles/vim/.vimrc $HOME/.vimrc"
-DOTS[xinit]="ln -s $HOME/dotfiles/xinit/.xinitrc $HOME/.xinitrc"
-DOTS[Xresources]="ln -s $HOME/dotfiles/Xresources/.Xresources $HOME/.Xresources"
+DOTS[bash]="ln -sf $HOME/dotfiles/bash/.bashrc $HOME/.bashrc"
+DOTS[bspwm]="ln -sf $HOME/dotfiles/bspwm $HOME/.config/bspwm"
+DOTS[polybar]="ln -sf $HOME/dotfiles/polybar $HOME/.config/polybar"
+DOTS[sxhkd]="ln -sf $HOME/dotfiles/sxhkd $HOME/.config/sxhkd"
+DOTS[tmux]="ln -sf $HOME/dotfiles/tmux/.tmux.conf $HOME/.tmux.conf"
+DOTS[vim]="ln -sf $HOME/dotfiles/vim/.vimrc $HOME/.vimrc"
+DOTS[xinit]="ln -sf $HOME/dotfiles/xinit/.xinitrc $HOME/.xinitrc"
+DOTS[Xresources]="ln -sf $HOME/dotfiles/Xresources/.Xresources $HOME/.Xresources"
 
 clear
 
@@ -86,8 +86,11 @@ done
 
 # symlink configs
 echo -e "${GREEN}Symlinking configuration files/directories...${NONE}"
-for config in $configs
+for config in ${!DOTS[@]}
 do
+    # pull out the last word (symlink target to backup if it exists)
+    target=$(echo ${DOTS[$config]} | awk '{print $NF}')
+    cp $target $target.original
     eval ${DOTS[$config]}
 done
 
@@ -132,7 +135,7 @@ then
             echo -e "${RED}Cloning git repo for dmenu2...${NONE}"
             git clone https://github.com/muff1nman/dmenu2 $DEST/dmenu2
             cd $DEST/dmenu2
-            make clean install
+            sudo make clean install
         ;;
     esac
 fi
