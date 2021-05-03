@@ -1,6 +1,6 @@
 # dotfiles
 
-My configuration files for my linux desktop running Debian and and installation script to ease new setups. 
+Configuration files for my linux desktop with an installation script to ease new setups. 
 - bspwm
 - sxhkd
 - .Xresources
