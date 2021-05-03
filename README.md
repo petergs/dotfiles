@@ -1,14 +1,12 @@
 # dotfiles
 
-My configuration files managed using [GNU Stow](http://gnu.org "GNU Stow"). 
+My configuration files for my linux desktop running Debian and and installation script to ease new setups. 
 - bspwm
 - sxhkd
 - .Xresources
 - .vimrc
 - .bashrc
 - polybar
-- rofi
-- miscellaneous scripts
 
 Active: ![active](./scrots/active.png "Active")
 

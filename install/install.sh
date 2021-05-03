@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# script location
+SCRIPTDIR=$PWD
+
 # color escape codes
 RED='\033[0;31m'
 GREEN='\033[0;32m'
@@ -7,29 +10,132 @@ ORANGE='\033[0;33m'
 BLUE='\033[0;34m'
 NONE='\033[0m'
 
+# available configurations
+declare -A DOTS
+DOTS[bash]="ln -s $HOME/dotfiles/bash/.bashrc $HOME/.bashrc"
+DOTS[bspwm]="ln -s $HOME/dotfiles/bspwm $HOME/.config/bspwm"
+DOTS[polybar]="ln -s $HOME/dotfiles/polybar $HOME/.config/polybar"
+DOTS[sxhkd]="ln -s $HOME/dotfiles/sxhkd $HOME/.config/sxhkd"
+DOTS[tmux]="ln -s $HOME/dotfiles/tmux/.tmux.conf $HOME/.tmux.conf"
+DOTS[vim]="ln -s $HOME/dotfiles/vim/.vimrc $HOME/.vimrc"
+DOTS[xinit]="ln -s $HOME/dotfiles/xinit/.xinitrc $HOME/.xinitrc"
+DOTS[Xresources]="ln -s $HOME/dotfiles/Xresources/.Xresources $HOME/.Xresources"
 
-echo -e "${RED}Cloning git repos for fonts...${NONE}"
-DEST=~/git-repos-test
-#mkdir $DEST
-#git clone https://github.com/adobe-fonts/source-code-pro $DEST/source-code-pro
-#git clone https://github.com/google/material-design-icons $DEST/material-design-icons
+clear
 
-echo -e "${RED}Copying fonts to ~/.local/share/fonts${NONE}"
-cp $DEST/source-code-pro/TTF/SourceCodePro-*.ttf ~/.local/share/fonts
-cp $DEST/material-design-icons/font/MaterialIcons*.ttf ~/.local/share/fonts
+echo -e "${GREEN}https://github.com/petergs/dotfiles${NONE}"
+echo -e "${ORANGE}What installation mode do you want to use?${NONE}"
+modes=("Workstation" "Server" "Manual" "Help")
+select mode in "${modes[@]}"
+do 
+    # set $pkgs and $configs based on $mode
+    case $mode in
+        'Manual') 
+            # what do you want installed from the repos?
+            cmd=(whiptail --separate-output --checklist "Which pkgs do you want to install?" 22 55 16)
+            options=()
+            while IFS="" read -r pkg || [ -n "$pkg" ]
+            do
+                options+=("$pkg" "" off)
+            done < $SCRIPTDIR/packages
 
-# update font cache
-echo -e "${RED}Updating the font cache${NONE}"
-fc-cache
+            pkgs=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
-# what do you want installed?
-while IFS="" read -r p || [ -n "$p" ]
+            # what configs do you want symlinked?
+            cmd=(whiptail --separate-output --checklist "Which configs do you want symlinked?" 22 76 16)
+            options=()
+            for i in "${!DOTS[@]}"
+            do
+                options+=("$i" "" off)
+            done
+
+            configs=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+            break
+
+        ;;
+
+        'Server') 
+            pkgs=()
+            configs=(bash vim tmux)
+            break
+        ;;
+        
+        'Workstation') 
+            while IFS="" read -r pkg || [ -n "$pkg" ]
+            do
+                pkgs+=("$pkg")
+            done < $SCRIPTDIR/packages
+            break
+        ;;
+
+        'Help') 
+            echo -e "${RED}Workstation${NONE} mode installs all packages, symlinks all configs, and installs addition fonts and programs from Github. This is best for a new installation on Debian."
+            echo -e "${RED}Server${NONE} mode only symlinks configurations for vim, bash, and tmux."
+            echo -e "${RED}Manual${NONE} mode uses whiptail to allow you to select which packages to install and which configs to symlink."
+        ;;
+    esac
+done
+
+# install packages
+echo -e "${GREEN}Installing packages...${NONE}"
+for pkg in ${pkgs[@]}
 do
-  echo -e "${RED}Installing $p ${NONE}"
-  sudo apt install $p
-done < ./packages
+    echo -e "${BLUE}Installing $pkg...${NONE}"
+    sudo apt install $pkg
+done
 
-echo -e "${RED}Cloning git repo for dmenu2...${NONE}"
-git clone https://github.com/muff1nman/dmenu2 $DEST/dmenu2
+# symlink configs
+echo -e "${GREEN}Symlinking configuration files/directories...${NONE}"
+for config in $configs
+do
+    eval ${DOTS[$config]}
+done
 
-# symlink files
+notes=''
+
+if [[ $mode = 'Workstation' ]] || [[ $mode = 'Manual' ]] 
+then
+    # install directory
+    DEST=$HOME/git-repos-test
+    mkdir $DEST
+
+    echo -e "${ORANGE}Do you want to install required fonts (see INSTALL.md)?${NONE} (Y/n)"
+    read resp
+    case $resp in
+        [Nn]* ) 
+            notes+='-- Since you opted out of installing additional fonts, remember to edit .Xresources and the polybar config to use different fonts.\n'
+            ;;
+        * ) 
+            echo -e "${RED}Cloning git repos for fonts...${NONE}"
+            #git clone https://github.com/adobe-fonts/source-code-pro $DEST/source-code-pro
+            #git clone https://github.com/google/material-design-icons $DEST/material-design-icons
+
+            echo -e "${RED}Copying fonts to ~/.local/share/fonts...${NONE}"
+            cp $DEST/source-code-pro/TTF/SourceCodePro-*.ttf ~/.local/share/fonts
+            cp $DEST/material-design-icons/font/MaterialIcons*.ttf ~/.local/share/fonts
+
+            # update font cache
+            echo -e "${RED}Updating the font cache${NONE}"
+            fc-cache
+        ;;
+
+    esac
+
+    # 
+    echo -e "${ORANGE}Do you want to install additional packages from Github (see INSTALL.md)?${NONE} (Y/n)"
+    read resp
+    case $resp in
+        [Nn]* ) 
+            notes+='-- Since you opted out of dmenu2, remember to adjust sxhkdrc to use a different launcher.\n'
+            ;;
+        * ) 
+            echo -e "${RED}Cloning git repo for dmenu2...${NONE}"
+            git clone https://github.com/muff1nman/dmenu2 $DEST/dmenu2
+            cd $DEST/dmenu2
+            make clean install
+        ;;
+    esac
+fi
+
+echo -e "${GREEN}Install complete!${NONE}"
+echo -e "${notes}"
