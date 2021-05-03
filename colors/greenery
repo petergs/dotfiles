@@ -1,23 +1,3 @@
-!Xft.dpi: 96
-Xft.antialias: true
-!Xft.hinting: true
-!Xft.rgba: rgb
-!Xft.autohint: false
-!Xft.hintstyle: hintslight
-!Xft.lcdfilter: lcddefault
-
-! URxvt Appearance
-URxvt.depth: 32 
-URxvt.fading: 10
-URxvt.scrollBar: off
-URxvt.urgentOnBell: True
-URxvt.visualBell: False
-URxvt.font: xft:Source Code Pro Semibold:size=11
-URxvt.cursorBlink: true
-URxvt.internalBorder: 15
-URxvt.saveline: 2048
-
-
 !-------Colors------!
 *cursorColor: #659063
 

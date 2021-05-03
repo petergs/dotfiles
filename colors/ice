@@ -1,0 +1,30 @@
+!-------Colors------!
+*cursorColor: #7795AD
+
+*background:  #22313c
+*foreground:  #e5e5e5
+
+*color8:  #aaaaaa
+*color0:   #424f59
+
+#replace
+*color9:  #7795AD
+*color1:  #B6CCE1
+
+*color10:  #F79862
+*color2:  #F05E23
+
+*color3:  #ff8e0f
+*color11:  #ffa200
+
+*color12:  #CFF6FF
+*color4:  #9ACDD9
+
+*color13:  #49A0D6
+*color5:  #36698A
+
+*color14:  #FF9191
+*color6:  #B55555
+
+*color15:  #e5e5e5
+*color7:  #e0e0e0

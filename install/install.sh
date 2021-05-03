@@ -13,9 +13,9 @@ NONE='\033[0m'
 # available configurations
 declare -A DOTS
 DOTS[bash]="ln -sf $HOME/dotfiles/bash/.bashrc $HOME/.bashrc"
-DOTS[bspwm]="ln -sf $HOME/dotfiles/bspwm $HOME/.config/bspwm"
-DOTS[polybar]="ln -sf $HOME/dotfiles/polybar $HOME/.config/polybar"
-DOTS[sxhkd]="ln -sf $HOME/dotfiles/sxhkd $HOME/.config/sxhkd"
+DOTS[bspwm]="ln -sf $HOME/dotfiles/bspwm $HOME/.config/"
+DOTS[polybar]="ln -sf $HOME/dotfiles/polybar $HOME/.config/"
+DOTS[sxhkd]="ln -sf $HOME/dotfiles/sxhkd $HOME/.config/"
 DOTS[tmux]="ln -sf $HOME/dotfiles/tmux/.tmux.conf $HOME/.tmux.conf"
 DOTS[vim]="ln -sf $HOME/dotfiles/vim/.vimrc $HOME/.vimrc"
 DOTS[xinit]="ln -sf $HOME/dotfiles/xinit/.xinitrc $HOME/.xinitrc"
@@ -86,11 +86,15 @@ done
 
 # symlink configs
 echo -e "${GREEN}Symlinking configuration files/directories...${NONE}"
-for config in ${!DOTS[@]}
+for config in $configs #${!DOTS[@]}
 do
     # pull out the last word (symlink target to backup if it exists)
     target=$(echo ${DOTS[$config]} | awk '{print $NF}')
-    cp $target $target.original
+    if [[ -d $target ]]; then
+        cp -r $target$config $target$config.original
+    else
+        cp $target $target.original
+    fi 
     eval ${DOTS[$config]}
 done
 
