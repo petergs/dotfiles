@@ -1,7 +1,7 @@
 # Installation
 ## Overview
 This installtion script assumes a Debian environment. If you're not using
-Debian, you can use the manual mode to skip package installation step.
+Debian, you can use the manual mode to skip the package installation step.
 Alternatively, just copy or symlink the required files without this script. 
 
     cd $HOME
