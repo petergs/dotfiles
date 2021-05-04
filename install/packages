@@ -13,3 +13,5 @@ libxinerama-dev
 libxft-dev
 lxrandr
 bspwm
+network-manager-gnome
+network-manager-openvpn-gnome
