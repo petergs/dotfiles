@@ -86,7 +86,7 @@ done
 
 # symlink configs
 echo -e "${GREEN}Symlinking configuration files/directories...${NONE}"
-for config in $configs #${!DOTS[@]}
+for config in ${configs[@]} #${!DOTS[@]}
 do
     # pull out the last word (symlink target to backup if it exists)
     target=$(echo ${DOTS[$config]} | awk '{print $NF}')
