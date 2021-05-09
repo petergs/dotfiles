@@ -1,0 +1,52 @@
+{
+    "terminal.integrated.shell.linux": "/bin/bash",
+    "window.zoomLevel": 0,
+    "workbench.colorTheme": "Xresources Bordered",
+    "editor.fontFamily": "'Source Code Pro Semibold', 'monospace', monospace, 'Droid Sans Fallback'",
+    "workbench.colorCustomizations": {
+        "foreground": "#e5e5e5",
+        "sideBar.background": "#22313c",
+        "editor.background": "#22313c",
+        "sideBarSectionHeader.background": "#424f59",
+        "activityBar.activeBackground": "#22313c",
+        "activityBar.background": "#22313c",
+        "activityBar.foreground": "#e5e5e5",
+        "sideBarSectionHeader.foreground": "#22313c",
+        "editorGroupHeader.tabsBackground": "#22313c",
+        "tab.activeBackground": "#22313c",
+        "tab.activeForeground": "#e5e5e5",
+        "tab.inactiveForeground": "#e5e5e5",
+        "statusBar.background": "#659063",
+        "statusBar.foreground": "#000",
+        "descriptionForeground": "#e5e5e5",
+        "input.background": "#e5e5e5",
+        "input.foreground": "#22313c",
+        "dropdown.background": "#22313c",
+        "dropdown.listBackground": "#e5e5e5",
+        "dropdown.foreground": "#22313c",
+        "settings.dropdownBackground": "#22313c",
+        "settings.dropdownForeground": "#e5e5e5",
+        "button.foreground": "#e5e5e5",
+        "statusBar.noFolderBackground": "#659063",
+        "statusBar.debuggingBackground": "#659063"
+    },
+    "editor.tokenColorCustomizations": {
+        "comments": "#d4922f"
+    },
+    "window.menuBarVisibility": "toggle",
+    "vim.vimrc.enable": true,
+    "vim.vimrc.path": "~/.vimrc",
+    "vim.insertModeKeyBindings": [
+        {
+            "before": ["j", "j"],
+            "after": ["<Esc>"]
+        }
+    ],
+    "workbench.editorAssociations": [
+    
+        {
+            "viewType": "jupyter.notebook.ipynb",
+            "filenamePattern": "*.ipynb"
+        }
+    ]
+}
