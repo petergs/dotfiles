@@ -5,18 +5,22 @@ case $(hostname) in
     "bean")
         PRIMARYMON="DisplayPort-0"
         SECONDARYMON="HDMI-A-0"
+        (polybar -c ~/.config/polybar/config.ini top) &
+        (polybar -c ~/.config/polybar/config.ini dualmonitor) &
     ;;
 
     "lettuce")
         PRIMARYMON="eDP1"
         SECONDARYMON="HDMI1"
+        (polybar -c ~/.config/polybar/config.ini top) &
+        (polybar -c ~/.config/polybar/config.ini bottom) &
     ;;
 esac
         
 
 if ((xrandr --query | grep -q "${PRIMARYMON} connected") && (xrandr --query | grep -q "${SECONDARYMON} connected")) 
 then
-    xrandr --output $PRIMARYMON --primary --mode "2560x1080" --left-of $SECONDARYMON --output eDP1 --off
+    xrandr --output $PRIMARYMON --primary --mode "2560x1080" --right-of $SECONDARYMON --output eDP1 --off
     bspc config -m $PRIMARYMON top_padding		        30
     bspc config -m $SECONDARYMON top_padding        	0
     # Otherwise eDP1 will be discovered. We must do this
@@ -24,8 +28,8 @@ then
     # from eDP1
     bspc config remove_disabled_monitors  true
     bspc config remove_unplugged_monitors  true
-    bspc monitor $PRIMARYMON    -d                 1 2
-    bspc monitor $SECONDARYMON  -d                 3 4
+    bspc monitor $PRIMARYMON    -d                 3 4
+    bspc monitor $SECONDARYMON  -d                 1 2
 # if not, then check if at least SECONDARYMON is plugged in
 # should only hit this condition on lettuce
 elif (xrandr --query | grep -q "${SECONDARYMON} connected")
@@ -63,8 +67,8 @@ bspc config normal_border_color \#2E3440
 sxhkd &
 xrdb ~/.Xresources &
 compton &
-(sleep 3 && polybar -c ~/.config/polybar/config.ini bottom) &
-(sleep 3 && polybar -c ~/.config/polybar/config.ini top) &
+#(sleep 3 && polybar -c ~/.config/polybar/config.ini bottom) &
+#(sleep 3 && polybar -c ~/.config/polybar/config.ini top) &
 nm-applet &
 # helps window rendering in some java apps
 wmname LG3D
