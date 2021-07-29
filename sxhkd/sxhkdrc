@@ -17,9 +17,19 @@ super + {f,t}
 super + Tab
 	bspc node -f {prev,next}.local
 
-#focus desktop or moved focused window to desktop
-super + {_,shift + }{1-9,}
-	bspc {desktop -f,node -d} ^{1-9,10}
+#focus desktop
+super + {1-9,}
+	bspc desktop -f ^{1-9}
+
+# move focused window to desktop
+super + shift + {1-9}
+	bspc node -d ^{1-9}
+
+#super + {1+5}
+#    bspc wm h off; \
+#    bspc query -M | xargs -Imon bspc desktop 'mon:^{1-5}' -f; \
+#    bspc wm -h on; \
+#    bspc monitor last -f
 
 # inc/dec window gap
 super + {minus,equal}
@@ -39,16 +49,19 @@ super + r
 #
 
 super + Return
-	urxvt
+    kitty
 
 super + space
-    dmenu_run -h 30 -w 600 -x 400 -nb '#22313c' -sf '#e5e5e5' -sb '#659063' -nf '#e5e5e5' -fn 'Source Code Pro Semibold-10'
+    dmenu_run -h 30 -w 600 -x 400
+#    dmenu_run -h 30 -w 600 -x 400 -nb '#22313c' -sf '#e5e5e5' -sb '#659063' -nf '#e5e5e5' -fn 'Source Code Pro Semibold-10'
 
 super + s
-    import $(date '+%Y%m%d_%H%M%S_')scrot.png 
+    xfce4-screenshooter -r
+    #import $(date '+%Y%m%d_%H%M%S_')scrot.png 
 
 super + shift + s
-    import png:- | xclip -selection clipboard -t image/png
+    xfce4-screenshooter -r -c
+    #import png:- | xclip -selection clipboard -t image/png
 
 XF86MonBrightnessDown
     xbacklight -dec 10 

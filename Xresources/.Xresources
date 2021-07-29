@@ -17,33 +17,42 @@ URxvt.cursorBlink: true
 URxvt.internalBorder: 15
 URxvt.saveline: 2048
 
+#define nord0 #2E3440
+#define nord1 #3B4252
+#define nord2 #434C5E
+#define nord3 #4C566A
+#define nord4 #D8DEE9
+#define nord5 #E5E9F0
+#define nord6 #ECEFF4
+#define nord7 #8FBCBB
+#define nord8 #88C0D0
+#define nord9 #81A1C1
+#define nord10 #5E81AC
+#define nord11 #BF616A
+#define nord12 #D08770
+#define nord13 #EBCB8B
+#define nord14 #A3BE8C
+#define nord15 #B48EAD
 
-!-------Colors------!
-*cursorColor: #659063
+*.foreground:   nord4
+*.background:   nord0
+*.cursorColor:  nord4
+*fading: 35
+*fadeColor: nord3
 
-*background:  #22313c
-*foreground:  #e5e5e5
-
-*color8:  #aaaaaa
-*color0:   #424f59
-
-*color9:  #659063
-*color1:  #839b62
-
-*color10:  #F79862
-*color2:  #F05E23
-
-*color3:  #ff8e0f
-*color11:  #ffa200
-
-*color12:  #CFF6FF
-*color4:  #9ACDD9
-
-*color13:  #49A0D6
-*color5:  #36698A
-
-*color14:  #FF9191
-*color6:  #B55555
-
-*color15:  #e5e5e5
-*color7:  #e0e0e0
+*.color0: nord1
+*.color1: nord11
+*.color2: nord14
+*.color3: nord13
+*.color4: nord9
+*.color5: nord15
+*.color6: nord8
+*.color7: nord5
+*.color8: nord3
+*.color9: nord11
+*.color10: nord14
+*.color11: nord13
+*.color12: nord9
+*.color13: nord15
+*.color14: nord7
+*.color15: nord6
