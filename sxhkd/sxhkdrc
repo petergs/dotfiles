@@ -12,24 +12,41 @@ super + shift + q
 
 # toggle floating, fullscreen, or tiled
 super + {f,t}
-	bspc node focused -t {fullscreen,tiled}
+	bspc node focused -t {floating,tiled}
 
-super + Tab
-	bspc node -f {prev,next}.local
+super + Up
+    bspc node -f -t {fullscreen, tiled}
+
+super + Right 
+	bspc node -f east.window
+
+super + Left
+	bspc node -f west.window
+
+super + shift + Right
+	bspc node -m east --follow
+
+super + shift + Left
+	bspc node -m west --follow
 
 #focus desktop
-super + {1-9,}
-	bspc desktop -f ^{1-9}
+#super + {1-9}
+	#bspc desktop -f ^{1-9}
 
 # move focused window to desktop
-super + shift + {1-9}
-	bspc node -d ^{1-9}
+#super + shift + {1-9}
+	#bspc node -d ^{1-9}
 
-#super + {1+5}
-#    bspc wm h off; \
-#    bspc query -M | xargs -Imon bspc desktop 'mon:^{1-5}' -f; \
-#    bspc wm -h on; \
-#    bspc monitor last -f
+super + {1-5}
+	bspc wm -h off; \
+	bspc query -M | xargs -Imon bspc desktop 'mon:^{1-5}' -f; \
+	bspc wm -h on; \
+	bspc monitor last -f
+
+super + shift + {1-2}
+    focm=`bspc query -M -m focused --names`; \
+    if [ $focm == "HDMI-A-0" ]; then cur=1; else cur=2; fi; \
+    bspc node -d ^"$cur":^{1-2}
 
 # inc/dec window gap
 super + {minus,equal}
@@ -37,7 +54,7 @@ super + {minus,equal}
 
 # reset window gap
 super + shift + {minus, equal}
-    bspc config -d focused window_gap 10
+    bspc config -d focused window_gap 5
 
 # rotate windows
 super + r
@@ -52,8 +69,12 @@ super + Return
     kitty
 
 super + space
-    dmenu_run -h 30 -w 600 -x 400
-#    dmenu_run -h 30 -w 600 -x 400 -nb '#22313c' -sf '#e5e5e5' -sb '#659063' -nf '#e5e5e5' -fn 'Source Code Pro Semibold-10'
+    dmenu_run -h 30 -w 600 -x 400 \
+        -nb '#2E3440' \ 
+        -nf '#D8DEE9' \ 
+        -sb '#81A1C1' \ 
+        -sf '#2E3440' \ 
+        -fn 'Source Code Pro Semibold-10'
 
 super + s
     xfce4-screenshooter -r
@@ -84,3 +105,6 @@ XF86LaunchA
 # make sxhkd reload its configuration files:
 super + Escape
     pkill -USR1 -x sxhkd
+
+super + shift + Escape
+    bspc wm -r

@@ -28,8 +28,10 @@ then
     # from eDP1
     bspc config remove_disabled_monitors  true
     bspc config remove_unplugged_monitors  true
-    bspc monitor $PRIMARYMON    -d                 3 4
-    bspc monitor $SECONDARYMON  -d                 1 2
+    bspc monitor $PRIMARYMON    -d                 1
+    bspc monitor $SECONDARYMON  -d                 1
+    bspc monitor $PRIMARYMON    -a                 2 
+    bspc monitor $SECONDARYMON  -a                 2
 # if not, then check if at least SECONDARYMON is plugged in
 # should only hit this condition on lettuce
 elif (xrandr --query | grep -q "${SECONDARYMON} connected")
@@ -47,7 +49,7 @@ else
 fi
 
 #---- settings ----#
-#bspc config automatic_scheme longest_side
+bspc config automatic_scheme spiral
 bspc config border_width        3
 bspc config window_gap          5
 bspc config split_ratio         0.50
