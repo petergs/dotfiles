@@ -17,36 +17,34 @@ super + {f,t}
 super + Up
     bspc node -f -t {fullscreen, tiled}
 
+# focued node to the east
 super + Right 
-	bspc node -f east.window
+	bspc node -f east
 
+# focued node to the west
 super + Left
-	bspc node -f west.window
+	bspc node -f west
 
+# move node to the east monitor and follow focus
 super + shift + Right
 	bspc node -m east --follow
 
+# move node to the west monitor and follow focus
 super + shift + Left
 	bspc node -m west --follow
 
-#focus desktop
-#super + {1-9}
-	#bspc desktop -f ^{1-9}
-
-# move focused window to desktop
-#super + shift + {1-9}
-	#bspc node -d ^{1-9}
-
+# focus desktop
 super + {1-5}
 	bspc wm -h off; \
 	bspc query -M | xargs -Imon bspc desktop 'mon:^{1-5}' -f; \
 	bspc wm -h on; \
 	bspc monitor last -f
 
-super + shift + {1-2}
+# move focused window to desktop
+super + shift + {1-5}
     focm=`bspc query -M -m focused --names`; \
-    if [ $focm == "HDMI-A-0" ]; then cur=1; else cur=2; fi; \
-    bspc node -d ^"$cur":^{1-2}
+    if [ $focm == "DisplayPort-0" ]; then cur=2; else cur=1; fi; \
+    bspc node -d ^"$cur":^{1-5}
 
 # inc/dec window gap
 super + {minus,equal}
