@@ -22,11 +22,33 @@ DOTS[VSCode]="ln -sf $HOME/dotfiles/VSCode/settings.json $HOME/.config/Code/User
 DOTS[xinit]="ln -sf $HOME/dotfiles/xinit/.xinitrc $HOME/.xinitrc"
 DOTS[Xresources]="ln -sf $HOME/dotfiles/Xresources/.Xresources $HOME/.Xresources"
 
+if [ "$1" = "untracked" ]
+then 
+    echo -e "${RED}The following directories do not have an install command:${NONE}"
+    prefix=$PWD/../
+    dirs=() 
+    for d in $prefix*/ ; do
+        dirs+=("$d")
+    done
+
+    len=${#prefix}
+    ((len+=1))
+
+    for i in ${dirs[@]}
+    do
+        i=$( echo "$i" | cut -c "$len"- | rev | cut -c2- | rev )
+        if [[ ! -v "DOTS[$i]" ]] ; then
+            echo -e "$i"
+        fi
+    done
+    exit 0 
+fi
+
 clear
 
 echo -e "${GREEN}https://github.com/petergs/dotfiles${NONE}"
 echo -e "${ORANGE}What installation mode do you want to use?${NONE}"
-modes=("Workstation" "Server" "Manual" "Help")
+modes=("Workstation" "Server" "Manual" "Help" "Quit")
 select mode in "${modes[@]}"
 do 
     # set $pkgs and $configs based on $mode
@@ -74,6 +96,9 @@ do
             echo -e "${RED}Server${NONE} mode only symlinks configurations for vim, bash, and tmux."
             echo -e "${RED}Manual${NONE} mode uses whiptail to allow you to select which packages to install and which configs to symlink."
         ;;
+        'Quit') 
+            exit 0
+        ;;
     esac
 done
 
@@ -104,7 +129,7 @@ notes=''
 if [[ $mode = 'Workstation' ]] || [[ $mode = 'Manual' ]] 
 then
     # install directory
-    DEST=$HOME/git-repos-test
+    DEST=$HOME/git-repos
     mkdir $DEST
 
     echo -e "${ORANGE}Do you want to install required fonts (see INSTALL.md)?${NONE} (Y/n)"
