@@ -16,11 +16,11 @@ set autoindent    " align the new line indent with the previous line
 
 " Key bindings
 " split switch
-nnoremap <Leader>[ <C-W>w
-map <F1> <C-W><C-H>
-map <F2> <C-W><C-J>
-map <F3> <C-W><C-K>
-map <F4> <C-W><C-L>
+"nnoremap <Leader>[ <C-W>w
+" map <F1> <C-W><C-H>
+" map <F2> <C-W><C-J>
+" map <F3> <C-W><C-K>
+" map <F4> <C-W><C-L>
 
 set splitright
 set belloff=all
@@ -73,3 +73,6 @@ inoremap {;<CR> {<CR>};<ESC>O
 inoremap <expr> ) strpart(getline('.'), col('.')-1, 1) == ")" ? "\<Right>" : ")"
 inoremap <expr> ] strpart(getline('.'), col('.')-1, 1) == "]" ? "\<Right>" : "]"
 inoremap <expr> } strpart(getline('.'), col('.')-1, 1) == "}" ? "\<Right>" : "}"
+
+" netrw hide banner
+let g:netrw_banner = 0
