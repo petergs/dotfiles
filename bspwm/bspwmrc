@@ -69,8 +69,8 @@ bspc config normal_border_color \#2E3440
 sxhkd &
 xrdb ~/.Xresources &
 compton &
-#(sleep 3 && polybar -c ~/.config/polybar/config.ini bottom) &
-#(sleep 3 && polybar -c ~/.config/polybar/config.ini top) &
 nm-applet &
+xfce4-clipman & 
 # helps window rendering in some java apps
 wmname LG3D
+

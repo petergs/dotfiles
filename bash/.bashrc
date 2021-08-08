@@ -1,16 +1,6 @@
 # set EDITOR
 export EDITOR="vim"
 
-# set TERM
-if [[ $(hostname) = 'lettuce' ]]
-then
-    TERM=xterm-kitty
-else
-    # for example... 
-    # if i'm on a centos or rocky linux host over ssh
-    TERM=xterm
-fi
-
 # enable bash completion
 if [ -f /etc/bash_completion ]; then
 	    . /etc/bash_completion

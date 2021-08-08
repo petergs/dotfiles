@@ -16,3 +16,6 @@ bspwm
 network-manager-gnome
 network-manager-openvpn-gnome
 xfce4-screenshooter
+slock
+xfce4-clipman
+tmux

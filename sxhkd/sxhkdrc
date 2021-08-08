@@ -64,7 +64,7 @@ super + r
 #
 
 super + Return
-    kitty
+    xterm 
 
 super + space
     dmenu_run -h 30 -w 600 -x 400 \
