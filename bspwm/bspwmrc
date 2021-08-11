@@ -66,7 +66,7 @@ bspc config normal_border_color \#2E3440
 
 #---- autostart ----#
 (sleep 1 && nitrogen --restore) &
-sxhkd &
+(sleep 1 && sxhkd) &
 xrdb ~/.Xresources &
 compton &
 nm-applet &

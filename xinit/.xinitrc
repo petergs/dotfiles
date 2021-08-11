@@ -4,7 +4,5 @@ xset fp rehash
 # set capslock as another ctrl
 setxkbmap -option caps:ctrl_modifier
 
-
-
 # bspwm
 exec bspwm
