@@ -18,8 +18,6 @@ DOTS[polybar]="ln -sf $HOME/dotfiles/polybar $HOME/.config/"
 DOTS[sxhkd]="ln -sf $HOME/dotfiles/sxhkd $HOME/.config/"
 DOTS[tmux]="ln -sf $HOME/dotfiles/tmux/.tmux.conf $HOME/.tmux.conf"
 DOTS[vim]="ln -sf $HOME/dotfiles/vim/.vimrc $HOME/.vimrc"
-DOTS[VSCode]="ln -sf $HOME/dotfiles/VSCode/settings.json $HOME/.config/Code/User/settings.json"
-DOTS[xinit]="ln -sf $HOME/dotfiles/xinit/.xinitrc $HOME/.xinitrc"
 DOTS[Xresources]="ln -sf $HOME/dotfiles/Xresources/.Xresources $HOME/.Xresources"
 
 if [ "$1" = "untracked" ]
