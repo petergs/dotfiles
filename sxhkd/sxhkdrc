@@ -64,11 +64,7 @@ super + r
 #
 
 super + Return
-<<<<<<< HEAD
     kitty 
-=======
-    alacritty 
->>>>>>> 56fd121fb8146a41568489342a885f363fdb160b
 
 super + space
     dmenu_run -h 30 -w 600 -x 400 \
