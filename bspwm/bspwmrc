@@ -23,15 +23,17 @@ then
     xrandr --output $PRIMARYMON --primary --mode "2560x1080" --right-of $SECONDARYMON --output eDP1 --off
     bspc config -m $PRIMARYMON top_padding		        30
     bspc config -m $SECONDARYMON top_padding        	0
+    bspc config -m $PRIMARYMON bottom_padding           30
+    bspc config -m $SECONDARYMON bottom_padding        	0
     # Otherwise eDP1 will be discovered. We must do this
     # before bspc monitor -d/--reset-desktops or else we'll get another Desktop
     # from eDP1
     bspc config remove_disabled_monitors  true
     bspc config remove_unplugged_monitors  true
-    bspc monitor $PRIMARYMON    -d                 1
-    bspc monitor $SECONDARYMON  -d                 1
-    bspc monitor $PRIMARYMON    -a                 2 
-    bspc monitor $SECONDARYMON  -a                 2
+    bspc monitor $PRIMARYMON    -d                 
+    bspc monitor $SECONDARYMON  -d                 
+    bspc monitor $PRIMARYMON    -a                  
+    bspc monitor $SECONDARYMON  -a                  
 # if not, then check if at least SECONDARYMON is plugged in
 # should only hit this condition on lettuce
 elif (xrandr --query | grep -q "${SECONDARYMON} connected")

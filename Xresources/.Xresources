@@ -22,6 +22,7 @@ xterm*scrollBar: false
 xterm*font: xft:Source Code Pro Semibold:size=11
 xterm*termName: xterm-256color
 xterm*vt100.internalBorder: 15
+xterm*selectToClipboard: true
 
 #define nord0 #2E3440
 #define nord1 #3B4252
