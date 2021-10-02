@@ -166,6 +166,14 @@ then
             git clone https://github.com/muff1nman/dmenu2 $DEST/dmenu2
             cd $DEST/dmenu2
             sudo make clean install
+
+            # clone slock, apply blur patch, make
+            echo -e "${RED}Cloning git repo for slock...${NONE}"
+            git clone https://git.suckless.org/slock $DEST/slock
+            cd $DEST/slock
+            wget https://tools.suckless.org/slock/patches/blur-pixelated-screen/slock-blur_pixelated_screen-1.4.diff
+            git apply slock-blur_pixelated_screen-1.4.diff
+            sudo make clean install
         ;;
     esac
 fi

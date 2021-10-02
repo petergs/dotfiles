@@ -64,7 +64,11 @@ super + r
 #
 
 super + Return
+<<<<<<< HEAD
     kitty 
+=======
+    alacritty 
+>>>>>>> 56fd121fb8146a41568489342a885f363fdb160b
 
 super + space
     dmenu_run -h 30 -w 600 -x 400 \
@@ -72,7 +76,7 @@ super + space
         -nf '#D8DEE9' \ 
         -sb '#81A1C1' \ 
         -sf '#2E3440' \ 
-        -fn 'Source Code Pro Semibold-10'
+        -fn 'Source Code Pro Semibold-11'
 
 super + s
     xfce4-screenshooter -r
@@ -99,6 +103,9 @@ XF86AudioMute
 
 XF86LaunchA
     scrot /home/pgs/Pictures/screenshots/'%Y-%m-%d_%T_$wx$h.png'
+
+super + l
+    slock    
 
 # make sxhkd reload its configuration files:
 super + Escape
