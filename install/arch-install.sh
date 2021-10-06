@@ -87,7 +87,7 @@ do
             while IFS="" read -r pkg || [ -n "$pkg" ]
             do
                 pkgs+=("$pkg")
-            done < $SCRIPTDIR/packages
+            done < $SCRIPTDIR/arch-packages
             break
         ;;
 
@@ -102,14 +102,19 @@ do
     esac
 done
 
-# install yay
-echo -e "${GREEN}Installing yay...${NONE}"
-mkdir $HOME/git-repos
-cd $HOME/git-repos/
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-
+# install yay if it's not installed
+pacman -Qi yay > /dev/null
+if [ $? -eq 0 ]
+then
+    echo -e "${GREEN}yay is already installed...${NONE}"
+else
+    echo -e "${GREEN}Installing yay...${NONE}"
+    mkdir $HOME/git-repos
+    cd $HOME/git-repos/
+    git clone https://aur.archlinux.org/yay.git
+    cd yay
+    makepkg -si
+fi
 
 # install packages
 echo -e "${GREEN}Installing packages...${NONE}"
