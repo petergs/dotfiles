@@ -58,7 +58,7 @@ do
             while IFS="" read -r pkg || [ -n "$pkg" ]
             do
                 options+=("$pkg" "" off)
-            done < $SCRIPTDIR/packages
+            done < $SCRIPTDIR/deb-packages
 
             pkgs=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -138,8 +138,8 @@ then
             ;;
         * ) 
             echo -e "${RED}Cloning git repos for fonts...${NONE}"
-            #git clone https://github.com/adobe-fonts/source-code-pro $DEST/source-code-pro
-            #git clone https://github.com/google/material-design-icons $DEST/material-design-icons
+            git clone https://github.com/adobe-fonts/source-code-pro $DEST/source-code-pro
+            git clone https://github.com/google/material-design-icons $DEST/material-design-icons
 
             echo -e "${RED}Copying fonts to ~/.local/share/fonts...${NONE}"
             cp $DEST/source-code-pro/TTF/SourceCodePro-*.ttf ~/.local/share/fonts
