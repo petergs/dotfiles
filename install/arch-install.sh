@@ -121,7 +121,7 @@ echo -e "${GREEN}Installing packages...${NONE}"
 for pkg in ${pkgs[@]}
 do
     echo -e "${BLUE}Installing $pkg...${NONE}"
-    yay -Sy $pkg
+    yay -S $pkg
 done
 
 # symlink configs
