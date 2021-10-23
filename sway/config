@@ -48,8 +48,8 @@ client.unfocused        $bg     $bg     $fg     $bg       $bg
 # Example configuration:
 #
 exec swayidle -w \
-          timeout 300 'swaylock --effect-blur 4x3 --screenshots --indicator-radius 0 --indicator-thickness 1' \
-          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+          timeout 1800  'swaylock --effect-blur 4x3 --screenshots --indicator-radius 0 --indicator-thickness 1' \
+          timeout 2060 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
           before-sleep 'swaylock --effect-blur 4x3 --screenshots --indicator-radius 0 --indicator-thickness 1'
 
 # This will lock your screen after 300 seconds of inactivity, then turn off
@@ -92,6 +92,9 @@ exec swayidle -w \
 
     # Reload the configuration file
     bindsym $mod+Shift+c reload
+
+    # Screenshot an selected area and save 
+    bindsym $mod+Shift+s exec grimshot save area
 
     # Exit sway (logs you out of your Wayland session)
     bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -234,5 +237,7 @@ exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'Nordic'
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
     gsettings set org.gnome.desktop.interface font-name 'Source Code Pro Regular 11'
+    nm-applet --indicator
+    mozillavpn
 }
 include /etc/sway/config.d/*

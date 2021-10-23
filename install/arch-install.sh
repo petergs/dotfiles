@@ -19,8 +19,8 @@ DOTS[sxhkd]="ln -sf $HOME/dotfiles/sxhkd $HOME/.config/"
 DOTS[tmux]="ln -sf $HOME/dotfiles/tmux/.tmux.conf $HOME/.tmux.conf"
 DOTS[vim]="ln -sf $HOME/dotfiles/vim/.vimrc $HOME/.vimrc"
 DOTS[Xresources]="ln -sf $HOME/dotfiles/Xresources/.Xresources $HOME/.Xresources"
-DOTS[sway]="ln -sf $HOME/dotfiles/sway/config $HOME/.config/"
-DOTS[waybar]="ln -sf $HOME/dotfiles/waybar/config $HOME/.config/ && ln -sf $HOME/dotfiles/waybar/style.css $HOME/.config/"
+DOTS[sway]="ln -sf $HOME/dotfiles/sway $HOME/.config/"
+DOTS[waybar]="ln -sf $HOME/dotfiles/waybar $HOME/.config/"
 
 if [ "$1" = "untracked" ]
 then 
