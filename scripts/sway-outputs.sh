@@ -19,7 +19,8 @@ esac
 
 if [[ $numoutputs = 2 ]]
 then
-    swaymsg workspace 1s output $SECONDARYMON, workspace 1p output $PRIMARYMON
+    swaymsg workspace 1s output $SECONDARYMON
+    swaymsg workspace 1p output $PRIMARYMON
     swaymsg workspace 2s output $SECONDARYMON
     swaymsg workspace 2p output $PRIMARYMON
     swaymsg workspace 3s output $SECONDARYMON
@@ -28,6 +29,8 @@ then
     swaymsg workspace 4p output $PRIMARYMON
     swaymsg workspace 5s output $SECONDARYMON
     swaymsg workspace 5p output $PRIMARYMON
+    # switch immediately to 2 char naming scheme
+    swaymsg workspace 1s, workspace 1p
 elif [[ $numoutputs = 1 ]]
 then
     swaymsg workspace 1 output $PRIMARYMON    
