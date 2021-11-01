@@ -30,6 +30,7 @@
 @define-color light_font #D8DEE9;
 @define-color light @light_font;
 @define-color dark_font #434C5E;
+@define-color modules_container_bg #3b4252;
 
 * {
     border: none;
@@ -43,6 +44,7 @@
     font-size: 12px;
     font-weight: bold;
 }
+
 
 #battery,
 #clock,

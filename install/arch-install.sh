@@ -21,6 +21,7 @@ DOTS[vim]="ln -sf $HOME/dotfiles/vim/.vimrc $HOME/.vimrc"
 DOTS[Xresources]="ln -sf $HOME/dotfiles/Xresources/.Xresources $HOME/.Xresources"
 DOTS[sway]="ln -sf $HOME/dotfiles/sway $HOME/.config/"
 DOTS[waybar]="ln -sf $HOME/dotfiles/waybar $HOME/.config/"
+DOTS[wofi]="ln -sf $HOME/dotfiles/wofi $HOME/.config/"
 
 if [ "$1" = "untracked" ]
 then 
