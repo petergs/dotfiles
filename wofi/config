@@ -7,3 +7,4 @@ hide_scroll=true
 orientation=horizontal
 location=top_left
 filter_rate=25
+width=800

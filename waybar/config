@@ -8,7 +8,7 @@
     "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": [],
     "modules-right": ["network", "temperature", "cpu", "memory", "pulseaudio", "backlight", "battery",  "tray", "clock"],
-    "output": "DP-1",
+//    "output": "DP-1",
         "sway/workspaces": {
             "disable-scroll": true,
             "format": "{name}",
