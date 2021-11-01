@@ -10,7 +10,8 @@
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
-set $down j set $up k
+set $down j 
+set $up k
 set $right l
 # Your preferred terminal emulator
 set $term kitty
@@ -43,17 +44,9 @@ client.unfocused        $bg     $bg     $fg     $bg       $bg
 
 focus_wrapping no
 
-### Workspaces and Outputs
-
 exec sway-outputs.sh
-
-workspace 1p output DP-1
-workspace 1s output HDMI-A-1
-workspace 2p output DP-1
-workspace 2s output HDMI-A-1
-workspace 3p output DP-1
-workspace 3s output HDMI-A-1
-
+# workspace 1s output HDMI-A-1
+# workspace 1p output DP-1
 
 ### Idle configuration
 #
@@ -144,8 +137,8 @@ exec swayidle -w \
     bindsym $mod+1 exec sway-workspaces.sh switch 1 
     bindsym $mod+2 exec sway-workspaces.sh switch 2 
     bindsym $mod+3 exec sway-workspaces.sh switch 3
-    bindsym $mod+3 exec sway-workspaces.sh switch 4
-    bindsym $mod+3 exec sway-workspaces.sh switch 5
+    bindsym $mod+4 exec sway-workspaces.sh switch 4
+    bindsym $mod+5 exec sway-workspaces.sh switch 5
     # Move focused container to workspace
     bindsym $mod+Shift+1 exec sway-workspaces.sh move 1
     bindsym $mod+Shift+2 exec sway-workspaces.sh move 2
@@ -224,12 +217,12 @@ bar {
     
 }
 
-# 
+# Autostart
+exec nm-applet --indicator
+exec mozillavpn linuxdaemon
 exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'Nordic'
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
     gsettings set org.gnome.desktop.interface font-name 'Source Code Pro Regular 11'
-    nm-applet --indicator
-    mozillavpn
 }
 include /etc/sway/config.d/*

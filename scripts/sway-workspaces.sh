@@ -7,23 +7,31 @@ switch_ws(){
     param1=$1
     focusedm=$(get_focused_workspace | cut -c 2)
     focusedws=$(get_focused_workspace | cut -c 1)
+    numoutputs=$(count_outputs)
 
     # do nothing if we're already on the focused workspace set
     # otherwise focus the workspace set
-    if [[ $focusedws != $param1 ]]
-    then
-        case $focusedm in
-            "p")
-                swaymsg workspace "$param1"s, workspace "$param1"p
-                ;;
-            "s")
-                swaymsg workspace "$param1"s, workspace "$param1"s
-                ;;
-            "")
+    case $focusedm in
+        "p")
+            swaymsg workspace "$param1"s, workspace "$param1"p
+            ;;
+        "s")
+            swaymsg workspace "$param1"p, workspace "$param1"s
+            ;;
+        "")
+            # if we're on a 1 character workspace, it should still switch us to
+            # a 2 character workspace if there are 2 outputs
+            # this also enables dynamically switching to this mode if a new
+            # output is added
+            if [[ $numoutputs -eq 2 ]]
+            then
+                swaymsg workspace "$param1"p, workspace "$param1"s
+            else
                 swaymsg workspace "$param1"
-                ;;
-        esac
-    fi
+            fi
+            ;;
+    esac
+    # fi
 }
 
 move_win() {
