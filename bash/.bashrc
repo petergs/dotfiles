@@ -47,3 +47,4 @@ export RANGER_LOAD_DEFAULT_RC=FALSE  # use home dir configuration files
 
 # ensure ~/.local/bin is in PATH
 PATH=~/.local/bin:$PATH
+. "$HOME/.cargo/env"

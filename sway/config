@@ -10,11 +10,10 @@
 set $mod Mod4
 # Home row direction keys, like vim
 set $left h
-set $down j
-set $up k
+set $down j set $up k
 set $right l
 # Your preferred terminal emulator
-set $term alacritty
+set $term kitty
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
@@ -37,11 +36,24 @@ set $bg #2E3440
 set $fg #2E3440
 set $br #81A1C1
 
-
 # class                 border  backgr. text    indicator child_border
 client.focused          $br     $br     $fg     $bg       $br
 client.focused_inactive $bg     $bg     $fg     $bg       $bg
 client.unfocused        $bg     $bg     $fg     $bg       $bg
+
+focus_wrapping no
+
+### Workspaces and Outputs
+
+exec sway-outputs.sh
+
+workspace 1p output DP-1
+workspace 1s output HDMI-A-1
+workspace 2p output DP-1
+workspace 2s output HDMI-A-1
+workspace 3p output DP-1
+workspace 3s output HDMI-A-1
+
 
 ### Idle configuration
 #
@@ -125,30 +137,21 @@ exec swayidle -w \
 #
 # Workspaces:
 #
+
+    # keybinds are output dependant and are set by sway-outputs.sh
+
     # Switch to workspace
-    bindsym $mod+1 workspace number 1
-    bindsym $mod+2 workspace number 2
-    bindsym $mod+3 workspace number 3
-    bindsym $mod+4 workspace number 4
-    bindsym $mod+5 workspace number 5
-    bindsym $mod+6 workspace number 6
-    bindsym $mod+7 workspace number 7
-    bindsym $mod+8 workspace number 8
-    bindsym $mod+9 workspace number 9
-    bindsym $mod+0 workspace number 10
+    bindsym $mod+1 exec sway-workspaces.sh switch 1 
+    bindsym $mod+2 exec sway-workspaces.sh switch 2 
+    bindsym $mod+3 exec sway-workspaces.sh switch 3
+    bindsym $mod+3 exec sway-workspaces.sh switch 4
+    bindsym $mod+3 exec sway-workspaces.sh switch 5
     # Move focused container to workspace
-    bindsym $mod+Shift+1 move container to workspace number 1
-    bindsym $mod+Shift+2 move container to workspace number 2
-    bindsym $mod+Shift+3 move container to workspace number 3
-    bindsym $mod+Shift+4 move container to workspace number 4
-    bindsym $mod+Shift+5 move container to workspace number 5
-    bindsym $mod+Shift+6 move container to workspace number 6
-    bindsym $mod+Shift+7 move container to workspace number 7
-    bindsym $mod+Shift+8 move container to workspace number 8
-    bindsym $mod+Shift+9 move container to workspace number 9
-    bindsym $mod+Shift+0 move container to workspace number 10
-    # Note: workspaces can have any name you want, not just numbers.
-    # We just use 1-10 as the default.
+    bindsym $mod+Shift+1 exec sway-workspaces.sh move 1
+    bindsym $mod+Shift+2 exec sway-workspaces.sh move 2
+    bindsym $mod+Shift+3 exec sway-workspaces.sh move 3
+    bindsym $mod+Shift+4 exec sway-workspaces.sh move 4
+    bindsym $mod+Shift+5 exec sway-workspaces.sh move 5
 
 #
 # Volume / Backlight
@@ -186,18 +189,7 @@ exec swayidle -w \
 
     # Move focus to the parent container
     bindsym $mod+a focus parent
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
-
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
 #
 # Resizing containers:
 #
