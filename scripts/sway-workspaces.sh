@@ -1,8 +1,13 @@
 #!/bin/bash
 
+### wrapper script for handling workspaces in swaywm which gives the appearance
+### of a shared workspacing spanning both outputs in a multimonitor setup
+
 SCRIPT_DIR=$(dirname "$0")
 source $SCRIPT_DIR/sway-utils.sh
 
+# handle switching workspaces
+# args: param1 - workspace number
 switch_ws(){
     param1=$1
     focusedm=$(get_focused_workspace | cut -c 2)

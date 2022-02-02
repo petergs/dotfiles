@@ -13,7 +13,7 @@ case $(hostname) in
 
     "lettuce")
         PRIMARYMON="eDP1"
-        SECONDARYMON="HDMI1"
+        SECONDARYMON="DP-2"
     ;;
 esac
 
