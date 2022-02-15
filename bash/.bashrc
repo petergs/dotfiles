@@ -51,6 +51,10 @@ PATH=~/.local/bin:$PATH
 
 # other aliases
 alias hostname='hostnamectl hostname'
+if [[ $TERM='xterm-kitty' ]]
+then
+    alias ssh="kitty +kitten ssh"
+fi
 
 
 # BEGIN_KITTY_SHELL_INTEGRATION

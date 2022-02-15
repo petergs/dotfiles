@@ -61,7 +61,7 @@ do
             while IFS="" read -r pkg || [ -n "$pkg" ]
             do
                 options+=("$pkg" "" off)
-            done < $SCRIPTDIR/packages
+            done < $SCRIPTDIR/arch-packages
 
             pkgs=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
 
@@ -118,12 +118,27 @@ else
 fi
 
 # install packages
-echo -e "${GREEN}Installing packages...${NONE}"
-for pkg in ${pkgs[@]}
-do
-    echo -e "${BLUE}Installing $pkg...${NONE}"
-    yay -S $pkg
-done
+if [[ $mode = 'Workstation' ]]
+then
+    echo -e "${GREEN}Installing packages...${NONE}"
+    sudo pacman -S --needed $pkg $(echo $(cat $SCRIPTDIR/arch-packages | cut -d' ' -f1))
+    echo "Do you want to install AUR packages? (Yes/No)"
+    select yn in "Yes" "No"; do
+        case $yn in
+            Yes ) yay -S --needed $pkg $(echo $(cat $SCRIPTDIR/aur-packages | cut -d' ' -f1))
+                break;;
+                
+            No ) break;;
+        esac
+    done
+else
+    echo -e "${GREEN}Installing packages...${NONE}"
+    for pkg in ${pkgs[@]}
+    do
+        echo -e "${BLUE}Installing $pkg...${NONE}"
+        sudo pacman -S --needed $pkg
+    done
+fi
 
 # symlink configs
 echo -e "${GREEN}Symlinking configuration files/directories...${NONE}"
