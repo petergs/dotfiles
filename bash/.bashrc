@@ -1,3 +1,21 @@
+# prompt
+#PS1='[\u@\h \W]\$ '  # Default
+#PS1='\[\e[1;32m\][\u@\h] \w\[\e[0m\]\n\$ '
+set_ps1() {
+    local start="\[$(tput bold)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]"
+    local host=""
+    if [[ $SSH_TTY ]] 
+    then
+        host="\[$(tput bold)\]\[\033[38;5;5m\]\h\[$(tput sgr0)\]"
+    else
+        host="\[$(tput bold)\]\[\033[38;5;2m\]\h\[$(tput sgr0)\]"
+    fi
+    local end=":[\[$(tput sgr0)\]\[\033[38;5;4m\]\w\[$(tput sgr0)\]] \$> \[$(tput sgr0)\]"
+    echo "${start}${host}${end}"
+}
+#PS1="\[$(tput bold)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;2m\]\h\[$(tput sgr0)\]:[\[$(tput sgr0)\]\[\033[38;5;4m\]\w\[$(tput sgr0)\]] \$> \[$(tput sgr0)\]"
+PS1=$(set_ps1)
+
 # set EDITOR
 export EDITOR="vim"
 
@@ -6,20 +24,17 @@ if [ -f /etc/bash_completion ]; then
 	    . /etc/bash_completion
 fi
 
-# xhost +local:root > /dev/null 2>&1
-
-complete -cf sudo
-
+# optional shell behaviors
 shopt -s cdspell
 shopt -s checkwinsize
 shopt -s cmdhist
 shopt -s dotglob
 shopt -s expand_aliases
 shopt -s extglob
-
-# append history file instead of creating a new one
 shopt -s histappend
+shopt -s histverify
 shopt -s hostcomplete
+shopt -s no_empty_cmd_completion
 shopt -s nocaseglob
 
 # history environment variables
@@ -28,10 +43,6 @@ export HISTFILESIZE=${HISTSIZE}
 export HISTCONTROL=ignoreboth
 export HISTIGNORE="ls:ll:la:cd:pwd"
 export HISTTIMEFORMAT="[$(tput setaf 6)%F %T$(tput sgr0)]: " # colorful date
-
-# prompt
-#PS1='[\u@\h \W]\$ '  # Default
-PS1='\[\e[1;32m\][\u@\h \W]\$\[\e[0m\] '
 
 # load host specific bash aliases
 if [ -f ~/.bash_aliases ]; then
@@ -42,21 +53,13 @@ fi
 alias la='ls -la --color=auto'
 alias ls='ls --color=auto'
 
-# ranger environment variables
-export RANGER_LOAD_DEFAULT_RC=FALSE  # use home dir configuration files
-
 # ensure ~/.local/bin is in PATH
 PATH=~/.local/bin:$PATH
-# . "$HOME/.cargo/env"
 
 # other aliases
 alias hostname='hostnamectl hostname'
 if [[ $TERM='xterm-kitty' ]]
 then
-    alias ssh="kitty +kitten ssh"
+    alias kssh="kitty +kitten ssh"
 fi
 
-
-# BEGIN_KITTY_SHELL_INTEGRATION
-if test -n "$KITTY_INSTALLATION_DIR" -a -e "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; then source "$KITTY_INSTALLATION_DIR/shell-integration/bash/kitty.bash"; fi
-# END_KITTY_SHELL_INTEGRATION
