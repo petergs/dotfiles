@@ -71,6 +71,7 @@ bspc config normal_border_color \#2E3440
 (sleep 1 && nitrogen --restore) &
 (sleep 1 && sxhkd) &
 xrdb ~/.Xresources &
+mozillavpn activate &
 compton &
 nm-applet &
 xfce4-clipman & 

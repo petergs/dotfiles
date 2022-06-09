@@ -80,7 +80,7 @@ super + r
 #
 
 super + Return
-    kitty 
+    alacritty 
 
 super + space
     dmenu_run -h 30 -w 600 -x 400 \
