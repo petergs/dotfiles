@@ -79,6 +79,9 @@ Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tmsvg/pear-tree'
 call plug#end()
 
+" prevent erasing closing string (breaks dot repeat)
+let g:pear_tree_repeatable_expand = 0
+
 " run black on save
 augroup black_on_save
     autocmd!
@@ -92,3 +95,6 @@ augroup insertMatch
     au InsertEnter * DoMatchParen
     au InsertLeave * NoMatchParen
 augroup END
+
+" turn off autocomment
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o

@@ -63,3 +63,8 @@ then
     alias kssh="kitty +kitten ssh"
 fi
 
+# misc funcs
+# compress_pdf in.pdf out.pdf
+compress_pdf() {
+    gs  -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$2 $1
+}

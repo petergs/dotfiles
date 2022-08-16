@@ -25,7 +25,7 @@ then
     echo -e "${RED}The following directories do not have an install command:${NONE}"
     prefix=$PWD/../
     dirs=() 
-    for d in $prefix*/ ; do
+    for d in "$prefix"*/ ; do
         dirs+=("$d")
     done
 
@@ -52,27 +52,19 @@ do
     # set $pkgs and $configs based on $mode
     case $mode in
         'Manual') 
-            # what do you want installed from the repos?
-            cmd=(whiptail --separate-output --checklist "Which pkgs do you want to install?" 22 55 16)
-            options=()
-            while IFS="" read -r pkg || [ -n "$pkg" ]
-            do
-                options+=("$pkg" "" off)
-            done < $SCRIPTDIR/deb-packages
-
-            pkgs=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
-
-            # what configs do you want symlinked?
-            cmd=(whiptail --separate-output --checklist "Which configs do you want symlinked?" 22 76 16)
-            options=()
-            for i in "${!DOTS[@]}"
-            do
-                options+=("$i" "" off)
+            echo -e "${RED}Specify configs to be installed manually (space separated). Options are:${NONE}"
+            for i in "${!DOTS[@]}"; do
+                echo $i
             done
-
-            configs=$("${cmd[@]}" "${options[@]}" 2>&1 >/dev/tty)
+            read configs
+            echo ""
+            echo -e "${RED}Specify packages to be installed manually (space separated). Options are:${NONE}"
+            cat $SCRIPTDIR/deb-packages | sort
+            read pkgs
+            echo ""
+            echo -e "Configs ( $configs ) will be symlinked."
+            echo -e "Packages ( $pkgs ) will be installed."
             break
-
         ;;
 
         'Server') 
@@ -110,7 +102,7 @@ done
 
 # symlink configs
 echo -e "${GREEN}Symlinking configuration files/directories...${NONE}"
-for config in ${configs[@]} #${!DOTS[@]}
+for config in ${configs[@]}
 do
     # pull out the last word (symlink target to backup if it exists)
     target=$(echo ${DOTS[$config]} | awk '{print $NF}')
