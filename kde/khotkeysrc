@@ -104,7 +104,7 @@ DataCount=4
 
 [Data_1]
 Comment=KMenuEdit Global Shortcuts
-DataCount=2
+DataCount=1
 Enabled=true
 Name=KMenuEdit
 SystemGroup=1
@@ -983,6 +983,10 @@ Key=Meta+Space
 Type=SHORTCUT
 Uuid={47fc2d1b-04e7-43f0-802a-b0f94d311af0}
 
+[DirSelect Dialog]
+DirSelectDialog Size[$d]
+History Items[$d]
+
 [General]
 AccentColor[$d]
 ColorScheme[$d]
@@ -1019,6 +1023,7 @@ Show Speedbar[$d]
 Show hidden files[$d]
 Sort by[$d]
 Sort directories first[$d]
+Sort hidden files last[$d]
 Sort reversed[$d]
 Speedbar Width[$d]
 View Style[$d]

@@ -39,7 +39,10 @@ LayoutName=org.kde.breeze.desktop
 [Windows]
 RollOverDesktops=false
 
+[Xwayland]
+Scale=1
+
 [org.kde.kdecoration2]
 BorderSizeAuto=false
-library=org.kde.kwin.aurorae
-theme=__aurorae__svg__ActiveAccentFrame
+library=org.kde.bismuth.decoration
+theme=Bismuth
