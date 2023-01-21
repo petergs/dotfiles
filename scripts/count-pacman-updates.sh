@@ -2,7 +2,7 @@
 
 # icons 
 
-checkupdates > /tmp/checkupdates.out 2&>1
+checkupdates > /tmp/checkupdates.out 2>&1
 res="$?"
 if [ $res -eq 2 ]; then
     echo 0
