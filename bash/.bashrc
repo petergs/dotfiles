@@ -58,10 +58,15 @@ PATH=~/.local/bin:$PATH
 
 # other aliases
 alias hostname='hostnamectl hostname'
+
 if [[ $TERM='xterm-kitty' ]]
 then
     alias kssh="kitty +kitten ssh"
 fi
+
+alias dev='cd ~/Documents/dev/'
+alias ctf='cd ~/Documents/dev/ctf'
+alias qtile_logs='tail -n 30 ~/.local/share/qtile/qtile.log'
 
 # misc funcs
 # compress_pdf in.pdf out.pdf
