@@ -18,6 +18,9 @@ from sqwid import (
     DBL_HEAVY_BOX,
 )
 
+# other imports
+import os
+
 
 # constants
 mod = "mod4"
@@ -31,6 +34,7 @@ fontsize = 13
 spacer_len = 25
 curly = "{}"
 iface = "wlan0"
+home = os.path.expanduser("~")
 
 
 ## cmds
@@ -52,6 +56,10 @@ inc_lite_cmd = "xbacklight -inc 5"
 dec_lite_cmd = "xbacklight -dec 5"
 get_lite_cmd = "xbacklight"
 get_root_storage_cmd = "df -k | awk '{print $5$6}' | grep -x '[0-9].%/' | tr -d '/% '"
+
+ipaddr = (
+    f"ip -4 addr show {iface}" + " | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n1",
+)
 
 
 # keybindings
@@ -142,12 +150,14 @@ layouts = [
         border_focus=t.border_focus,
         border_normal=t.border_normal,
         border_width=lbw,
+        border_on_single=True,
         margin=gaps,
     ),
     layout.Bsp(
         border_focus=t.border_focus,
         border_normal=t.border_normal,
         border_width=lbw,
+        border_on_single=True,
         margin=gaps,
     ),
     layout.Max(),
@@ -253,21 +263,37 @@ screens = [
             border_width=[0, 0, 0, 0],
             background=t.bar_bg,
         ),
+        # right=bar.Bar(
+        #     [
+        #         widget.Spacer(length=spacer_len),
+        #         widget.TextBox(),
+        #     ],
+        #     size=200,
+        #     margin=[gaps, 0, gaps, 0],
+        #     background=t.bar_bg,
+        # ),
         bottom=bar.Bar(
             [
                 widget.Spacer(length=spacer_len),
                 SpawnWidget(
-                    fmt=f"<span color='{t.border_focus}' weight='bold'>IP</span>: {curly} ",
-                    cmd=f"ip -4 addr show {iface}"
-                    + " | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n1",
+                    # fmt=f"<span color='{t.border_focus}' weight='bold'>IP</span>: {curly} ",
+                    fmt=f"<span color='{t.border_focus}' weight='bold'>{iface}</span> {curly}",
+                    cmd=f"{home}/dotfiles/scripts/ipaddr.sh {iface}",
                     update_interval=60,
                 ),
-                widget.Net(
-                    format=f"<span color='{t.border_focus}'>"
-                    + "󰜷</span>:{up}  "
-                    + f"<span color='{t.border_focus}'>󰜮</span>"
-                    + ":{down} ",
-                    interface=iface,
+                # widget.Net(
+                #     format=f"<span color='{t.border_focus}'>"
+                #     + "󰜷</span>:{up}  "
+                #     + f"<span color='{t.border_focus}'>󰜮</span>"
+                #     + ":{down} ",
+                #     interface=iface,
+                # ),
+                # widget.Spacer(length=spacer_len),
+                widget.NetGraph(
+                    type="line",
+                    graph_color=t.border_focus,
+                    border_color=t.border_normal,
+                    border_width=4,
                 ),
                 widget.Spacer(bar.STRETCH),
                 SpawnWidget(
@@ -350,3 +376,55 @@ reconfigure_screens = True
 auto_minimize = True
 wl_input_rules = None
 # wmname = "LG3D"
+
+# hooks
+# @hook.subscribe.startup
+# def startup():
+#    right.show(False)
+
+"""
+from qtile_extras.popup.toolkit import (
+    PopupRelativeLayout,
+    PopupImage,
+    PopupText,
+    PopupWidget,
+)
+
+def toggle_power_menu(qtile):
+
+    controls = [
+        PopupWidget(
+            widget=widget.CPUGraph(), width=0.95, height=0.1, pos_x=0.05, pos_y=0.05
+        ),
+        PopupText(
+            text="Sleep", pos_x=0.4, pos_y=0.7, width=0.2, height=0.2, h_align="center"
+        ),
+        PopupText(
+            text="Shutdown",
+            pos_x=0.7,
+            pos_y=0.7,
+            width=0.2,
+            height=0.2,
+            h_align="center",
+        ),
+    ]
+
+    layout = PopupRelativeLayout(
+        qtile,
+        width=200,
+        height=qtile.current_screen.height - 60 - 2 * gaps,
+        controls=controls,
+        background="000000",
+        initial_focus=None,
+    )
+
+    layout.show(relative_to=6)
+
+
+def show_dash(qtile):
+    # lazy.hide_show_bar("right")
+    toggle_power_menu(qtile)
+
+
+keys += [Key([mod], "d", lazy.function(show_dash))]
+"""

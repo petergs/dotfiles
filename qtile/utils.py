@@ -3,6 +3,7 @@ import psutil
 import subprocess
 
 from libqtile import hook
+from libqtile.widget import base
 
 
 # hooks

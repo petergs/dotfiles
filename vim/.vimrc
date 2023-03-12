@@ -77,6 +77,7 @@ call plug#begin()
 Plug 'fatih/vim-go'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tmsvg/pear-tree'
+Plug 'elkowar/yuck.vim'
 call plug#end()
 
 " prevent erasing closing string (breaks dot repeat)
