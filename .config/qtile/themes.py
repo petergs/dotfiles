@@ -10,7 +10,8 @@ Theme = namedtuple(
         "bar_fg",
         "tag_normal_bg",
         "tag_focus_bg",
-        "tag_fg",
+        "tag_normal_fg",
+        "tag_focus_fg",
         "tag_focus_line",
         "low",
         "medium",
@@ -53,7 +54,8 @@ nord = Theme(
     bar_fg=_nc[6],
     tag_normal_bg=_nc[0],
     tag_focus_bg=_nc[3],
-    tag_fg=_nc[4],
+    tag_normal_fg=_nc[4],
+    tag_focus_fg=_nc[4],
     tag_focus_line=_nc[9],
     low=_nc[14],
     medium=_nc[13],
@@ -91,7 +93,8 @@ catppuccin = Theme(
     bar_fg=_cc[6],
     tag_normal_bg=_cc[0],
     tag_focus_bg=_cc[3],
-    tag_fg=_cc[4],
+    tag_normal_fg=_cc[4],
+    tag_focus_fg=_cc[4],
     tag_focus_line=_cc[9],
     low=_cc[11],
     medium=_cc[10],
@@ -115,10 +118,6 @@ _dc = [
     "#bd93f9",  # 9 - purple color
     "#ff5555",  # 10 - red color
     "#f1fa8c",  # 11 - yellow color
-    "#f1fa8c",  # 12 - repeat
-    "#f1fa8c",  # 13 - repeat
-    "#f1fa8c",  # 14 - repeat
-    "#f1fa8c",  # 15 - repeat
 ]
 
 dracula = Theme(
@@ -126,10 +125,11 @@ dracula = Theme(
     border_focus=_dc[9],
     border_normal=_dc[1],
     bar_bg=_dc[0],
-    bar_fg=_dc[6],
+    bar_fg=_dc[3],
     tag_normal_bg=_dc[0],
     tag_focus_bg=_dc[1],
-    tag_fg=_dc[1],
+    tag_normal_fg=_dc[1],
+    tag_focus_fg=_dc[6],
     tag_focus_line=_dc[9],
     low=_dc[6],
     medium=_dc[11],

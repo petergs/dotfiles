@@ -41,7 +41,7 @@ home = os.path.expanduser("~")
 dmenu_run = f"""
     dmenu_run -h 30 -w 600 -x 400 \
     -nb '{t.bar_bg}' \
-    -nf '{t.tag_fg}' \
+    -nf '{t.bar_fg}' \
     -sb '{t.border_focus}' \
     -sf '{t.bar_bg}' \
     -fn 'Source Code Pro Semibold-11'
@@ -187,7 +187,7 @@ screens = [
             [
                 widget.GroupBox(
                     this_current_screen_border=t.tag_focus_line,
-                    block_highlight_text_color=t.bar_fg,
+                    block_highlight_text_color=t.tag_focus_fg,
                     borderwidth=3,
                     highlight_method="line",
                     background=t.bar_bg,
