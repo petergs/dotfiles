@@ -1,0 +1,29 @@
+#!/bin/bash
+
+# print the reverse dependencies of a pacman package with `rdep [pkg-name]` 
+# example: `rdep clang`
+# result:  `None -> bcc-tools(+2) -> bcc(+18) -> clang`
+
+RED='\033[0;31m'
+NONE='\033[0m'
+
+deps=$1
+next=$1
+while [ "$next" != "None" ]
+do 
+    res=$(pacman -Sii $next | grep 'Required By')
+    if [[ $? -ne 0 ]]; then 
+        exit 1 
+    fi
+
+    next=$(echo $res | awk '{print $4}')
+    count=$(echo $res | awk '{print NF-4}')
+
+    if [[ $count -eq 0 ]]; then
+        deps="$next -> $deps"
+    else
+        deps="$next$RED(+$count)$NONE -> $deps"
+    fi
+done
+
+echo -e $deps

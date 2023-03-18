@@ -1,0 +1,21 @@
+#!/bin/python
+import os
+
+def try_mkdir(d: str) -> None:
+    try:
+        os.mkdir(d, mode=0o755)
+    except FileExistsError:
+        print(f"{d} already exists")
+
+if __name__ == "__main__":
+    home = os.getenv("HOME")
+    dev = "dev"
+    devpath = f"{home}/Documents/{dev}"
+    dirs = ["ctf", "dump", "testbed", "github", "projects"]
+
+    if not os.path.isdir(devpath):
+        try_mkdir(devpath)
+
+    for d in dirs:
+        try_mkdir(f"{devpath}/{d}")
+

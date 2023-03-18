@@ -1,7 +1,6 @@
 import:
-  # - ~/.config/alacritty/catppuccin/catppuccin-mocha.yml
-  # - ~/.config/alacritty/nord/src/nord.yaml
-  - ~/.config/alacritty/dracula/dracula.yml
+  # - ~/.config/alacritty/nord.yaml
+  - ~/.config/alacritty/dracula.yml
 
 env:
   # TERM variable
