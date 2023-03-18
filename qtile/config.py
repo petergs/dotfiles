@@ -5,7 +5,7 @@ from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
 # custom modules
-from themes import nord
+from themes import nord, dracula
 from utils import *
 from sqwid import (
     SpawnWidget,
@@ -25,7 +25,7 @@ import os
 # constants
 mod = "mod4"
 terminal = guess_terminal()
-theme = t = nord
+theme = t = dracula
 c = theme.colors
 lbw = 3  # layout border width
 gaps = 5
@@ -198,17 +198,17 @@ screens = [
                 ),
                 widget.Spacer(length=spacer_len),
                 SpawnWidget(
-                    fmt=f"<span color='{c[7]}' size='large'>󰝚</span>  {curly}",
+                    fmt=f"<span color='{t.accent2}' size='large'>󰝚</span>  {curly}",
                     cmd="/home/nibbles/dotfiles/scripts/playerctl.sh",
                     update_interval=60,
                 ),
                 widget.Spacer(bar.STRETCH),
                 widget.CurrentLayout(
-                    fmt=f"<span color='{c[15]}' size='large'>󰕰</span> " + "{}"
+                    fmt=f"<span color='{t.accent3}' size='large'>󰕰</span> " + "{}"
                 ),
                 widget.Spacer(length=spacer_len),
                 SpawnWidget(
-                    fmt=f"<span color='{c[10]}' size='large'>󰏔</span>" + " {}",
+                    fmt=f"<span color='{t.accent2}' size='large'>󰏔</span>" + " {}",
                     cmd="/home/nibbles/dotfiles/scripts/count-pacman-updates.sh",
                     update_interval=6000,
                 ),
@@ -247,7 +247,7 @@ screens = [
                     discharge_char="",
                     empty_char="",
                     full_char="",
-                    low_foreground=c[11],
+                    low_foreground=t.crit,
                     markup=True,
                 ),
                 widget.Spacer(length=spacer_len),
@@ -257,21 +257,12 @@ screens = [
                     format="%Y-%m-%d %I:%M %p",
                 ),
                 widget.Spacer(length=10),
-                widget.Systray(background=t.tag_focus_bg),
+                widget.Systray(background=t.bar_bg),
             ],
             size=30,
             border_width=[0, 0, 0, 0],
             background=t.bar_bg,
         ),
-        # right=bar.Bar(
-        #     [
-        #         widget.Spacer(length=spacer_len),
-        #         widget.TextBox(),
-        #     ],
-        #     size=200,
-        #     margin=[gaps, 0, gaps, 0],
-        #     background=t.bar_bg,
-        # ),
         bottom=bar.Bar(
             [
                 widget.Spacer(length=spacer_len),
@@ -292,31 +283,31 @@ screens = [
                 widget.NetGraph(
                     type="line",
                     graph_color=t.border_focus,
-                    border_color=t.border_normal,
+                    border_color=t.bar_bg,
                     border_width=4,
                 ),
                 widget.Spacer(bar.STRETCH),
                 SpawnWidget(
-                    fmt=f"<span color='{c[10]}' weight='bold'>/</span>: {curly}%",
+                    fmt=f"<span color='{t.accent1}' weight='bold'>/</span>: {curly}%",
                     cmd=get_root_storage_cmd,
                     update_interval=120,
                 ),
                 widget.Spacer(length=spacer_len),
                 widget.ThermalZone(
                     fmt=" <span color='white'>{}</span>",
-                    fgcolor_crit=c[11],
-                    fgcolor_high=c[12],
-                    fgcolor_normal=c[13],
+                    fgcolor_crit=t.crit,
+                    fgcolor_high=t.high,
+                    fgcolor_normal=t.medium,
                     markup=True,
                 ),
                 widget.Spacer(length=spacer_len),
                 CpuRamp(
                     fmt="CPU {}",
                     update_interval=1,  # 0.25
-                    clr_low=c[14],
-                    clr_med=c[13],
-                    clr_high=c[12],
-                    clr_crit=c[11],
+                    clr_low=t.low,
+                    clr_med=t.medium,
+                    clr_high=t.high,
+                    clr_crit=t.crit,
                     sensitive=True,
                     markup=True,
                 ),
@@ -357,6 +348,9 @@ follow_mouse_focus = False
 bring_front_click = False
 cursor_warp = False
 floating_layout = layout.Floating(
+    border_width=lbw,
+    border_focus=t.low,
+    border_normal=t.border_normal,
     float_rules=[
         # Run the utility of `xprop` to see the wm class and name of an X client.
         *layout.Floating.default_float_rules,
@@ -366,7 +360,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-    ]
+    ],
 )
 
 # misc settings
@@ -376,55 +370,3 @@ reconfigure_screens = True
 auto_minimize = True
 wl_input_rules = None
 # wmname = "LG3D"
-
-# hooks
-# @hook.subscribe.startup
-# def startup():
-#    right.show(False)
-
-"""
-from qtile_extras.popup.toolkit import (
-    PopupRelativeLayout,
-    PopupImage,
-    PopupText,
-    PopupWidget,
-)
-
-def toggle_power_menu(qtile):
-
-    controls = [
-        PopupWidget(
-            widget=widget.CPUGraph(), width=0.95, height=0.1, pos_x=0.05, pos_y=0.05
-        ),
-        PopupText(
-            text="Sleep", pos_x=0.4, pos_y=0.7, width=0.2, height=0.2, h_align="center"
-        ),
-        PopupText(
-            text="Shutdown",
-            pos_x=0.7,
-            pos_y=0.7,
-            width=0.2,
-            height=0.2,
-            h_align="center",
-        ),
-    ]
-
-    layout = PopupRelativeLayout(
-        qtile,
-        width=200,
-        height=qtile.current_screen.height - 60 - 2 * gaps,
-        controls=controls,
-        background="000000",
-        initial_focus=None,
-    )
-
-    layout.show(relative_to=6)
-
-
-def show_dash(qtile):
-    # lazy.hide_show_bar("right")
-    toggle_power_menu(qtile)
-
-
-keys += [Key([mod], "d", lazy.function(show_dash))]
-"""

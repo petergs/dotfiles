@@ -1,5 +1,6 @@
 #!/bin/bash
 nitrogen --restore &
+# hsetroot -solid "#44475a"
 xrdb .Xresources &
 nm-applet &
 comptom &

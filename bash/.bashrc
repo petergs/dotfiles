@@ -54,7 +54,7 @@ alias la='ls -la --color=auto'
 alias ls='ls --color=auto'
 
 # ensure ~/.local/bin is in PATH
-PATH=~/.local/bin:$PATH
+PATH=~/.local/bin:~/go/bin:$PATH
 
 # other aliases
 alias hostname='hostnamectl hostname'
