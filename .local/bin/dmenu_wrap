@@ -1,0 +1,7 @@
+#!/bin/bash
+NB="#282a36"
+NF="#f8f8f2"
+SB="#bd93f9"
+SF="#282a26"
+FN="Source Code Pro Semibold-11"
+dmenu -s 0 -h 30 -nb $NB -nf $NF -sb $SB -sf $SF -fn "$FN" "$@" 

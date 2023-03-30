@@ -1,3 +1,3 @@
 README
 ------
-> misc scripts
+> misc scripts - mostly used for bar output
