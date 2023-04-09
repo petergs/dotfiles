@@ -6,7 +6,7 @@ syntax on
 color default
 " set background=dark
 set t_Co=16 " base 16 colors
-highlight StatusLine ctermbg=15 ctermfg=4
+" highlight StatusLine ctermbg=15 ctermfg=4
 
 
 set nu
@@ -20,7 +20,7 @@ set ignorecase
 set hlsearch
 set incsearch
 set linebreak
-set laststatus=2
+" set laststatus=2
 
 " Tab settings
 " set textwidth=79  " lines longer than 79 columns will be broken

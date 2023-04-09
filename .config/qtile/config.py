@@ -28,7 +28,7 @@ terminal = guess_terminal()
 theme = t = dracula
 c = theme.colors
 lbw = 3  # layout border width
-gaps = 5
+gaps = 3
 font = "SauceCodePro Nerd Font Regular"
 fontsize = 13
 spacer_len = 25
@@ -258,6 +258,7 @@ screens = [
                 ),
                 widget.Spacer(length=10),
                 widget.Systray(background=t.bar_bg),
+                widget.Spacer(length=5),
             ],
             size=30,
             border_width=[0, 0, 0, 0],

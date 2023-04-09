@@ -74,3 +74,4 @@ alias qtile-reload='qtile cmd-obj -o cmd -f reload_config'
 compress_pdf() {
     gs  -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$2 $1
 }
+. "$HOME/.cargo/env"
