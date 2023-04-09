@@ -181,147 +181,151 @@ widget_defaults = dict(
 )
 extension_defaults = widget_defaults.copy()
 
+top_widgets = [
+    widget.GroupBox(
+        this_current_screen_border=t.tag_focus_line,
+        block_highlight_text_color=t.tag_focus_fg,
+        borderwidth=3,
+        highlight_method="line",
+        background=t.bar_bg,
+        highlight_color=t.tag_focus_bg,
+        disable_drag=True,
+        padding_x=7,
+        margin_x=0,
+    ),
+    widget.Spacer(length=spacer_len),
+    SpawnWidget(
+        fmt=f"<span color='{t.accent2}' size='large'>󰝚</span>  {curly}",
+        cmd="/home/nibbles/dotfiles/scripts/playerctl.sh",
+        update_interval=60,
+    ),
+    widget.Spacer(bar.STRETCH),
+    widget.CurrentLayout(
+        fmt=f"<span color='{t.accent3}' size='large'>󰕰</span> " + "{}"
+    ),
+    widget.Spacer(length=spacer_len),
+    SpawnWidget(
+        fmt=f"<span color='{t.accent2}' size='large'>󰏔</span>" + " {}",
+        cmd="/home/nibbles/dotfiles/scripts/count-pacman-updates.sh",
+        update_interval=6000,
+    ),
+    widget.Spacer(length=spacer_len),
+    widget.Backlight(
+        fmt="<span size='large'></span>  {}",
+        backlight_name="intel_backlight",
+        brightness_file="brightness",
+        markup=True,
+    ),
+    ProgressBar(
+        update_interval=0.1,
+        bar_char="栗",
+        line_char="",
+        bar_fg=t.border_focus,
+        check_output_cmd=get_lite_cmd,
+    ),
+    widget.Spacer(length=spacer_len),
+    widget.PulseVolume(
+        fmt="<span size='large'></span>  {}",
+        cardid="0",
+        update_interval=0.05
+        # cardid might not be needed
+    ),
+    ProgressBar(
+        update_interval=0.1,
+        bar_char="栗",
+        line_char="",
+        bar_fg=t.border_focus,
+        check_output_cmd=get_vol_cmd,
+    ),
+    widget.Spacer(length=spacer_len),
+    widget.Battery(
+        format="{char} {percent:2.0%}",
+        charge_char="",
+        discharge_char="",
+        empty_char="",
+        full_char="",
+        low_foreground=t.crit,
+        markup=True,
+    ),
+    widget.Spacer(length=spacer_len),
+    widget.Clock(
+        fmt="<span size='large'></span> {}",
+        markup=True,
+        format="%Y-%m-%d %I:%M %p",
+    ),
+    widget.Spacer(length=10),
+    widget.Systray(background=t.bar_bg),
+    widget.Spacer(length=5),
+]
+
+bottom_widgets = [
+    widget.Spacer(length=spacer_len),
+    SpawnWidget(
+        # fmt=f"<span color='{t.border_focus}' weight='bold'>IP</span>: {curly} ",
+        fmt=f"<span color='{t.border_focus}' weight='bold'>{iface}</span> {curly}",
+        cmd=f"{home}/dotfiles/scripts/ipaddr.sh {iface}",
+        update_interval=60,
+    ),
+    # widget.Net(
+    #     format=f"<span color='{t.border_focus}'>"
+    #     + "󰜷</span>:{up}  "
+    #     + f"<span color='{t.border_focus}'>󰜮</span>"
+    #     + ":{down} ",
+    #     interface=iface,
+    # ),
+    # widget.Spacer(length=spacer_len),
+    widget.NetGraph(
+        type="line",
+        graph_color=t.border_focus,
+        border_color=t.bar_bg,
+        border_width=4,
+    ),
+    widget.Spacer(bar.STRETCH),
+    SpawnWidget(
+        fmt=f"<span color='{t.accent1}' weight='bold'>/</span>: {curly}%",
+        cmd=get_root_storage_cmd,
+        update_interval=120,
+    ),
+    widget.Spacer(length=spacer_len),
+    widget.ThermalZone(
+        fmt=" <span color='white'>{}</span>",
+        fgcolor_crit=t.crit,
+        fgcolor_high=t.high,
+        fgcolor_normal=t.medium,
+        markup=True,
+    ),
+    widget.Spacer(length=spacer_len),
+    CpuRamp(
+        fmt="CPU {}",
+        update_interval=1,  # 0.25
+        clr_low=t.low,
+        clr_med=t.medium,
+        clr_high=t.high,
+        clr_crit=t.crit,
+        sensitive=True,
+        markup=True,
+    ),
+    widget.Spacer(length=spacer_len),
+    RamBar(
+        fmt="RAM <span weight='heavy'>{}</span>",
+        update_interval=60,
+        bar_fg=t.border_focus,
+        bar_char=EM,
+        line_char="|",
+    ),
+    widget.Spacer(length=spacer_len),
+]
+
 screens = [
     Screen(
         top=bar.Bar(
-            [
-                widget.GroupBox(
-                    this_current_screen_border=t.tag_focus_line,
-                    block_highlight_text_color=t.tag_focus_fg,
-                    borderwidth=3,
-                    highlight_method="line",
-                    background=t.bar_bg,
-                    highlight_color=t.tag_focus_bg,
-                    disable_drag=True,
-                    padding_x=7,
-                    margin_x=0,
-                ),
-                widget.Spacer(length=spacer_len),
-                SpawnWidget(
-                    fmt=f"<span color='{t.accent2}' size='large'>󰝚</span>  {curly}",
-                    cmd="/home/nibbles/dotfiles/scripts/playerctl.sh",
-                    update_interval=60,
-                ),
-                widget.Spacer(bar.STRETCH),
-                widget.CurrentLayout(
-                    fmt=f"<span color='{t.accent3}' size='large'>󰕰</span> " + "{}"
-                ),
-                widget.Spacer(length=spacer_len),
-                SpawnWidget(
-                    fmt=f"<span color='{t.accent2}' size='large'>󰏔</span>" + " {}",
-                    cmd="/home/nibbles/dotfiles/scripts/count-pacman-updates.sh",
-                    update_interval=6000,
-                ),
-                widget.Spacer(length=spacer_len),
-                widget.Backlight(
-                    fmt="<span size='large'></span>  {}",
-                    backlight_name="intel_backlight",
-                    brightness_file="brightness",
-                    markup=True,
-                ),
-                ProgressBar(
-                    update_interval=0.1,
-                    bar_char="栗",
-                    line_char="",
-                    bar_fg=t.border_focus,
-                    check_output_cmd=get_lite_cmd,
-                ),
-                widget.Spacer(length=spacer_len),
-                widget.PulseVolume(
-                    fmt="<span size='large'></span>  {}",
-                    cardid="0",
-                    update_interval=0.05
-                    # cardid might not be needed
-                ),
-                ProgressBar(
-                    update_interval=0.1,
-                    bar_char="栗",
-                    line_char="",
-                    bar_fg=t.border_focus,
-                    check_output_cmd=get_vol_cmd,
-                ),
-                widget.Spacer(length=spacer_len),
-                widget.Battery(
-                    format="{char} {percent:2.0%}",
-                    charge_char="",
-                    discharge_char="",
-                    empty_char="",
-                    full_char="",
-                    low_foreground=t.crit,
-                    markup=True,
-                ),
-                widget.Spacer(length=spacer_len),
-                widget.Clock(
-                    fmt="<span size='large'></span> {}",
-                    markup=True,
-                    format="%Y-%m-%d %I:%M %p",
-                ),
-                widget.Spacer(length=10),
-                widget.Systray(background=t.bar_bg),
-                widget.Spacer(length=5),
-            ],
+            top_widgets,
             size=30,
             border_width=[0, 0, 0, 0],
             background=t.bar_bg,
         ),
         bottom=bar.Bar(
-            [
-                widget.Spacer(length=spacer_len),
-                SpawnWidget(
-                    # fmt=f"<span color='{t.border_focus}' weight='bold'>IP</span>: {curly} ",
-                    fmt=f"<span color='{t.border_focus}' weight='bold'>{iface}</span> {curly}",
-                    cmd=f"{home}/dotfiles/scripts/ipaddr.sh {iface}",
-                    update_interval=60,
-                ),
-                # widget.Net(
-                #     format=f"<span color='{t.border_focus}'>"
-                #     + "󰜷</span>:{up}  "
-                #     + f"<span color='{t.border_focus}'>󰜮</span>"
-                #     + ":{down} ",
-                #     interface=iface,
-                # ),
-                # widget.Spacer(length=spacer_len),
-                widget.NetGraph(
-                    type="line",
-                    graph_color=t.border_focus,
-                    border_color=t.bar_bg,
-                    border_width=4,
-                ),
-                widget.Spacer(bar.STRETCH),
-                SpawnWidget(
-                    fmt=f"<span color='{t.accent1}' weight='bold'>/</span>: {curly}%",
-                    cmd=get_root_storage_cmd,
-                    update_interval=120,
-                ),
-                widget.Spacer(length=spacer_len),
-                widget.ThermalZone(
-                    fmt=" <span color='white'>{}</span>",
-                    fgcolor_crit=t.crit,
-                    fgcolor_high=t.high,
-                    fgcolor_normal=t.medium,
-                    markup=True,
-                ),
-                widget.Spacer(length=spacer_len),
-                CpuRamp(
-                    fmt="CPU {}",
-                    update_interval=1,  # 0.25
-                    clr_low=t.low,
-                    clr_med=t.medium,
-                    clr_high=t.high,
-                    clr_crit=t.crit,
-                    sensitive=True,
-                    markup=True,
-                ),
-                widget.Spacer(length=spacer_len),
-                RamBar(
-                    fmt="RAM <span weight='heavy'>{}</span>",
-                    update_interval=60,
-                    bar_fg=t.border_focus,
-                    bar_char=EM,
-                    line_char="|",
-                ),
-                widget.Spacer(length=spacer_len),
-            ],
+            bottom_widgets,
             size=30,
             border_width=[0, 0, 0, 0],
             background=t.bar_bg,
