@@ -2,4 +2,4 @@
 
 # switch to the desktop where to the selected window is located
 desktop=$(wmctrl -lx | awk '{$1=$4="";split($3,n,".");$3=n[2];print}' | dmenu_wrap | awk '{print $1}')
-wmctrl -s $desktop
+wmctrl -s "$desktop"

@@ -11,13 +11,13 @@ deps=$1
 next=$1
 while [ "$next" != "None" ]
 do 
-    res=$(pacman -Sii $next | grep 'Required By')
+    res=$(pacman -Sii "$next" | grep 'Required By')
     if [[ $? -ne 0 ]]; then 
         exit 1 
     fi
 
-    next=$(echo $res | awk '{print $4}')
-    count=$(echo $res | awk '{print NF-4}')
+    next=$(echo "$res" | awk '{print $4}')
+    count=$(echo "$res" | awk '{print NF-4}')
 
     if [[ $count -eq 0 ]]; then
         deps="$next -> $deps"
@@ -26,4 +26,4 @@ do
     fi
 done
 
-echo -e $deps
+echo -e "$deps"
