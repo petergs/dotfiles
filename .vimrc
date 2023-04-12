@@ -69,6 +69,7 @@ endif
 " add plugins
 call plug#begin()
 Plug 'fatih/vim-go'
+Plug 'rust-lang/rust.vim'
 Plug 'psf/black', { 'branch': 'stable' }
 Plug 'tmsvg/pear-tree'
 Plug 'elkowar/yuck.vim'
@@ -84,6 +85,9 @@ augroup black_on_save
     autocmd!
     autocmd BufWritePre *.py Black
 augroup end
+
+" run rustfmt on save
+let g:rustfmt_autosave = 1
 
 " turn off paren match in normal mode 
 augroup insertMatch
