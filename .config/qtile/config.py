@@ -249,9 +249,15 @@ top_widgets = [
     ),
     widget.Spacer(length=spacer_len),
     widget.Clock(
+        fmt="<span size='large'></span> {}",
+        markup=True,
+        format=" %Y-%m-%d",
+    ),
+    widget.Spacer(length=spacer_len),
+    widget.Clock(
         fmt="<span size='large'></span> {}",
         markup=True,
-        format="%Y-%m-%d %I:%M %p",
+        format=" %I:%M %p",
     ),
     widget.Spacer(length=10),
     widget.Systray(background=t.bar_bg),
@@ -316,6 +322,7 @@ bottom_widgets = [
     widget.Spacer(length=spacer_len),
 ]
 
+# replace this with a query to X for number of screens
 screens = [
     Screen(
         top=bar.Bar(
