@@ -249,7 +249,7 @@ top_widgets = [
     ),
     widget.Spacer(length=spacer_len),
     widget.Clock(
-        fmt="<span size='large'></span> {}",
+        fmt="<span size='large'></span> {}",
         markup=True,
         format=" %Y-%m-%d",
     ),
