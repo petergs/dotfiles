@@ -49,6 +49,9 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
+# load environment variables
+source ~/.env
+
 # ls defaults
 alias la='ls -la --color=auto'
 alias ls='ls --color=auto'
@@ -68,6 +71,7 @@ alias dev='cd ~/Documents/dev/'
 alias ctf='cd ~/Documents/dev/ctf'
 alias qtile-logs='tail -n 30 ~/.local/share/qtile/qtile.log'
 alias qtile-reload='qtile cmd-obj -o cmd -f reload_config'
+alias vim='nvim' 
 
 # misc funcs
 # compress_pdf in.pdf out.pdf

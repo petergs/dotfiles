@@ -7,16 +7,7 @@ from libqtile.utils import guess_terminal
 # custom modules
 from themes import nord, dracula
 from utils import *
-from sqwid import (
-    SpawnWidget,
-    ProgressBar,
-    CpuRamp,
-    RamBar,
-    EM,
-    TWO_EM,
-    HEAVY_BOX,
-    DBL_HEAVY_BOX,
-)
+from sqwid import SpawnWidget, ProgressBar, CpuRamp, RamBar, EM
 
 # other imports
 import os
@@ -249,15 +240,9 @@ top_widgets = [
     ),
     widget.Spacer(length=spacer_len),
     widget.Clock(
-        fmt="<span size='large'></span> {}",
-        markup=True,
-        format=" %Y-%m-%d",
-    ),
-    widget.Spacer(length=spacer_len),
-    widget.Clock(
         fmt="<span size='large'></span> {}",
         markup=True,
-        format=" %I:%M %p",
+        format=" %Y-%m-%d %I:%M %p",
     ),
     widget.Spacer(length=10),
     widget.Systray(background=t.bar_bg),
