@@ -35,6 +35,7 @@ DOTS = [
     f"{DOTFILES}/.config/alacritty",
     f"{DOTFILES}/.config/dunst",
     f"{DOTFILES}/.config/qtile",
+    f"{DOTFILES}/.config/nvim",
 ]
 
 
@@ -44,14 +45,20 @@ def symlink_dots(dots: list) -> None:
         dst = f"{HOME}/{path}"
         if os.path.exists(dst):
             resp = input(f"{dst} exists - would you like to overwrite it? (y/N) ")
-            if resp.lower() != "y":
+            if resp.lower() == "n":
                 os.rename(dst, f"{dst}.original")
                 print(f"Moving {dst} to {dst}.original")
-            else:  # yes we want to overwrite
+            elif resp.lower() == "y":  # yes we want to overwrite
                 os.remove(dst)
-
-        os.symlink(src=item, dst=dst)
-        print(f"Symlinked {item} to {dst} \n")
+            else:
+                print(f"Skipping {dst}")
+        else:
+            try:
+                os.symlink(src=item, dst=dst)
+            except FileExistsError:
+                print(f"{item} exists - skipping symlink")  
+            else:
+                print(f"Symlinked {item} to {dst} \n")
 
 
 def symlink_bin(path: str) -> None:
@@ -148,8 +155,9 @@ if __name__ == "__main__":
         f"{ORANGE}What installation mode do you want to use?{NONE}\n"
         "1) Workstation\n"
         "2) Server\n"
-        "3) Help\n"
-        "4) Quit\n"
+        "3) Bin\n"
+        "4) Help\n"
+        "5) Quit\n"
     )
     if mode == "1":  # Workstation
         print(f"\n{GREEN}Symlinking configuration files/directories...{NONE}")
@@ -168,6 +176,9 @@ if __name__ == "__main__":
         ]
         symlink_dots(DOTS)
     elif mode == "3":  # Help
+        print(f"{GREEN}Symlinking ~/.local/bin...{NONE}")
+        symlink_bin(f"{DOTFILES}/.local/bin")
+    elif mode == "4":  # Help
         print_help()
     else:
         # Quit option or an invalid option was entered
