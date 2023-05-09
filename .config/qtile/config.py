@@ -237,6 +237,8 @@ top_widgets = [
         empty_char=h.empty_char,
         full_char=h.full_char,
         low_foreground=t.crit,
+        show_short_text=False,
+        notify_below=10,
         markup=True,
     ),
     widget.Spacer(length=spacer_len),
