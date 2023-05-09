@@ -8,6 +8,7 @@ from libqtile.utils import guess_terminal
 from themes import nord, dracula
 from utils import *
 from sqwid import SpawnWidget, ProgressBar, CpuRamp, RamBar, EM
+import hostconf as h
 
 # other imports
 import os
@@ -21,16 +22,16 @@ c = theme.colors
 lbw = 3  # layout border width
 gaps = 3
 font = "SauceCodePro Nerd Font Regular"
-fontsize = 13
-spacer_len = 25
+fontsize = h.fontsize
+spacer_len = h.spacer_len
 curly = "{}"
-iface = "wlan0"
+iface = h.iface
 home = os.path.expanduser("~")
 
 
 ## cmds
 dmenu_run = f"""
-    dmenu_run -h 30 -w 600 -x 400 \
+    dmenu_run -h {h.barsize} -w 600 -x 400 \
     -nb '{t.bar_bg}' \
     -nf '{t.bar_fg}' \
     -sb '{t.border_focus}' \
@@ -202,14 +203,14 @@ top_widgets = [
     ),
     widget.Spacer(length=spacer_len),
     widget.Backlight(
-        fmt="<span size='large'></span>  {}",
+        fmt=f"<span size='large'>{h.bright_char}</span>  {curly}",
         backlight_name="intel_backlight",
         brightness_file="brightness",
         markup=True,
     ),
     ProgressBar(
         update_interval=0.1,
-        bar_char="栗",
+        bar_char=h.bar_char,
         line_char="",
         bar_fg=t.border_focus,
         check_output_cmd=get_lite_cmd,
@@ -223,7 +224,7 @@ top_widgets = [
     ),
     ProgressBar(
         update_interval=0.1,
-        bar_char="栗",
+        bar_char=h.bar_char,
         line_char="",
         bar_fg=t.border_focus,
         check_output_cmd=get_vol_cmd,
@@ -231,10 +232,10 @@ top_widgets = [
     widget.Spacer(length=spacer_len),
     widget.Battery(
         format="{char} {percent:2.0%}",
-        charge_char="",
-        discharge_char="",
-        empty_char="",
-        full_char="",
+        charge_char=h.charge_char,
+        discharge_char=h.discharge_char,
+        empty_char=h.empty_char,
+        full_char=h.full_char,
         low_foreground=t.crit,
         markup=True,
     ),
@@ -312,13 +313,13 @@ screens = [
     Screen(
         top=bar.Bar(
             top_widgets,
-            size=30,
+            size=h.barsize,
             border_width=[0, 0, 0, 0],
             background=t.bar_bg,
         ),
         bottom=bar.Bar(
             bottom_widgets,
-            size=30,
+            size=h.barsize,
             border_width=[0, 0, 0, 0],
             background=t.bar_bg,
         ),
