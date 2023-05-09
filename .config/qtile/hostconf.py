@@ -15,7 +15,7 @@ if hostname == "tomato":
     discharge_char = "\U000F0079"
     empty_char = "\U000F007A"
     full_char = "\U000F0079"
-    bar_char = "栗"
+    bar_char = "\u25fc"
 else:
     fontsize = 13
     barsize = 30
@@ -28,4 +28,4 @@ else:
     discharge_char = "\U0000F578"
     empty_char = "\U0000F58D"
     full_char = "\U0000F58E"
-    bar_char = "栗"  # 栗
+    bar_char = "\u25a0" 
