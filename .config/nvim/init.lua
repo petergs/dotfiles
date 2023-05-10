@@ -23,4 +23,5 @@ vim.opt.wrap = false
 
 -- globals
 vim.g.netrw_banner = 0
+vim.g.rustfmt_autosave = 1
 
