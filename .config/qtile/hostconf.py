@@ -16,6 +16,19 @@ if hostname == "tomato":
     empty_char = "\U000F007A"
     full_char = "\U000F0079"
     bar_char = "\u25fc"
+elif hostname == "bean":
+    fontsize = 13
+    barsize = 30
+    group_box_padding_x = 7
+    spacer_len = 25
+    iface = "enp5s0"
+
+    bright_char = "\U0000F5DF"
+    charge_char = "\U0000F583"
+    discharge_char = "\U0000F578"
+    empty_char = "\U0000F58D"
+    full_char = "\U0000F58E"
+    bar_char = "\u25a0" 
 else:
     fontsize = 13
     barsize = 30
@@ -29,3 +42,5 @@ else:
     empty_char = "\U0000F58D"
     full_char = "\U0000F58E"
     bar_char = "\u25a0" 
+
+def set_widgets() -> None:

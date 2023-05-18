@@ -260,14 +260,6 @@ bottom_widgets = [
         cmd=f"{home}/dotfiles/scripts/ipaddr.sh {iface}",
         update_interval=60,
     ),
-    # widget.Net(
-    #     format=f"<span color='{t.border_focus}'>"
-    #     + "󰜷</span>:{up}  "
-    #     + f"<span color='{t.border_focus}'>󰜮</span>"
-    #     + ":{down} ",
-    #     interface=iface,
-    # ),
-    # widget.Spacer(length=spacer_len),
     widget.NetGraph(
         type="line",
         graph_color=t.border_focus,

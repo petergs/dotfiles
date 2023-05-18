@@ -1,4 +1,5 @@
 #!/bin/bash
+~/dotfiles/scripts/displays.sh
 nitrogen --restore &
 # hsetroot -solid "#44475a"
 xrdb .Xresources &

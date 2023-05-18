@@ -23,7 +23,7 @@ return require('packer').startup(function(use)
 
 	use('fatih/vim-go')
 
-	-- use { 'psf/black', branch = 'stable' }
+	use { 'psf/black', branch = 'stable' }
 
 	use {
 	  'VonHeikemen/lsp-zero.nvim',
