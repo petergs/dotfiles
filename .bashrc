@@ -49,13 +49,6 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# load environment variables
-source ~/.env
-
-# ls defaults
-alias la='ls -la --color=auto'
-alias ls='ls --color=auto'
-
 # ensure ~/.local/bin is in PATH
 PATH=~/.local/bin:~/go/bin:$PATH
 
@@ -67,15 +60,35 @@ then
     alias kssh="kitty +kitten ssh"
 fi
 
+# aliases
 alias dev='cd ~/Documents/dev/'
 alias ctf='cd ~/Documents/dev/ctf'
 alias qtile-logs='tail -n 30 ~/.local/share/qtile/qtile.log'
 alias qtile-reload='qtile cmd-obj -o cmd -f reload_config'
 alias vim='nvim' 
 
+# ls defaults
+alias la='ls -la --color=auto'
+alias ls='ls --color=auto'
+
 # misc funcs
 # compress_pdf in.pdf out.pdf
 compress_pdf() {
     gs  -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$2 $1
 }
-. "$HOME/.cargo/env"
+
+# load additional environment variables
+if [ -f "$HOME/.cargo/env" ]; then
+    . "$HOME/.cargo/env"
+fi
+
+if [ -f "$HOME/.env" ]; then
+    source ~/.env
+fi
+
+
+
+
+
+
+

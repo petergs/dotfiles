@@ -5,7 +5,12 @@
 https://raw.githubusercontent.com/dracula/alacritty/master/dracula.yml
 https://raw.githubusercontent.com/nordtheme/alacritty/main/src/nord.yaml
 https://raw.githubusercontent.com/qtile/qtile-examples/52c49816c48fca6eb1bb707cb872e58e460d00fa/traverse.py
+
+Additional steps that need to be implemented
+- pip install neovim (for Black)
+- install packer
 """
+
 # standard library
 import os
 import sys
@@ -40,6 +45,7 @@ DOTS = [
 
 
 def symlink_dots(dots: list) -> None:
+    print(f"\n{GREEN}Symlinking configuration files/directories...{NONE}")
     for item in dots:
         path = item.split(f"{DOTFILES}/")[1:][0]
         dst = f"{HOME}/{path}"
@@ -56,12 +62,13 @@ def symlink_dots(dots: list) -> None:
             try:
                 os.symlink(src=item, dst=dst)
             except FileExistsError:
-                print(f"{item} exists - skipping symlink")  
+                print(f"{item} exists - skipping symlink")
             else:
                 print(f"Symlinked {item} to {dst} \n")
 
 
 def symlink_bin(path: str) -> None:
+    print(f"{GREEN}Symlinking ~/.local/bin...{NONE}")
     for item in os.listdir(path):
         dst = f"{HOME}/.local/bin/{item}"
         if not os.path.exists(dst):
@@ -69,8 +76,14 @@ def symlink_bin(path: str) -> None:
         else:
             print(f"{dst} already exists - skipping the symlink")
 
+def setup_nvim() -> None:
+    print(f"{GREEN}Setting up neovim...{NONE}")
+    os.system(f"{DOTFILES}/install/nvim-setup.sh") 
+    
+
 
 def pacman_install() -> None:
+    print(f"\n{GREEN}Installing packages...{NONE}")
     password = getpass("Enter your password for running `pacman -S`:")
     cmd = "sudo -S pacman -S --noconfirm --needed".split()
     cmd.extend(ARCH_PKGS)
@@ -155,16 +168,14 @@ if __name__ == "__main__":
         f"{ORANGE}What installation mode do you want to use?{NONE}\n"
         "1) Workstation\n"
         "2) Server\n"
-        "3) Bin\n"
-        "4) Help\n"
-        "5) Quit\n"
+        "3) Bin Only\n"
+        "4) Dots Only\n"
+        "5) Help\n"
+        "6) Quit\n"
     )
     if mode == "1":  # Workstation
-        print(f"\n{GREEN}Symlinking configuration files/directories...{NONE}")
         symlink_dots(DOTS)
-        print(f"{GREEN}Symlinking ~/.local/bin...{NONE}")
         symlink_bin(f"{DOTFILES}/.local/bin")
-        print(f"\n{GREEN}Installing packages...{NONE}")
         pacman_install()
         print(f"{GREEN}Done! Installation is complete.{NONE}\n\n")
     elif mode == "2":  # Server
@@ -175,10 +186,11 @@ if __name__ == "__main__":
             f"{DOTFILES}/.vimrc",
         ]
         symlink_dots(DOTS)
-    elif mode == "3":  # Help
-        print(f"{GREEN}Symlinking ~/.local/bin...{NONE}")
+    elif mode == "3":  # Symlink bin
         symlink_bin(f"{DOTFILES}/.local/bin")
-    elif mode == "4":  # Help
+    elif mode == "4":  # Symlink dots
+        symlink_dots(DOTS)
+    elif mode == "5":  # Help
         print_help()
     else:
         # Quit option or an invalid option was entered
