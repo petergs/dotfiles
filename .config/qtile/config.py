@@ -27,6 +27,8 @@ spacer_len = h.spacer_len
 curly = "{}"
 iface = h.iface
 home = os.path.expanduser("~")
+display_count = count_displays()
+islettuce = h.hostname == "lettuce"
 
 
 ## cmds
@@ -317,7 +319,7 @@ screens = [
             border_width=[0, 0, 0, 0],
             background=t.bar_bg,
         ),
-    ),
+    )
 ]
 
 # Drag floating layouts.

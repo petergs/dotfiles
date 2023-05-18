@@ -28,7 +28,7 @@ elif hostname == "bean":
     discharge_char = "\U0000F578"
     empty_char = "\U0000F58D"
     full_char = "\U0000F58E"
-    bar_char = "\u25a0" 
+    bar_char = "\u25a0"
 else:
     fontsize = 13
     barsize = 30
@@ -41,6 +41,4 @@ else:
     discharge_char = "\U0000F578"
     empty_char = "\U0000F58D"
     full_char = "\U0000F58E"
-    bar_char = "\u25a0" 
-
-def set_widgets() -> None:
+    bar_char = "\u25a0"
