@@ -5,6 +5,7 @@ from typing import Type
 from libqtile import hook
 from libqtile.widget.base import _Widget
 from libqtile.widget import Spacer
+from sqwid import ProgressBar
 
 from Xlib.ext import randr
 from Xlib import display
@@ -18,7 +19,9 @@ def autostart() -> None:
 
 
 # other utility functions
-def show_widget_if(w: Type[_Widget], b: bool) -> Type[_Widget]:
+def show_widget_if(
+    w: Type[_Widget] | ProgressBar, b: bool
+) -> Type[_Widget] | ProgressBar:
     if b:
         return w
     else:
