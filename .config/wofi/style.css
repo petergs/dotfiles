@@ -1,0 +1,44 @@
+/* wofi config */
+
+@define-color bg #2e3440;
+@define-color selected_bg #434c5e;
+@define-color light_font #fff;
+@define-color border #81a1c1;
+@define-color input_fg #81a1c1;
+
+* {
+    outline-style: none;
+    color: @light_font;
+    outline-style: none;
+    border: none;
+    border-radius: 0px;
+    background: @bg;
+}
+
+#inner-box,
+#input,
+#scroll, 
+#text, 
+#entry,
+#unselected,
+#window,
+#outer-box {
+    /* no additional styles*/
+}
+
+
+#entry {
+    padding: 0px 10px;
+}
+
+#entry:selected,
+#entry:selected * {
+    background: @border;
+    color: @bg;
+}
+
+#input {
+    text-decoration: underline;
+    font-weight: bold;
+}
+

@@ -1,0 +1,188 @@
+
+@keyframes blink-warning {
+    70% {
+        color: @light;
+    }
+
+    to {
+        color: @light;
+        background-color: @warning;
+    }
+}
+
+@keyframes blink-critical {
+    70% {
+      color: @light;
+    }
+
+    to {
+        color: @light;
+        background-color: @critical;
+    }
+}
+
+@define-color purple #BD93F9;
+
+@define-color bg #282A36;
+@define-color module_bg #44475A;
+@define-color low #50fa7b;
+@define-color medium #f1fa8c;
+@define-color high #ffb86C;
+@define-color critical #FF5555;
+@define-color warning @high;
+@define-color mode @purple;
+@define-color workspaces_focused #44475A;
+@define-color light_font #F8F8F2;
+@define-color light @light_font;
+@define-color dark_font #44475A;
+@define-color modules_container_bg @dark_font;
+@define-color workspaces_focused_line @purple;
+
+* {
+    border: none;
+    min-height: 0;
+}
+
+#waybar {
+    background: @bg;
+    color: @light;
+    font-family: "Source Code Pro Semibold", "Font Awesome 5 Pro";
+    font-size: 13px;
+    font-weight: bold;
+}
+
+
+#battery,
+#clock,
+#cpu,
+#memory,
+#mode,
+#network,
+#pulseaudio,
+#temperature,
+#tray,
+#backlight {
+    padding-left: 0.6em;
+    padding-right: 0.6em;
+    /*border-radius: 5em;*/
+    margin: 5px 5px 5px 5px;
+    /*background: @module_bg;*/
+}
+
+/* Each module that should blink */
+#mode,
+#memory,
+#temperature,
+#battery {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+/* Each critical module */
+#memory.critical,
+#cpu.critical,
+#temperature.critical,
+#battery.critical {
+    color: @critical;
+}
+
+
+/* Each critical that should blink */
+#mode,
+#memory.critical,
+#temperature.critical,
+#battery.critical.discharging {
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+
+/* Each warning */
+#network.disconnected,
+#memory.warning,
+#cpu.warning,
+#temperature.warning,
+#battery.warning {
+    background: @warning;
+    color: @dark_font;
+}
+
+#mode { /* Shown current Sway mode (resize etc.) */
+    color: @light;
+    background: @mode;
+}
+
+#workspaces {
+}
+
+#workspaces button {
+    padding: 0 5px;
+    border-radius: 0px;
+    background-color: transparent;
+    color: #ffffff;
+    box-shadow: inset 0 -3px transparent;
+}
+
+
+#workspaces button:hover {
+    color: rgba(0, 0, 0, 0.2);
+}
+
+#workspaces button.focused {
+    background-color: @workspaces_focused;
+    box-shadow: inset 0 -3px @workspaces_focused_line;
+}
+
+#workspaces button.urgent {
+    background-color: #eb4d4b;
+}
+
+#window {
+    margin-right: 40px;
+    margin-left: 40px;
+    font-weight: normal;
+}
+
+#bluetooth {
+    background: @module_bg;
+    font-size: 1.2em;
+    font-weight: bold;
+    padding: 0 0.6em;
+}
+
+#cpu.critical {
+    color: @dark_font;
+}
+
+#temperature.critical {
+    background:  @critical;
+}
+
+#pulseaudio {
+    color: #D8DEE9;
+}
+
+#pulseaudio.muted {
+    background: #BF616A;
+    /* No styles */
+}
+
+#pulseaudio.source-muted {
+    background: #D08770;
+}
+
+#custom-cpu.low{
+    color: @low;
+}
+
+#custom-cpu.medium{
+    color: @medium;
+}
+
+#custom-cpu.high{
+    color: @high;
+}
+
+#custom-cpu.critical{
+    color: @critical;
+}
