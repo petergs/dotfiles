@@ -28,7 +28,7 @@ curly = "{}"
 iface = h.iface
 home = os.path.expanduser("~")
 display_count = count_displays()
-islettuce = h.hostname == "lettuce"
+islettuce = h.hostname in ["lettuce", "tomato"]
 
 
 ## cmds

@@ -14,7 +14,7 @@ if hostname == "tomato":
     charge_char = "\U000F0084"
     discharge_char = "\U000F0079"
     empty_char = "\U000F007A"
-    full_char = "\U000F0079"
+    full_char = "\U000F1121"
     bar_char = "\u25fc"
 elif hostname == "bean":
     fontsize = 13
