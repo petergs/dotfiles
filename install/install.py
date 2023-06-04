@@ -5,10 +5,6 @@
 https://raw.githubusercontent.com/dracula/alacritty/master/dracula.yml
 https://raw.githubusercontent.com/nordtheme/alacritty/main/src/nord.yaml
 https://raw.githubusercontent.com/qtile/qtile-examples/52c49816c48fca6eb1bb707cb872e58e460d00fa/traverse.py
-
-Additional steps that need to be implemented
-- pip install neovim (for Black)
-- install packer
 """
 
 # standard library
@@ -41,6 +37,9 @@ DOTS = [
     f"{DOTFILES}/.config/dunst",
     f"{DOTFILES}/.config/qtile",
     f"{DOTFILES}/.config/nvim",
+    f"{DOTFILES}/.config/sway",
+    f"{DOTFILES}/.config/waybar",
+    f"{DOTFILES}/.config/wofi",
 ]
 
 
@@ -76,10 +75,10 @@ def symlink_bin(path: str) -> None:
         else:
             print(f"{dst} already exists - skipping the symlink")
 
+
 def setup_nvim() -> None:
     print(f"{GREEN}Setting up neovim...{NONE}")
-    os.system(f"{DOTFILES}/install/nvim-setup.sh") 
-    
+    os.system(f"{DOTFILES}/install/nvim-setup.sh")
 
 
 def pacman_install() -> None:

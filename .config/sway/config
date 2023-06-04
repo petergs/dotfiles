@@ -190,8 +190,8 @@ bindsym $mod+r mode "resize"
 
 ## bar
 bar {
-    swaybar_command waybar
-    
+    status_command exec ~/Downloads/sample-bar
+    font pango:DejaVu Sans Mono 10
 }
 
 # autostart
