@@ -1,18 +1,3 @@
-# Install scoop
-Invoke-RestMethod get.scoop.sh | Invoke-Expression
-
-# Install scoop packages
-scoop install ` 
-curl `
-file `
-git `
-jq `
-neovim `
-python `
-shasum `
-upx `
-gawk
-
 # Set Dark Mode
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name AppsUseLightTheme -Value 0
 Set-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Themes\Personalize -Name SystemUsesLightTheme -Value 0
