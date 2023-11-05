@@ -1,6 +1,7 @@
 # list of packages to be installed by install.py
 
 WAYLAND = False
+INSTALL_SECURITY_TOOLS = True
 
 AUR_PKGS = [
     "dmenu2",
@@ -25,10 +26,13 @@ ARCH_PKGS = [
     "efibootmgr",
     "firefox",
     "glances",
+    "gnome-disk-utility",
+    "gnome-keyring",
     "graphicsmagick",
     "gst-plugin-pipewire",
     "gvfs-smb",
     "htop",
+    "i3lock",
     "imv",
     "intel-media-driver",
     "intel-ucode",
@@ -45,8 +49,8 @@ ARCH_PKGS = [
     "networkmanager-l2tp",
     "networkmanager-pptp",
     "nmap",
-    "ntp",
     "openssh",
+    "openvpn",
     "otf-font-awesome",
     "papirus-icon-theme",
     "pavucontrol",
@@ -89,7 +93,7 @@ if WAYLAND:
             "wob",
         ]
     )
-    ARCH_PKS.extend(
+    ARCH_PKGS.extend(
         [
             "fuzzel",
             "swayidle",
@@ -98,5 +102,17 @@ if WAYLAND:
             "wofi",
             "wl-clipboard",
             "xorg-xwayland",
+        ]
+    )
+
+if INSTALL_SECURITY_TOOLS:
+    ARCH_PKGS.extend(
+        [
+            "metasploit",
+            "exploitdb",
+            "hydra",
+            "john",
+            "hashcat",
+            "hashcat-utils",
         ]
     )

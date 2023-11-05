@@ -1,6 +1,4 @@
 # prompt
-#PS1='[\u@\h \W]\$ '  # Default
-#PS1='\[\e[1;32m\][\u@\h] \w\[\e[0m\]\n\$ '
 set_ps1() {
     local start="\[$(tput bold)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]"
     local host=""
@@ -13,7 +11,6 @@ set_ps1() {
     local end=":[\[$(tput sgr0)\]\[\033[38;5;4m\]\w\[$(tput sgr0)\]] \$> \[$(tput sgr0)\]"
     echo "${start}${host}${end}"
 }
-#PS1="\[$(tput bold)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;2m\]\h\[$(tput sgr0)\]:[\[$(tput sgr0)\]\[\033[38;5;4m\]\w\[$(tput sgr0)\]] \$> \[$(tput sgr0)\]"
 PS1=$(set_ps1)
 
 # set EDITOR
@@ -52,30 +49,32 @@ fi
 # ensure ~/.local/bin is in PATH
 PATH=~/.local/bin:~/go/bin:$PATH
 
-# other aliases
-alias hostname='hostnamectl hostname'
-
-if [[ $TERM='xterm-kitty' ]]
-then
-    alias kssh="kitty +kitten ssh"
-fi
-
 # aliases
 alias dev='cd ~/Documents/dev/'
 alias ctf='cd ~/Documents/dev/ctf'
 alias qtile-logs='tail -n 30 ~/.local/share/qtile/qtile.log'
 alias qtile-reload='qtile cmd-obj -o cmd -f reload_config'
 alias vim='nvim' 
+alias hostname='hostnamectl hostname'
 
 # ls defaults
 alias la='ls -la --color=auto'
 alias ls='ls --color=auto'
+
+# grep color
+alias grep='grep --color=auto'
 
 # misc funcs
 # compress_pdf in.pdf out.pdf
 compress_pdf() {
     gs  -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$2 $1
 }
+
+# top 20 largest directories in $1
+dud() {
+    du -h $1 2> /dev/null | sort -n -r | head -n 20
+}
+
 
 # load additional environment variables
 if [ -f "$HOME/.cargo/env" ]; then
@@ -85,10 +84,4 @@ fi
 if [ -f "$HOME/.env" ]; then
     source ~/.env
 fi
-
-
-
-
-
-
 

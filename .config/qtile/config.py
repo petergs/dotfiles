@@ -50,10 +50,11 @@ inc_lite_cmd = "xbacklight -inc 5"
 dec_lite_cmd = "xbacklight -dec 5"
 get_lite_cmd = "xbacklight"
 get_root_storage_cmd = "df -k | awk '{print $5$6}' | grep -x '[0-9].%/' | tr -d '/% '"
-
 ipaddr = (
     f"ip -4 addr show {iface}" + " | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n1",
 )
+lock_cmd = "i3lock --nofork -u"
+screenshot_cmd = "xfce4-screenshooter"
 
 
 # keybindings
@@ -107,6 +108,8 @@ keys = [
     Key([], "XF86AudioMute", lazy.spawn(mute_vol_cmd)),
     Key([], "XF86MonBrightnessUp", lazy.spawn(inc_lite_cmd)),
     Key([], "XF86MonBrightnessDown", lazy.spawn(dec_lite_cmd)),
+    Key([mod, "shift"], "s", lazy.spawn(screenshot_cmd)),
+    Key([mod, "shift"], "l", lazy.spawn(lock_cmd)),
     Key([mod], "f", lazy.window.toggle_fullscreen()),
     Key(
         [mod],
@@ -224,13 +227,17 @@ top_widgets = [
         islettuce,
     ),
     widget.Spacer(length=spacer_len),
-    widget.PulseVolume(
-        fmt="<span size='large'></span>  {}",
-        cardid="0",
-        update_interval=0.05
-        # cardid might not be needed
+    show_widget_if(
+        widget.PulseVolume(
+            fmt="<span size='large'></span>  {}",
+            cardid="0",
+            update_interval=0.05
+            # cardid might not be needed
+        ),
+        False,
     ),
     ProgressBar(
+        fmt="<span size='large'></span>  {}",
         update_interval=0.1,
         bar_char=h.bar_char,
         line_char="",
