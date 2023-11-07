@@ -23,6 +23,12 @@ New-Item -Force -ItemType SymbolicLink -Path $env:LOCALAPPDATA\Packages\Microsof
 # PowerShell
 New-Item -Force -ItemType SymbolicLink -Path $env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1 -Target $env:USERPROFILE\dotfiles\windows\ps\Microsoft.PowerShell_profile.ps1
 
+# PowerToys
+New-Item -Force -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\Microsoft\PowerToys\settings.json" -Target "$env:USERPROFILE\dotfiles\windows\powertoys\settings.json"
+New-Item -Force -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\Microsoft\PowerToys\PowerToys Run\settings.json" -Target "$env:USERPROFILE\dotfiles\windows\powertoys\run\settings.json"
+New-Item -Force -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\Microsoft\PowerToys\Keyboard Manager\settings.json" -Target "$env:USERPROFILE\dotfiles\windows\powertoys\keyboard-manager\settings.json"
+New-Item -Force -ItemType SymbolicLink -Path "$env:LOCALAPPDATA\Microsoft\PowerToys\Keyboard Manager\default.json" -Target "$env:USERPROFILE\dotfiles\windows\powertoys\keyboard-manager\default.json"
+
 # neovim 
 pip install neovim
 pip install black
