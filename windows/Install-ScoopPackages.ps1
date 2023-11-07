@@ -11,4 +11,5 @@ neovim `
 python `
 shasum `
 upx `
-gawk
+gawk `
+gcc

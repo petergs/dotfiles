@@ -21,4 +21,10 @@ New-ItemProperty -Path HKCU:\Software\Microsoft\Windows\CurrentVersion\Explorer\
 New-Item -Force -ItemType SymbolicLink -Path $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json -Target $env:USERPROFILE\dotfiles\windows\wt\settings.json 
 
 # PowerShell
-New-Item -Force -ItemType SymbolicLink -Path $env:USERPROFILE\Documents\WindowsPowerShell\Microsoft.PowerShell_profile.ps1 -Target $env:USERPROFILE\dotfiles\windows\ps\Microsoft.PowerShell_profile.ps1
+New-Item -Force -ItemType SymbolicLink -Path $env:USERPROFILE\Documents\PowerShell\Microsoft.PowerShell_profile.ps1 -Target $env:USERPROFILE\dotfiles\windows\ps\Microsoft.PowerShell_profile.ps1
+
+# neovim 
+pip install neovim
+pip install black
+git clone https://github.com/wbthomason/packer.nvim "$env:LOCALAPPDATA\nvim-data\site\pack\packer\start\packer.nvim"
+New-Item -Force -ItemType Junction -Path $env:LOCALAPPDATA\nvim -Target $env:USERPROFILE\dotfiles\.config\nvim\
