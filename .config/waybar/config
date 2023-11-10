@@ -6,12 +6,19 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": [],
-    "modules-right": ["pulseaudio", "backlight", "battery",  "tray", "clock"],
+    "modules-right": ["pulseaudio", "custom/backlight", "battery",  "tray", "clock"],
     "output": ["DP-1", "eDP-1"],
         "sway/workspaces": {
             "disable-scroll": true,
             "format": "{name}",
-            "all-outputs": true 
+            "all-outputs": true ,
+            "persistent-workspaces": {
+                "1": [],
+                "2": [],
+                "3": [],
+                "4": [],
+                "5": [],
+            }
         },
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
@@ -20,10 +27,12 @@
         // "icon-size": 21,
         "spacing": 10
     },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{icon} {percent}%",
-        "format-icons": [""]
+    "custom/backlight": {
+        "format": " {percentage}% {}",
+        "interval": 1,
+        "tooltip": false,
+        "return-type": "json",
+        "exec": "$HOME/dotfiles/scripts/progress_bar.py brightness"
     },
     "battery": {
         "states": {
@@ -32,15 +41,15 @@
             "critical": 15
         },
         "format": "{icon} {capacity}%",
-        "format-charging": "  {capacity}%",
+        "format-charging": " 󰂄 {capacity}%",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["󰁺", "󰁻", "󰁾", "󰂁", "󰁹"]
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
-        "format": "{icon} {volume}%",
+        "format": "<span font='12' rise='-1000'>{icon}</span> {volume}%",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
         "format-muted": " {format_source}",
@@ -66,7 +75,7 @@
     "position": "bottom", // Waybar position (top|bottom|left|right)
     "height": 30, // Waybar height (to be removed for auto height)
     "modules-left": ["network"],
-    "modules-right": ["temperature", "custom/cpu", "memory"],
+    "modules-right": ["temperature", "custom/cpu-text", "custom/cpu", "custom/memory"],
     "network": {
         "format-wifi": " {essid} ({signalStrength}%)",
         "format-ethernet": "{ipaddr}/{cidr} ",
@@ -79,15 +88,15 @@
         "interval": 1,
         "tooltip": true,
         "return-type": "json",
-        "format": "{}",
+        "format": "<span color='#f8f8f2'>CPU</span> {}",
         "exec": "$HOME/dotfiles/scripts/cpu.py"
     },
-    "cpu": {
-        "format": " {usage}% ",
-        "tooltip": false
-    },
-    "memory": {
-        "format": " {}%"
+    "custom/memory": {
+        "interval": 1,
+        "tooltip": false,
+        "return-type": "json",
+        "format": "RAM {}",
+        "exec": "$HOME/dotfiles/scripts/progress_bar.py ram"
     },
     "temperature": {
         // "thermal-zone": 2,

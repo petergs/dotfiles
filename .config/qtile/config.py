@@ -229,7 +229,7 @@ top_widgets = [
     widget.Spacer(length=spacer_len),
     show_widget_if(
         widget.PulseVolume(
-            fmt="<span size='large'></span>  {}",
+            fmt="<span size='large'></span>  {}",
             cardid="0",
             update_interval=0.05
             # cardid might not be needed
@@ -237,7 +237,7 @@ top_widgets = [
         False,
     ),
     ProgressBar(
-        fmt="<span size='large'></span>  {}",
+        fmt="<span size='large'></span>  {}",
         update_interval=0.1,
         bar_char=h.bar_char,
         line_char="",

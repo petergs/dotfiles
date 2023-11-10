@@ -37,6 +37,8 @@
 @define-color dark_font #44475A;
 @define-color modules_container_bg @dark_font;
 @define-color workspaces_focused_line @purple;
+@define-color bar-fg @purple;
+@define-color bar-bg @light;
 
 * {
     border: none;
@@ -171,6 +173,11 @@
     background: #D08770;
 }
 
+
+#custom-backlight {
+    padding: 0px 10px;
+}
+
 #custom-cpu.low{
     color: @low;
 }
@@ -186,3 +193,18 @@
 #custom-cpu.critical{
     color: @critical;
 }
+
+#custom-memory {
+    padding: 0px 20px;
+}
+
+#custom-memory.bar-fg,
+#custom-backlight.bar-fg {
+    color: @bar-fg;
+}
+
+#custom-memory.bar-bg, 
+#custom-backlight.bar-bg {
+    color: @bar-bg;
+}
+

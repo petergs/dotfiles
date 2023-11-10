@@ -155,7 +155,7 @@ exec swayidle -w \
     bindsym $mod+f fullscreen
 
     # Toggle the current focus between tiling and floating mode
-    bindsym $mod+Shift+space floating toggle
+    bindsym $mod+t floating toggle
 
     # Swap focus between the tiling area and the floating area
     # bindsym $mod+space focus mode_toggle
@@ -190,8 +190,7 @@ bindsym $mod+r mode "resize"
 
 ## bar
 bar {
-    status_command exec ~/Downloads/sample-bar
-    font pango:DejaVu Sans Mono 10
+    swaybar_command waybar
 }
 
 # autostart

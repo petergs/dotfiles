@@ -36,9 +36,9 @@ else:
     spacer_len = 25
     iface = "wlan0"
 
-    bright_char = "\U0000F5DF"
-    charge_char = "\U0000F583"
-    discharge_char = "\U0000F578"
-    empty_char = "\U0000F58D"
-    full_char = "\U0000F58E"
+    bright_char = "\U0000F522"
+    charge_char = "\U000f0084"
+    discharge_char = "\U000f0079"
+    empty_char = "\U000f007a"
+    full_char = "\U000f0079"
     bar_char = "\u25a0"
