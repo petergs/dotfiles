@@ -8,7 +8,7 @@ set $term alacritty
 set $menu wofi | xargs swaymsg exec --
 
 ## wallpapers
-output * bg /home/nibbles/Pictures/wallpapers/rects-favorite.png center #282A36
+# output * bg /home/nibbles/Pictures/wallpapers/rects.png center #282A36
 ## display resolution
 # output HDMI-A-1 resolution 1920x1080 position 1920,0
 
@@ -111,17 +111,17 @@ exec swayidle -w \
     # keybinds are output dependant and are set by sway-outputs.sh
 
     # Switch to workspace
-    bindsym $mod+1 exec sway-workspaces.sh switch 1 
-    bindsym $mod+2 exec sway-workspaces.sh switch 2 
-    bindsym $mod+3 exec sway-workspaces.sh switch 3
-    bindsym $mod+4 exec sway-workspaces.sh switch 4
-    bindsym $mod+5 exec sway-workspaces.sh switch 5
+    bindsym $mod+1 exec sway-workspaces switch 1 
+    bindsym $mod+2 exec sway-workspaces switch 2 
+    bindsym $mod+3 exec sway-workspaces switch 3
+    bindsym $mod+4 exec sway-workspaces switch 4
+    bindsym $mod+5 exec sway-workspaces switch 5
     # Move focused container to workspace
-    bindsym $mod+Shift+1 exec sway-workspaces.sh move 1
-    bindsym $mod+Shift+2 exec sway-workspaces.sh move 2
-    bindsym $mod+Shift+3 exec sway-workspaces.sh move 3
-    bindsym $mod+Shift+4 exec sway-workspaces.sh move 4
-    bindsym $mod+Shift+5 exec sway-workspaces.sh move 5
+    bindsym $mod+Shift+1 exec sway-workspaces move 1
+    bindsym $mod+Shift+2 exec sway-workspaces move 2
+    bindsym $mod+Shift+3 exec sway-workspaces move 3
+    bindsym $mod+Shift+4 exec sway-workspaces move 4
+    bindsym $mod+Shift+5 exec sway-workspaces move 5
 
 #
 # Volume / Backlight
@@ -198,8 +198,10 @@ exec nm-applet --indicator
 exec mozillavpn linuxdaemon
 exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'Dracula'
+    gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
     gsettings set org.gnome.desktop.interface font-name 'Source Code Pro Regular 11'
-    # ~/dotfiles/scripts/sway-outputs.sh
+    sway-outputs
+    swaybg -o '*' -i /home/nibbles/Pictures/wallpapers/rects.png -m center -c '#282A36'
 }
 include /etc/sway/config.d/*

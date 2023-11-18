@@ -1,15 +1,9 @@
 # list of packages to be installed by install.py
 
-WAYLAND = False
+WAYLAND = True
 INSTALL_SECURITY_TOOLS = True
 
-AUR_PKGS = [
-    "dmenu2",
-    "font-manager-git",
-    "mozillavpn",
-    "nordic-theme-git",
-    "ttf-font-icons",
-]
+AUR_PKGS = ["dmenu2", "nordic-theme-git", "dracula-gtk-theme"]
 
 
 ARCH_PKGS = [
@@ -28,6 +22,7 @@ ARCH_PKGS = [
     "glances",
     "gnome-disk-utility",
     "gnome-keyring",
+    "go",
     "graphicsmagick",
     "gst-plugin-pipewire",
     "gvfs-smb",
@@ -40,6 +35,7 @@ ARCH_PKGS = [
     "light",
     "linux-firmware",
     "linux-headers",
+    "lxappearance",
     "man-db",
     "nano",
     "nitrogen",
@@ -58,6 +54,8 @@ ARCH_PKGS = [
     "pipewire-jack",
     "pipewire-pulse",
     "pluma",
+    "python-neovim",
+    "python-black",
     "qemu",
     "qtile",
     "rizin",
@@ -68,6 +66,7 @@ ARCH_PKGS = [
     "strongswan",
     "thunar",
     "transmission-gtk",
+    "ttf-sourcecode-pro-nerd",
     "unzip",
     "usbutils",
     "vala",
@@ -76,9 +75,9 @@ ARCH_PKGS = [
     "vulkan-intel",
     "wget",
     "wireless_tools",
-    "wmctl",
-    "xorg-server",
+    "xdg-user-dirs",
     "xfce4-clipman-plugin",
+    "xorg-server",
     "xorg-xinit",
 ]
 
@@ -87,10 +86,10 @@ if WAYLAND:
         [
             "grimshot",
             "rofi-lbonn-wayland-git",
+            "sway",
             "swaylock-effects",
             "wdisplays",
             "wlogout",
-            "wob",
         ]
     )
     ARCH_PKGS.extend(

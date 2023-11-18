@@ -103,6 +103,6 @@
     },
     "custom/disk": {
         "format": "<span color='#8be9fd'>/</span>: {}%",
-        "exec": "df -k | awk '{print $5$6}' | grep -x '[0-9].%/' | tr -d '/% '"
+        "exec": "df -k | awk '{print $5$6}' | grep -xE '[0-9]+%/' | tr -d '/% '"
     },
 }]

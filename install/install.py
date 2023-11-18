@@ -5,6 +5,10 @@
 https://raw.githubusercontent.com/dracula/alacritty/master/dracula.yml
 https://raw.githubusercontent.com/nordtheme/alacritty/main/src/nord.yaml
 https://raw.githubusercontent.com/qtile/qtile-examples/52c49816c48fca6eb1bb707cb872e58e460d00fa/traverse.py
+
+TODO:
+    - fix creation of clones dir (it's assumed created)
+    - fix creation of .local/bin (it's assumed created)
 """
 
 # standard library

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-SCRIPT_DIR=$(dirname "$0")
-source $SCRIPT_DIR/sway-utils.sh
+source $HOME/dotfiles/scripts/sway-utils.sh
 
 numoutputs=$(count_outputs)
 

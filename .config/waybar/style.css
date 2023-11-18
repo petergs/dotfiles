@@ -30,6 +30,7 @@
 
 #waybar {
     background: @background;
+    border-radius: 0px;
     color: @light;
     font-family: "Source Code Pro Semibold", "Font Awesome 5 Pro";
     font-size: 13px;
