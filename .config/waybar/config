@@ -1,31 +1,30 @@
 [{
-    // "layer": "top", // Waybar at top layer
-    "position": "top", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
-    // Choose the order of the modules
+    "position": "top", 
+    "height": 30, 
     "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": [],
-    "modules-right": ["pulseaudio", "custom/backlight", "battery",  "tray", "clock"],
+    "modules-right": ["custom/packages", "pulseaudio","custom/pulsebar", "custom/backlight", "battery", "clock", "tray"],
     "output": ["DP-1", "eDP-1"],
         "sway/workspaces": {
             "disable-scroll": true,
             "format": "{name}",
-            "all-outputs": true ,
-            "persistent-workspaces": {
-                "1": [],
-                "2": [],
-                "3": [],
-                "4": [],
-                "5": [],
-            }
+            "all-outputs": true
         },
     "sway/mode": {
-        "format": "<span style=\"italic\">{}</span>"
+        "format": "<span style='italic'>{}</span>"
+    },
+    "custom/media": {
+        "format": "<span color='#ff79c6'>󰝚</span> {}",
+        "interval": 1,
+        "exec": "/home/nibbles/dotfiles/scripts/playerctl.sh",
     },
     "tray": {
         // "icon-size": 21,
         "spacing": 10
+    },
+    "custom/packages": {
+        "format": "<span color='#ff79c6'>󰏔</span> {}",
+        "exec": "/home/nibbles/dotfiles/scripts/count-pacman-updates.sh"
     },
     "custom/backlight": {
         "format": " {percentage}% {}",
@@ -43,50 +42,49 @@
         "format": "{icon} {capacity}%",
         "format-charging": " 󰂄 {capacity}%",
         "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["󰁺", "󰁻", "󰁾", "󰂁", "󰁹"]
+        "format-icons": ["󰁺", "󰁹", "󰁹", "󰁹", "󰁹"]
     },
     "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
         "format": "<span font='12' rise='-1000'>{icon}</span> {volume}%",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth": "<span font='11' rise='-1000'></span> {volume}%",
+        "format-bluetooth-muted": "<span font='12' rise='-1000' color='#777'>󰝟</span> <span color='#777'>{volume}%</span>",
+        "format-muted": "<span font='12' rise='-1000' color='#777'>󰝟</span> <span color='#777'>{volume}%</span>",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
     },
+    "custom/pulsebar": {
+        "format": "{}",
+        "interval": 1,
+        "tooltip": false,
+        "return-type": "json",
+        "exec": "$HOME/dotfiles/scripts/progress_bar.py volume"
+    },
     "clock": {
-        "format": " {:%H:%M}",
+        "format": " {:%Y-%m-%d %H:%M}",
         "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": " {:%Y-%m-%d}",
+        "format-alt": " {:%A %Y-%m-%d %H:%M}",
         "format-icons": [""]
     }
 },
 {
-    "position": "bottom", // Waybar position (top|bottom|left|right)
-    "height": 30, // Waybar height (to be removed for auto height)
+    "position": "bottom", 
+    "height": 30, 
     "modules-left": ["network"],
-    "modules-right": ["temperature", "custom/cpu-text", "custom/cpu", "custom/memory"],
+    "modules-right": ["custom/disk", "temperature", "custom/cpu-text", "custom/cpu", "custom/memory"],
     "network": {
-        "format-wifi": " {essid} ({signalStrength}%)",
-        "format-ethernet": "{ipaddr}/{cidr} ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        "format-alt": "{ifname}: {ipaddr}/{cidr}"
+        "interface": "wlan0",
+        "format-wifi": "<span color='#bd93f9'>{ifname}</span> {ipaddr}  <span color='#bd93f9'></span>  {essid} ({signalStrength}%)",
+        "format-ethernet": "<span color='#bd93f9'>{ifname}</span> {ipaddr}  <span color='#bd93f9'>󰈀</span>",
+        "tooltip-format": "{ifname} via {gwaddr}/{cidr}",
+        "format-linked": "{ifname} (No IP)",
+        "format-disconnected": "<span color='#bd93f9'>{ifname}</span> disconnected",
+        "format-alt": "<span color='#bd93f9'>{ifname}</span> {ipaddr} ({essid})",
     },
     "custom/cpu": {
         "interval": 1,
-        "tooltip": true,
+        "tooltip": false,
         "return-type": "json",
         "format": "<span color='#f8f8f2'>CPU</span> {}",
         "exec": "$HOME/dotfiles/scripts/cpu.py"
@@ -99,11 +97,12 @@
         "exec": "$HOME/dotfiles/scripts/progress_bar.py ram"
     },
     "temperature": {
-        // "thermal-zone": 2,
-        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
-        "critical-threshold": 60,
-        // "format-critical": "{icon} {temperatureC}°C",
+        "critical-threshold": 70,
         "format": "{icon} {temperatureC}°C",
-        "format-icons": ["<span color='#a3be8c'></span>", "<span color='#bf616a'></span>", "<span color='#d08770'></span>"]
-    }
+        "format-icons": ["<span color='#50fa7b'></span>", "<span color='#f1fa8c'></span>", "<span color='#ffb86c'></span>", "<span color='#ff5555'></span>"]
+    },
+    "custom/disk": {
+        "format": "<span color='#8be9fd'>/</span>: {}%",
+        "exec": "df -k | awk '{print $5$6}' | grep -x '[0-9].%/' | tr -d '/% '"
+    },
 }]

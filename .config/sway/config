@@ -200,6 +200,6 @@ exec_always {
     gsettings set org.gnome.desktop.interface gtk-theme 'Dracula'
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
     gsettings set org.gnome.desktop.interface font-name 'Source Code Pro Regular 11'
-    ~/dotfiles/scripts/sway-outputs.sh
+    # ~/dotfiles/scripts/sway-outputs.sh
 }
 include /etc/sway/config.d/*

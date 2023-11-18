@@ -1,40 +1,23 @@
-
-@keyframes blink-warning {
-    70% {
-        color: @light;
-    }
-
-    to {
-        color: @light;
-        background-color: @warning;
-    }
-}
-
-@keyframes blink-critical {
-    70% {
-      color: @light;
-    }
-
-    to {
-        color: @light;
-        background-color: @critical;
-    }
-}
-
-@define-color purple #BD93F9;
-
-@define-color bg #282A36;
-@define-color module_bg #44475A;
-@define-color low #50fa7b;
-@define-color medium #f1fa8c;
-@define-color high #ffb86C;
-@define-color critical #FF5555;
+@define-color background #282a36;
+@define-color forefround #f8f8f2;
+@define-color cyan #8be9fd;
+@define-color green #50fa7b;
+@define-color orange #ffb86c;
+@define-color pink #ff79c6;
+@define-color purple #bd93f9;
+@define-color red #ff5555;
+@define-color yellow #f1fa8c;
+@define-color grey #44475A;
+@define-color light @foreground;
+@define-color low @green;
+@define-color medium @yellow;
+@define-color high @orange;
+@define-color module_bg @grey;
+@define-color critical @red;
 @define-color warning @high;
 @define-color mode @purple;
-@define-color workspaces_focused #44475A;
-@define-color light_font #F8F8F2;
-@define-color light @light_font;
-@define-color dark_font #44475A;
+@define-color workspaces_focused @module_bg;
+@define-color dark_font @module_bg;
 @define-color modules_container_bg @dark_font;
 @define-color workspaces_focused_line @purple;
 @define-color bar-fg @purple;
@@ -46,42 +29,48 @@
 }
 
 #waybar {
-    background: @bg;
+    background: @background;
     color: @light;
     font-family: "Source Code Pro Semibold", "Font Awesome 5 Pro";
     font-size: 13px;
     font-weight: bold;
 }
 
+tooltip {
+  background-color: @grey;
+  border-color: @grey;
+}
 
+/* padding & margin */
 #battery,
 #clock,
-#cpu,
 #memory,
 #mode,
 #network,
-#pulseaudio,
 #temperature,
 #tray,
-#backlight {
-    padding-left: 0.6em;
-    padding-right: 0.6em;
-    /*border-radius: 5em;*/
-    margin: 5px 5px 5px 5px;
-    /*background: @module_bg;*/
+#backlight, 
+#custom-backlight,
+#custom-cpu,
+#custom-packages,
+#custom-media,
+#custom-disk,
+#custom-memory {
+    padding-left: 15px;
+    padding-right: 15px;
+    background-color: transparent;
 }
 
-/* Each module that should blink */
-#mode,
-#memory,
-#temperature,
-#battery {
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
+#pulseaudio {
+    padding-left: 15px;
 }
 
-/* Each critical module */
+#custom-pulsebar {
+    padding-right: 15px;
+    padding-left: 6px;
+}
+
+/* each critical module */
 #memory.critical,
 #cpu.critical,
 #temperature.critical,
@@ -89,32 +78,17 @@
     color: @critical;
 }
 
-
-/* Each critical that should blink */
-#mode,
-#memory.critical,
-#temperature.critical,
-#battery.critical.discharging {
-    animation-name: blink-critical;
-    animation-duration: 2s;
-}
-
-/* Each warning */
-#network.disconnected,
-#memory.warning,
-#cpu.warning,
-#temperature.warning,
-#battery.warning {
-    background: @warning;
-    color: @dark_font;
-}
-
-#mode { /* Shown current Sway mode (resize etc.) */
+#battery.charging {
     color: @light;
+}
+
+
+#mode { 
     background: @mode;
 }
 
 #workspaces {
+    /* no styles */
 }
 
 #workspaces button {
@@ -152,31 +126,12 @@
     padding: 0 0.6em;
 }
 
-#cpu.critical {
-    color: @dark_font;
-}
-
-#temperature.critical {
-    background:  @critical;
-}
-
-#pulseaudio {
-    color: #D8DEE9;
-}
-
-#pulseaudio.muted {
-    background: #BF616A;
-    /* No styles */
-}
-
+#pulseaudio, 
+#pulseaudio.muted, 
 #pulseaudio.source-muted {
-    background: #D08770;
+    /* no styles */
 }
 
-
-#custom-backlight {
-    padding: 0px 10px;
-}
 
 #custom-cpu.low{
     color: @low;
@@ -194,17 +149,15 @@
     color: @critical;
 }
 
-#custom-memory {
-    padding: 0px 20px;
-}
-
 #custom-memory.bar-fg,
-#custom-backlight.bar-fg {
+#custom-backlight.bar-fg,
+#custom-pulsebar.bar-fg {
     color: @bar-fg;
 }
 
 #custom-memory.bar-bg, 
-#custom-backlight.bar-bg {
+#custom-backlight.bar-bg,
+#custom-pulsebar.bar-bg {
     color: @bar-bg;
 }
 

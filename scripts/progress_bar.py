@@ -74,3 +74,15 @@ if __name__ == "__main__":
             "percentage": percentage,
         }
         print(json.dumps(res, ensure_ascii=False))
+
+    elif str.lower(mod) == "volume":
+        cmd = "pactl get-sink-volume @DEFAULT_SINK@ | head -n1 | awk '{print $5}' | sed 's/.$//'"
+        text, percentage = print_bar(cmd, bar_char=SMALL_SQ, line_char="")
+        res = {
+            "text": text,
+            "alt": "alt",
+            "tooltip": "tip",
+            "class": "",
+            "percentage": percentage,
+        }
+        print(json.dumps(res, ensure_ascii=False))
