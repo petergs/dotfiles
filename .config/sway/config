@@ -5,7 +5,7 @@ set $down j
 set $up k
 set $right l
 set $term alacritty
-set $menu wofi | xargs swaymsg exec --
+set $menu wofi | xargs swaymsg exec sway-utils autotile, exec --
 
 # wallpaper
 set $papepath '/home/nibbles/Pictures/wallpapers/Dracula-Cat-Orange.png'
@@ -37,7 +37,7 @@ exec swayidle -w \
 
 ### Key bindings
 # Start a terminal
-bindsym $mod+Return exec $term
+bindsym $mod+Return exec sway-utils autotile, exec $term
 
 # Kill focused window
 bindsym $mod+Shift+q kill
@@ -91,17 +91,17 @@ bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. 
     # keybinds are output dependant and are set by sway-outputs.sh
 
     # Switch to workspace
-    bindsym $mod+1 exec sway-workspaces switch 1 
-    bindsym $mod+2 exec sway-workspaces switch 2 
-    bindsym $mod+3 exec sway-workspaces switch 3
-    bindsym $mod+4 exec sway-workspaces switch 4
-    bindsym $mod+5 exec sway-workspaces switch 5
+    bindsym $mod+1 exec sway-utils switch_ws 1 
+    bindsym $mod+2 exec sway-utils switch_ws 2 
+    bindsym $mod+3 exec sway-utils switch_ws 3
+    bindsym $mod+4 exec sway-utils switch_ws 4
+    bindsym $mod+5 exec sway-utils switch_ws 5
     # Move focused container to workspace
-    bindsym $mod+Shift+1 exec sway-workspaces move 1
-    bindsym $mod+Shift+2 exec sway-workspaces move 2
-    bindsym $mod+Shift+3 exec sway-workspaces move 3
-    bindsym $mod+Shift+4 exec sway-workspaces move 4
-    bindsym $mod+Shift+5 exec sway-workspaces move 5
+    bindsym $mod+Shift+1 exec sway-utils move_win 1
+    bindsym $mod+Shift+2 exec sway-utils move_win 2
+    bindsym $mod+Shift+3 exec sway-utils move_win 3
+    bindsym $mod+Shift+4 exec sway-utils move_win 4
+    bindsym $mod+Shift+5 exec sway-utils move_win 5
 
 #
 # Volume / Backlight
@@ -181,7 +181,6 @@ exec_always {
     gsettings set org.gnome.desktop.wm.preferences theme "Dracula"
     gsettings set org.gnome.desktop.interface icon-theme 'Papirus'
     gsettings set org.gnome.desktop.interface font-name 'Source Code Pro Regular 11'
-    killall swaybg
     swaybg -o '*' -i $papepath -m $papemode -c $papecolor
     sway-outputs
 }

@@ -62,6 +62,7 @@ ARCH_PKGS = [
     "rizin",
     "rz-cutter",
     "rz-ghidra",
+    "shellcheck",
     "smartmontools",
     "strace",
     "strongswan",
