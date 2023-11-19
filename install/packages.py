@@ -10,6 +10,7 @@ ARCH_PKGS = [
     "alacritty",
     "base",
     "bind",
+    "blueman",
     "brightnessctl",
     "bspwm",
     "code",

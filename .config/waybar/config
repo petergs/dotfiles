@@ -1,14 +1,15 @@
+// vim: syntax=json
 [{
     "position": "top", 
     "height": 30, 
     "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": [],
     "modules-right": ["custom/packages", "pulseaudio","custom/pulsebar", "custom/backlight", "battery", "clock", "tray"],
-    "output": ["DP-1", "eDP-1"],
+    "output": ["DP-1", "DP-5", "eDP-1"],
         "sway/workspaces": {
             "disable-scroll": true,
-            "format": "{name}",
-            "all-outputs": true
+            "format": "{index}",
+            "all-outputs": false 
         },
     "sway/mode": {
         "format": "<span style='italic'>{}</span>"
@@ -16,7 +17,7 @@
     "custom/media": {
         "format": "<span color='#ff79c6'>󰝚</span> {}",
         "interval": 1,
-        "exec": "/home/nibbles/dotfiles/scripts/playerctl.sh",
+        "exec": "/home/nibbles/dotfiles/scripts/playerctl.sh"
     },
     "tray": {
         // "icon-size": 21,
@@ -104,5 +105,5 @@
     "custom/disk": {
         "format": "<span color='#8be9fd'>/</span>: {}%",
         "exec": "df -k | awk '{print $5$6}' | grep -xE '[0-9]+%/' | tr -d '/% '"
-    },
+    }
 }]

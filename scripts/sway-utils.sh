@@ -14,3 +14,9 @@ get_focused_workspace() {
 count_outputs() {
     swaymsg -t get_outputs | jq '. | length'
 }
+
+# return a json array of outputs
+# each element is an object like { name, active }
+get_output_names() {
+    swaymsg -t get_outputs | jq '[.[] | {name: .name, active: .active}]'
+}

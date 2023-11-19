@@ -14,9 +14,18 @@ case $(hostname) in
         PRIMARYMON="eDP1"
         SECONDARYMON="DP-5"
     ;;
+    "soppu")
+        PRIMARYMON="DP-1"
+        SECONDARYMON="DP-5"
+    ;;
 esac
 
-if [[ $numoutputs = 2 ]]
+if [[ $numoutputs = 3 ]]
+then
+    swaymsg output eDP-1 disable
+fi
+
+if [[ $numoutputs > 1 ]]
 then
     swaymsg workspace 1s output $SECONDARYMON
     swaymsg workspace 1p output $PRIMARYMON
