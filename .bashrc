@@ -75,6 +75,11 @@ dud() {
     du -h $1 2> /dev/null | sort -n -r | head -n 20
 }
 
+# get public ip
+pubip() {
+    curl --silent https://ipinfo.io/json | jq -r '.ip'
+}
+
 
 # load additional environment variables
 if [ -f "$HOME/.cargo/env" ]; then

@@ -8,9 +8,10 @@ set $term alacritty
 set $menu wofi | xargs swaymsg exec sway-utils autotile, exec --
 
 # wallpaper
-set $papepath '/home/nibbles/Pictures/wallpapers/Dracula-Cat-Orange.png'
+set $papepath '/home/nibbles/Pictures/wallpapers/smiling-cat-head.png'
 set $papemode 'center' 
-set $papecolor '#282A36'
+set $papecolor '#7475d0'
+# set $papecolor '#282A36'
 
 gaps inner 5
 default_border pixel 3
