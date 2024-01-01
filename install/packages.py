@@ -90,7 +90,6 @@ if WAYLAND:
         [
             "grimshot",
             "rofi-lbonn-wayland-git",
-            "sway",
             "swaylock-effects",
             "wdisplays",
             "wlogout",
@@ -99,6 +98,9 @@ if WAYLAND:
     ARCH_PKGS.extend(
         [
             "fuzzel",
+            "sway",
+            "swaybg",
+            "swayimg",
             "swayidle",
             "qt5-wayland",
             "waybar",

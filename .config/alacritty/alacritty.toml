@@ -1,0 +1,15 @@
+import = ["/home/nibbles/.config/alacritty/dracula.toml"]
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 12.0
+
+[font.normal]
+family = "Source Code Pro"
+style = "Regular"
+
+[window.padding]
+x = 10
+y = 10

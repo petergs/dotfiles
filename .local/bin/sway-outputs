@@ -2,7 +2,7 @@
 
 numoutputs=$(sway-utils count_outputs)
 
-case $(hostname) in
+case $(hostnamectl hostname) in
     "bean")
         PRIMARYMON="DP-1"
         SECONDARYMON="HDMI-A-1"
