@@ -70,7 +70,7 @@ ARCH_PKGS = [
     "strongswan",
     "thunar",
     "transmission-gtk",
-    "ttf-sourcecode-pro-nerd",
+    "ttf-sourcecodepro-nerd",
     "unzip",
     "usbutils",
     "vala",

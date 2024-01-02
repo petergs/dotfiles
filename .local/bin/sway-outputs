@@ -6,6 +6,8 @@ case $(hostnamectl hostname) in
     "bean")
         PRIMARYMON="DP-1"
         SECONDARYMON="HDMI-A-1"
+        swaymsg output $PRIMARYMON pos 1920 0
+        swaymsg output $SECONDARYMON pos 0 0
     ;;
 
     "lettuce")
