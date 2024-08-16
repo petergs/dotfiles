@@ -1,3 +1,4 @@
+#!/bin/bash
 # prompt
 set_ps1() {
     local start="\[$(tput bold)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]"
@@ -12,6 +13,14 @@ set_ps1() {
     echo "${start}${host}${end}"
 }
 PS1=$(set_ps1)
+
+# set clipboard cmd
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    CLIPCMD="wl-copy -n"
+else
+    CLIPCMD="pbcopy"
+fi
+
 
 # set EDITOR
 export EDITOR="vim"
@@ -67,17 +76,46 @@ alias grep='grep --color=auto'
 # misc funcs
 # compress_pdf in.pdf out.pdf
 compress_pdf() {
-    gs  -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$2 $1
+    gs  -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$2" "$1"
 }
 
 # top 20 largest directories in $1
 dud() {
-    du -h $1 2> /dev/null | sort -n -r | head -n 20
+    du -h "$1" 2> /dev/null | sort -n -r | head -n 20
 }
 
 # get public ip
 pubip() {
     curl --silent https://ipinfo.io/json | jq -r '.ip'
+}
+
+
+# notes
+notes() {
+    if [[ "$1" = "" ]]; then
+        file="$(date +'%Y-%m')-notes.md"
+        if ! [ -f ~/Documents/notes/"$file" ]; then
+            touch "$file"
+        fi
+        vim ~/Documents/notes/"$file"
+    else
+        ls -la ~/Documents/notes/*"$1"*.md | awk '{print $9}' | head -1 | xargs -o nvim
+    fi
+}
+
+# unzip 7z archives with password infected
+malunzip() {
+    7z x "$1" -p"infected"
+}
+
+# urldecode
+urldecode() {
+    echo -n "$1" | python3 -c "import sys; from urllib.parse import unquote; print(unquote(sys.stdin.read()));" | tee >($COPYCMD)
+}
+
+# decode microsoft atp safelinks
+sldecode() {
+    echo -n "$1" | python3 -c "import sys; from urllib.parse import unquote, urlparse, parse_qs; print(parse_qs(urlparse(unquote(sys.stdin.read())).query)['url'][0]);" | tee >($CLIPCMD)
 }
 
 
