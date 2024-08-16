@@ -9,6 +9,7 @@ set $menu wofi | xargs swaymsg exec sway-utils autotile, exec --
 
 # wallpaper
 set $papepath '/home/nibbles/Pictures/wallpapers/smiling-cat-head.png'
+# set $papepath '/home/nibbles/Pictures/wallpapers/Dracula-Cat-Black.png'
 set $papemode 'center' 
 set $papecolor '#7475d0'
 # set $papecolor '#282A36'
@@ -31,12 +32,16 @@ focus_wrapping no
 # workspace 1p output DP-1
 
 ### Idle configuration
+set $lock_cmd swaylock --color 282A36 --indicator-radius 10 --indicator-thickness 20 --inside-color F8F8F2 --line-color BD93F9 --indicator-x-position 30 --indicator-y-position 30
 exec swayidle -w \
-          timeout 1800  'swaylock --effect-blur 4x3 --screenshots --indicator-radius 0 --indicator-thickness 1' \
+          timeout 1800  $lock_cmd \
           timeout 2060 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-          before-sleep 'swaylock --effect-blur 4x3 --screenshots --indicator-radius 0 --indicator-thickness 1'
+          before-sleep $lock_cmd
 
 ### Key bindings
+# lock screen
+bindsym $mod+Ctrl+l exec $lock_cmd
+
 # Start a terminal
 bindsym $mod+Return exec sway-utils autotile, exec $term
 
