@@ -1,0 +1,4 @@
+#!/bin/zsh
+
+aws ec2 describe-nat-gateways --region=$2 | jq -c ".NatGateways[].NatGatewayAddresses[].PublicIp" | grep "$1" | wc -l | awk '{print $1}'
+

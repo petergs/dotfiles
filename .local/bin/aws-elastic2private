@@ -1,0 +1,15 @@
+#!/bin/bash
+
+if [[ $1 = "-h" || $1 = "--help" || $1 = "" ]]; then
+    echo "$(tput bold)$(tput smul)Usage:$(tput sgr0)"
+    echo "  aws-elastic2private <public-ip>"
+    echo ""
+else
+    while read r; do
+        ip=$(aws ec2 describe-addresses --region="$r" --filter "Name=public-ip,Values=$1" | jq -r ".Addresses.[].PrivateIpAddress")
+        if [[ $ip != "" ]]; then
+            echo "$ip"
+            exit 0
+        fi
+    done < "$(dirname "$0")/shared/aws-regions.txt"
+fi
