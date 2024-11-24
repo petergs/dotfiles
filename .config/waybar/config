@@ -5,7 +5,7 @@
     "modules-left": ["sway/workspaces", "sway/mode", "custom/media"],
     "modules-center": [],
     "modules-right": ["custom/packages", "pulseaudio","custom/pulsebar", "custom/backlight", "battery", "clock", "tray"],
-    "output": ["DP-1", "DP-5", "eDP-1"],
+    "output": ["DP-1", "DP-2", "DP-5", "eDP-1"],
         "sway/workspaces": {
             "disable-scroll": true,
             "format": "{index}",

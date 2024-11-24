@@ -2,23 +2,6 @@
 
 numoutputs=$(sway-utils count_outputs)
 
-case $(hostnamectl hostname) in
-    "bean")
-        PRIMARYMON="DP-1"
-        SECONDARYMON="HDMI-A-1"
-        swaymsg output $PRIMARYMON pos 1920 0
-        swaymsg output $SECONDARYMON pos 0 0
-    ;;
-
-    "lettuce")
-        PRIMARYMON="eDP1"
-        SECONDARYMON="DP-5"
-    ;;
-    "soppu")
-        PRIMARYMON="DP-1"
-        SECONDARYMON="DP-5"
-    ;;
-esac
 
 if [[ $numoutputs = 3 ]]
 then
@@ -27,6 +10,24 @@ fi
 
 if [[ $numoutputs > 1 ]]
 then
+    case $(hostnamectl hostname) in
+        "bean")
+            PRIMARYMON="DP-2"
+            SECONDARYMON="DP-1"
+            swaymsg output $PRIMARYMON pos 1920 0
+            swaymsg output $SECONDARYMON pos 0 0
+        ;;
+
+        "lettuce")
+            PRIMARYMON="eDP1"
+            SECONDARYMON="DP-5"
+        ;;
+        "soppu")
+            PRIMARYMON="DP-1"
+            SECONDARYMON="DP-5"
+        ;;
+    esac
+
     swaymsg workspace 1s output $SECONDARYMON
     swaymsg workspace 1p output $PRIMARYMON
     swaymsg workspace 2s output $SECONDARYMON
