@@ -44,6 +44,18 @@ DOTS = [
     f"{DOTFILES}/.config/sway",
     f"{DOTFILES}/.config/waybar",
     f"{DOTFILES}/.config/wofi",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-appfinder.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screenshooter.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-editor.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-manager.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml",
 ]
 
 
@@ -59,6 +71,12 @@ def symlink_dots(dots: list) -> None:
                 print(f"Moving {dst} to {dst}.original")
             elif resp.lower() == "y":  # yes we want to overwrite
                 os.remove(dst)
+                try:
+                    os.symlink(src=item, dst=dst)
+                except FileExistsError:
+                    print(f"{item} exists - skipping symlink")
+                else:
+                    print(f"Symlinked {item} to {dst} \n")
             else:
                 print(f"Skipping {dst}")
         else:
