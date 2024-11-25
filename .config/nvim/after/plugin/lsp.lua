@@ -4,7 +4,6 @@ lsp.preset("recommended")
 
 if package.loaded['lsp-zero'] then
     lsp.ensure_installed({
-        'tsserver',
         'eslint',
         'rust_analyzer',
         'pyright',

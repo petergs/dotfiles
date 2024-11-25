@@ -5,6 +5,7 @@ import psutil
 import json
 
 ramp = "▁▂▃▄▅▆▇█"
+WAYBAR = False
 
 
 def print_ramp(cpus: list[float] | float) -> str:
@@ -62,11 +63,14 @@ if __name__ == "__main__":
     ramp = print_ramp(cpus)
     percentage = sum(cpus) / float(len(cpus))
     css_class = get_class(percentage)
-    res = {
-        "text": ramp,
-        "alt": "alt",
-        "tooltip": "tip",
-        "class": "",
-        "percentage": percentage,
-    }
-    print(json.dumps(res, ensure_ascii=False))
+    if WAYBAR:
+        res = {
+            "text": ramp,
+            "alt": "alt",
+            "tooltip": "tip",
+            "class": "",
+            "percentage": percentage,
+        }
+        print(json.dumps(res, ensure_ascii=False))
+    else:
+        print(f"<txt>{ramp}</txt>")

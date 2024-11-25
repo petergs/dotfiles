@@ -12,8 +12,8 @@ return require('packer').startup(function(use)
 	}
 
     use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-
-	use {'dracula/vim', as = 'dracula'}
+    use {'dracula/vim', as = 'dracula'}
+    -- use 'shaunsingh/nord.nvim'
 
 	use('tpope/vim-fugitive')
 

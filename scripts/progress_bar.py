@@ -15,6 +15,15 @@ MED_SQ = "\u25fc"
 BAR_FG = "#BD93F9"
 BAR_BG = "#F8F8F2"
 
+# color escape codes
+RED = "\033[0;31m"
+GREEN = "\033[0;32m"
+ORANGE = "\033[0;33m"
+BLUE = "\033[0;34m"
+NONE = "\033[0m"
+
+WAYBAR = False
+
 
 def print_bar(
     cmd,
@@ -45,6 +54,7 @@ if __name__ == "__main__":
         mod = sys.argv[1]
     else:
         print("Usage: progress_bar.py [MODULE]")
+        print("   [MODULE] - ram, brightness, volume")
         exit(1)
 
     if str.lower(mod) == "ram":
@@ -73,7 +83,12 @@ if __name__ == "__main__":
             "class": "",
             "percentage": percentage,
         }
-        print(json.dumps(res, ensure_ascii=False))
+        if WAYBAR:
+            print(json.dumps(res, ensure_ascii=False))
+        else:
+            print(
+                f"<txt><span weight='bold' color='{BAR_BG}'> {percentage}%</span> {text}</txt>"
+            )
 
     elif str.lower(mod) == "volume":
         cmd = "pactl get-sink-volume @DEFAULT_SINK@ | head -n1 | awk '{print $5}' | sed 's/.$//'"
@@ -85,4 +100,9 @@ if __name__ == "__main__":
             "class": "",
             "percentage": percentage,
         }
-        print(json.dumps(res, ensure_ascii=False))
+        if WAYBAR:
+            print(json.dumps(res, ensure_ascii=False))
+        else:
+            print(
+                f"<txt><span weight='bold' color='{BAR_BG}'>{percentage}%</span> {text}</txt>"
+            )

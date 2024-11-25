@@ -66,10 +66,7 @@ def symlink_dots(dots: list) -> None:
         dst = f"{HOME}/{path}"
         if os.path.exists(dst):
             resp = input(f"{dst} exists - would you like to overwrite it? (y/N) ")
-            if resp.lower() == "n":
-                os.rename(dst, f"{dst}.original")
-                print(f"Moving {dst} to {dst}.original")
-            elif resp.lower() == "y":  # yes we want to overwrite
+            if resp.lower() == "y":  # yes we want to overwrite
                 os.remove(dst)
                 try:
                     os.symlink(src=item, dst=dst)
