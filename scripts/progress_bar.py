@@ -64,14 +64,17 @@ if __name__ == "__main__":
 
         cmd = _ram_percent
         text, percentage = print_bar(cmd)
-        res = {
-            "text": text,
-            "alt": "alt",
-            "tooltip": "tip",
-            "class": "",
-            "percentage": percentage,
-        }
-        print(json.dumps(res, ensure_ascii=False))
+        if WAYBAR:
+            res = {
+                "text": text,
+                "alt": "alt",
+                "tooltip": "tip",
+                "class": "",
+                "percentage": percentage,
+            }
+            print(json.dumps(res, ensure_ascii=False))
+        else:
+            print(f"<txt>{text}</txt>")
 
     elif str.lower(mod) == "brightness":
         cmd = "light"
@@ -106,3 +109,11 @@ if __name__ == "__main__":
             print(
                 f"<txt><span weight='bold' color='{BAR_BG}'>{percentage}%</span> {text}</txt>"
             )
+    elif str.lower(mod) == "temp":
+        temps = psutil.sensors_temperatures()
+        if True:
+            color = "#50fa7b"
+            color = "#f1fa8c"
+            color = "#ffb86c"
+            color = "#ff5555"
+        print(f"<txt><span color='{color}'></span>  <span>46°</span></txt>")

@@ -1,3 +1,4 @@
 install/__pycache__/*
 .config/nvim/plugin/*
 .config/qtile/traverse.py
+.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml

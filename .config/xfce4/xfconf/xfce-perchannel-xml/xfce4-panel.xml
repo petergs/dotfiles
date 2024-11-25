@@ -22,12 +22,11 @@
         <value type="int" value="26"/>
         <value type="int" value="28"/>
         <value type="int" value="5"/>
-        <value type="int" value="30"/>
         <value type="int" value="12"/>
+        <value type="int" value="30"/>
+        <value type="int" value="9"/>
         <value type="int" value="11"/>
         <value type="int" value="6"/>
-        <value type="int" value="9"/>
-        <value type="int" value="10"/>
         <value type="int" value="13"/>
       </property>
       <property name="autohide-behavior" type="uint" value="0"/>
@@ -48,12 +47,16 @@
       <property name="size" type="uint" value="26"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="16"/>
-        <value type="int" value="33"/>
+        <value type="int" value="37"/>
+        <value type="int" value="17"/>
+        <value type="int" value="18"/>
         <value type="int" value="36"/>
         <value type="int" value="34"/>
-        <value type="int" value="37"/>
         <value type="int" value="2"/>
         <value type="int" value="38"/>
+        <value type="int" value="21"/>
+        <value type="int" value="33"/>
+        <value type="int" value="19"/>
       </property>
       <property name="icon-size" type="uint" value="0"/>
       <property name="length-adjust" type="bool" value="false"/>
@@ -104,7 +107,6 @@
       </property>
     </property>
     <property name="plugin-9" type="string" value="power-manager-plugin"/>
-    <property name="plugin-10" type="string" value="notification-plugin"/>
     <property name="plugin-11" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
@@ -154,15 +156,15 @@
       <property name="font" type="string" value="Source Code Pro 10"/>
     </property>
     <property name="plugin-33" type="string" value="genmon">
-      <property name="command" type="string" value=""/>
-      <property name="use-label" type="bool" value="false"/>
-      <property name="text" type="string" value=""/>
-      <property name="update-period" type="int" value="30000"/>
+      <property name="command" type="string" value="/home/nibbles/dotfiles/scripts/progress_bar.py ram"/>
+      <property name="use-label" type="bool" value="true"/>
+      <property name="text" type="string" value="RAM "/>
+      <property name="update-period" type="int" value="1000"/>
       <property name="enable-single-row" type="bool" value="true"/>
       <property name="font" type="string" value="Source Code Pro 10"/>
     </property>
     <property name="plugin-34" type="string" value="genmon">
-      <property name="command" type="string" value=""/>
+      <property name="command" type="string" value="echo &apos;CPU &apos;"/>
       <property name="use-label" type="bool" value="false"/>
       <property name="text" type="string" value=""/>
       <property name="update-period" type="int" value="30000"/>
@@ -182,7 +184,7 @@
     <property name="plugin-2" type="string" value="cpugraph">
       <property name="update-interval" type="int" value="2"/>
       <property name="time-scale" type="int" value="0"/>
-      <property name="size" type="int" value="50"/>
+      <property name="size" type="int" value="75"/>
       <property name="mode" type="int" value="1"/>
       <property name="color-mode" type="int" value="0"/>
       <property name="frame" type="int" value="0"/>
@@ -204,9 +206,9 @@
         <value type="double" value="0"/>
       </property>
       <property name="foreground-1" type="array">
-        <value type="double" value="0"/>
-        <value type="double" value="1"/>
-        <value type="double" value="0"/>
+        <value type="double" value="0.74117647058823544"/>
+        <value type="double" value="0.57647058823529407"/>
+        <value type="double" value="0.97647058823529409"/>
         <value type="double" value="1"/>
       </property>
       <property name="foreground-2" type="array">
@@ -251,6 +253,29 @@
         <value type="double" value="0.40000000000000002"/>
         <value type="double" value="1"/>
       </property>
+      <property name="bars-color" type="array">
+        <value type="double" value="0"/>
+        <value type="double" value="1"/>
+        <value type="double" value="0"/>
+        <value type="double" value="1"/>
+      </property>
+    </property>
+    <property name="plugin-17" type="string" value="genmon">
+      <property name="command" type="string" value="/home/nibbles/dotfiles/scripts/progress_bar.py temp"/>
+      <property name="use-label" type="bool" value="false"/>
+      <property name="text" type="string" value=""/>
+      <property name="update-period" type="int" value="30000"/>
+      <property name="enable-single-row" type="bool" value="true"/>
+      <property name="font" type="string" value="Source Code Pro 10"/>
+    </property>
+    <property name="plugin-18" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-19" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-21" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
     </property>
   </property>
 </channel>
