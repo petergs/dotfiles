@@ -58,7 +58,8 @@
       <property name="HomePage" type="string" value="exo-open --launch WebBrowser"/>
       <property name="XF86Display" type="string" value="xfce4-display-settings --minimal"/>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Super&gt;space" type="string" value="dmenu_run"/>
+      <property name="&lt;Super&gt;space" type="string" value="
+    dmenu_run -h 26 -w 800 -x 400 -nb '#1e1f29' -nf '#f8f8f2' -sb '#bd93f9' -sf '#282a36' -fn 'Source Code Pro Semibold-11'"/>
       <property name="&lt;Super&gt;Return" type="string" value="alacritty"/>
     </property>
   </property>

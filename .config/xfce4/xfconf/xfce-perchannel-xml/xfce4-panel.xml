@@ -5,7 +5,7 @@
   <property name="panels" type="array">
     <value type="int" value="1"/>
     <value type="int" value="2"/>
-    <property name="dark-mode" type="bool" value="true"/>
+    <property name="dark-mode" type="bool" value="false"/>
     <property name="panel-1" type="empty">
       <property name="position" type="string" value="p=6;x=0;y=0"/>
       <property name="length" type="uint" value="100"/>
@@ -31,28 +31,39 @@
         <value type="int" value="13"/>
       </property>
       <property name="autohide-behavior" type="uint" value="0"/>
+      <property name="enable-struts" type="bool" value="true"/>
+      <property name="background-style" type="uint" value="0"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0.75"/>
+        <value type="double" value="0.25"/>
+        <value type="double" value="0.25"/>
+        <value type="double" value="1"/>
+      </property>
     </property>
     <property name="panel-2" type="empty">
-      <property name="autohide-behavior" type="uint" value="1"/>
+      <property name="autohide-behavior" type="uint" value="0"/>
       <property name="position" type="string" value="p=10;x=0;y=0"/>
-      <property name="length" type="uint" value="1"/>
+      <property name="length" type="double" value="100"/>
       <property name="position-locked" type="bool" value="true"/>
-      <property name="size" type="uint" value="48"/>
+      <property name="size" type="uint" value="26"/>
       <property name="plugin-ids" type="array">
-        <value type="int" value="15"/>
         <value type="int" value="16"/>
-        <value type="int" value="17"/>
-        <value type="int" value="18"/>
-        <value type="int" value="19"/>
-        <value type="int" value="20"/>
-        <value type="int" value="21"/>
-        <value type="int" value="22"/>
-        <value type="int" value="7"/>
-        <value type="int" value="8"/>
-        <value type="int" value="23"/>
-        <value type="int" value="24"/>
-        <value type="int" value="25"/>
+        <value type="int" value="33"/>
+        <value type="int" value="36"/>
+        <value type="int" value="34"/>
+        <value type="int" value="37"/>
         <value type="int" value="2"/>
+        <value type="int" value="38"/>
+      </property>
+      <property name="icon-size" type="uint" value="0"/>
+      <property name="length-adjust" type="bool" value="false"/>
+      <property name="enable-struts" type="bool" value="true"/>
+      <property name="background-style" type="uint" value="0"/>
+      <property name="background-rgba" type="array">
+        <value type="double" value="0.11764705882352941"/>
+        <value type="double" value="0.12156862745098039"/>
+        <value type="double" value="0.16078431372549021"/>
+        <value type="double" value="1"/>
       </property>
     </property>
   </property>
@@ -75,12 +86,20 @@
     <property name="plugin-6" type="string" value="systray">
       <property name="square-icons" type="bool" value="true"/>
       <property name="known-legacy-items" type="array">
+        <value type="string" value="wi-fi network connection “91.9wfmu” active: 91.9wfmu (47%)"/>
+        <value type="string" value="wi-fi network connection “91.9wfmu” active: 91.9wfmu (94%)"/>
+        <value type="string" value="wi-fi network connection “91.9wfmu” active: 91.9wfmu (82%)"/>
+        <value type="string" value="wi-fi network connection “91.9wfmu” active: 91.9wfmu (86%)"/>
+        <value type="string" value="wi-fi network connection “91.9wfmu” active: 91.9wfmu (81%)"/>
+        <value type="string" value="wi-fi network connection “91.9wfmu” active: 91.9wfmu (100%)"/>
         <value type="string" value="blueman"/>
         <value type="string" value="wi-fi network connection “91.9wfmu” active: 91.9wfmu (83%)"/>
         <value type="string" value="clipman"/>
         <value type="string" value="networkmanager applet"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="chrome_status_icon_1"/>
+        <value type="string" value="blueman"/>
         <value type="string" value="steam"/>
       </property>
     </property>
@@ -95,60 +114,13 @@
     <property name="plugin-13" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
     </property>
-    <property name="plugin-15" type="string" value="showdesktop"/>
-    <property name="plugin-16" type="string" value="separator"/>
-    <property name="plugin-17" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="16366046321.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-18" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="16366046322.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-19" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="163660787814.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-20" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="16366046324.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-21" type="string" value="separator"/>
-    <property name="plugin-22" type="string" value="directorymenu">
-      <property name="base-directory" type="string" value="/home/nibbles"/>
-      <property name="open-in-terminal" type="bool" value="true"/>
-    </property>
-    <property name="plugin-7" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="16366047495.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-8" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="16366069938.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-23" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="163660724410.desktop"/>
-      </property>
-    </property>
-    <property name="plugin-24" type="string" value="separator"/>
-    <property name="plugin-25" type="string" value="launcher">
-      <property name="items" type="array">
-        <value type="string" value="163660727111.desktop"/>
-      </property>
+    <property name="plugin-16" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-26" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="mpris-players" type="string" value="firefox.instance53892;firefox.instance63896"/>
-    </property>
-    <property name="plugin-2" type="string" value="windowmenu">
-      <property name="workspace-names" type="bool" value="true"/>
+      <property name="known-players" type="string" value="firefox"/>
     </property>
     <property name="clipman" type="empty">
       <property name="tweaks" type="empty">
@@ -177,9 +149,108 @@
       <property name="command" type="string" value="/home/nibbles/dotfiles/scripts/progress_bar.py brightness"/>
       <property name="use-label" type="bool" value="false"/>
       <property name="text" type="string" value="(genmon)"/>
+      <property name="update-period" type="int" value="1000"/>
+      <property name="enable-single-row" type="bool" value="true"/>
+      <property name="font" type="string" value="Source Code Pro 10"/>
+    </property>
+    <property name="plugin-33" type="string" value="genmon">
+      <property name="command" type="string" value=""/>
+      <property name="use-label" type="bool" value="false"/>
+      <property name="text" type="string" value=""/>
       <property name="update-period" type="int" value="30000"/>
       <property name="enable-single-row" type="bool" value="true"/>
       <property name="font" type="string" value="Source Code Pro 10"/>
+    </property>
+    <property name="plugin-34" type="string" value="genmon">
+      <property name="command" type="string" value=""/>
+      <property name="use-label" type="bool" value="false"/>
+      <property name="text" type="string" value=""/>
+      <property name="update-period" type="int" value="30000"/>
+      <property name="enable-single-row" type="bool" value="true"/>
+      <property name="font" type="string" value="Source Code Pro 10"/>
+    </property>
+    <property name="plugin-36" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-37" type="string" value="separator">
+      <property name="expand" type="bool" value="true"/>
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-38" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-2" type="string" value="cpugraph">
+      <property name="update-interval" type="int" value="2"/>
+      <property name="time-scale" type="int" value="0"/>
+      <property name="size" type="int" value="50"/>
+      <property name="mode" type="int" value="1"/>
+      <property name="color-mode" type="int" value="0"/>
+      <property name="frame" type="int" value="0"/>
+      <property name="border" type="int" value="0"/>
+      <property name="bars" type="int" value="0"/>
+      <property name="per-core" type="int" value="0"/>
+      <property name="tracked-core" type="int" value="0"/>
+      <property name="in-terminal" type="int" value="1"/>
+      <property name="startup-notification" type="int" value="0"/>
+      <property name="load-threshold" type="int" value="0"/>
+      <property name="smt-stats" type="int" value="0"/>
+      <property name="smt-issues" type="int" value="0"/>
+      <property name="per-core-spacing" type="int" value="1"/>
+      <property name="command" type="string" value=""/>
+      <property name="background" type="array">
+        <value type="double" value="1"/>
+        <value type="double" value="1"/>
+        <value type="double" value="1"/>
+        <value type="double" value="0"/>
+      </property>
+      <property name="foreground-1" type="array">
+        <value type="double" value="0"/>
+        <value type="double" value="1"/>
+        <value type="double" value="0"/>
+        <value type="double" value="1"/>
+      </property>
+      <property name="foreground-2" type="array">
+        <value type="double" value="1"/>
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+        <value type="double" value="1"/>
+      </property>
+      <property name="foreground-3" type="array">
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+        <value type="double" value="1"/>
+        <value type="double" value="1"/>
+      </property>
+      <property name="smt-issues-color" type="array">
+        <value type="double" value="0.90000000000000002"/>
+        <value type="double" value="0"/>
+        <value type="double" value="0"/>
+        <value type="double" value="1"/>
+      </property>
+      <property name="foreground-system" type="array">
+        <value type="double" value="0.90000000000000002"/>
+        <value type="double" value="0.10000000000000001"/>
+        <value type="double" value="0.10000000000000001"/>
+        <value type="double" value="1"/>
+      </property>
+      <property name="foreground-user" type="array">
+        <value type="double" value="0.10000000000000001"/>
+        <value type="double" value="0.40000000000000002"/>
+        <value type="double" value="0.90000000000000002"/>
+        <value type="double" value="1"/>
+      </property>
+      <property name="foreground-nice" type="array">
+        <value type="double" value="0.90000000000000002"/>
+        <value type="double" value="0.80000000000000004"/>
+        <value type="double" value="0.20000000000000001"/>
+        <value type="double" value="1"/>
+      </property>
+      <property name="foreground-iowait" type="array">
+        <value type="double" value="0.20000000000000001"/>
+        <value type="double" value="0.90000000000000002"/>
+        <value type="double" value="0.40000000000000002"/>
+        <value type="double" value="1"/>
+      </property>
     </property>
   </property>
 </channel>

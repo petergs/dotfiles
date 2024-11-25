@@ -14,6 +14,7 @@ TODO:
 # standard library
 import os
 import sys
+import shutil
 from subprocess import Popen, PIPE, CalledProcessError, check_output
 from getpass import getpass
 
@@ -44,18 +45,7 @@ DOTS = [
     f"{DOTFILES}/.config/sway",
     f"{DOTFILES}/.config/waybar",
     f"{DOTFILES}/.config/wofi",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-appfinder.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-keyboard-shortcuts.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-panel.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-power-manager.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screenshooter.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-editor.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-manager.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xfwm4.xml",
-    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml",
+    f"{DOTFILES}/.config/xfce4/xfconf/xfce-perchannel-xml",
 ]
 
 
@@ -67,7 +57,10 @@ def symlink_dots(dots: list) -> None:
         if os.path.exists(dst):
             resp = input(f"{dst} exists - would you like to overwrite it? (y/N) ")
             if resp.lower() == "y":  # yes we want to overwrite
-                os.remove(dst)
+                if os.path.isdir(dst):
+                    shutil.rmtree(dst)
+                else:
+                    os.remove(dst)
                 try:
                     os.symlink(src=item, dst=dst)
                 except FileExistsError:
