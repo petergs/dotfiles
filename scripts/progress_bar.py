@@ -110,10 +110,21 @@ if __name__ == "__main__":
                 f"<txt><span weight='bold' color='{BAR_BG}'>{percentage}%</span> {text}</txt>"
             )
     elif str.lower(mod) == "temp":
-        temps = psutil.sensors_temperatures()
-        if True:
-            color = "#50fa7b"
-            color = "#f1fa8c"
-            color = "#ffb86c"
-            color = "#ff5555"
-        print(f"<txt><span color='{color}'></span>  <span>46°</span></txt>")
+        cmd = "sensors | grep 'CPU' | awk '{print $2}' | cut -c 2- | rev | cut -c 6-  | rev"
+        output = int(float(subprocess.check_output(cmd, shell=True).decode().strip()))
+        ramp = ["#50fa7b", "#f1fa8c", "#ffb86c", "#ff5555"]
+        if output < 40:
+            color = ramp[0]
+        elif output < 45:
+            color = ramp[1]
+        elif output < 50:
+            color = ramp[2]
+        else:
+            color = ramp[2]
+        print(f"<txt><span color='{color}'></span> <span>{output}°</span></txt>")
+    elif str.lower(mod) == "disk":
+        cmd = "df -k | awk '{print $5$6}' | grep -xE '[0-9]+%/' | tr -d '/% '"
+        output = int(float(subprocess.check_output(cmd, shell=True).decode().strip()))
+        print(
+            f"<txt><span color='#8be9fd' weight='bold'>/</span><span>: {output}%</span></txt>"
+        )

@@ -1,0 +1,17 @@
+#!/bin/bash
+
+ORANGE="\033[0;33m"
+NONE="\033[0m"
+
+if [ -f "/etc/arch-release" ]; then
+    echo -e "${ORANGE}Clearing pacman cache...${NONE}"
+    sudo pacman -rk1
+    echo -e "${ORANGE}Removing orphaned pacman packages...${NONE}"
+    sudo pacman -R $(pacman -Qtdq)
+    echo -e "${ORANGE}Deleting files in ~/.cache/${NONE}"
+    rm -rf ~/.cache/
+
+else
+    echo "This script assumes a host running ArchLinux."
+fi
+

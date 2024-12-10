@@ -48,6 +48,9 @@
       <property name="plugin-ids" type="array">
         <value type="int" value="16"/>
         <value type="int" value="37"/>
+        <value type="int" value="10"/>
+        <value type="int" value="8"/>
+        <value type="int" value="7"/>
         <value type="int" value="17"/>
         <value type="int" value="18"/>
         <value type="int" value="36"/>
@@ -71,10 +74,6 @@
     </property>
   </property>
   <property name="plugins" type="empty">
-    <property name="plugin-1" type="string" value="applicationsmenu">
-      <property name="show-button-title" type="bool" value="false"/>
-      <property name="button-icon" type="string" value="desktop-environment-xfce"/>
-    </property>
     <property name="plugin-3" type="string" value="separator">
       <property name="expand" type="bool" value="true"/>
       <property name="style" type="uint" value="0"/>
@@ -276,6 +275,27 @@
     </property>
     <property name="plugin-21" type="string" value="separator">
       <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-1" type="string" value="whiskermenu">
+      <property name="view-mode" type="int" value="0"/>
+      <property name="recent" type="array">
+        <value type="string" value="xfce4-screensaver-preferences.desktop"/>
+        <value type="string" value="xfce4-about.desktop"/>
+      </property>
+    </property>
+    <property name="plugin-7" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-8" type="string" value="separator">
+      <property name="style" type="uint" value="0"/>
+    </property>
+    <property name="plugin-10" type="string" value="genmon">
+      <property name="command" type="string" value="/home/nibbles/dotfiles/scripts/progress_bar.py disk"/>
+      <property name="use-label" type="bool" value="false"/>
+      <property name="text" type="string" value=""/>
+      <property name="update-period" type="int" value="6000000"/>
+      <property name="enable-single-row" type="bool" value="true"/>
+      <property name="font" type="string" value="Source Code Pro 10"/>
     </property>
   </property>
 </channel>
