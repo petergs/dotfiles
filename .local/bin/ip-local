@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# print ip address for a specific interface using either `ip` or `ifconfig` 
+# depending on the platform (via uname)
+# assumes IPv4
+if [[ $1 = "" || $1 = "-h" || $1 = "--help" ]]; then
+    echo "Usage: ip-local INTERFACE [-h]"
+else
+    if [[ "$(uname)" = "Linux" ]]; then
+        out=$(ip -4 addr show "$1" 2>/dev/null | grep -oP '(?<=inet\s)\d+(\.\d+){3}' | head -n1)
+    else
+        out=$(ifconfig "$1" | grep inet | grep -v inet6 | awk '{print $2}')
+    fi
+
+    # print output
+    if [[ $out = "" ]]; then 
+        echo "disconnected"
+    else 
+        echo "$out"
+    fi
+fi
+

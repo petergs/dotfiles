@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ $1 = "" || $1 = "-h" || $1 = "--help" ]]; then
+    echo "Usage: ip-info IP [-h]"
+    exit 1
+elif [[ $1 = "-" ]]; then
+    input=$(cat)
+else
+    input="$1"
+fi
+
+curl --silent "https://ipinfo.io/widget/demo/$input" | jq
