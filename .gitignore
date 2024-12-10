@@ -4,3 +4,10 @@ install/__pycache__/*
 .config/qtile/traverse.py
 .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-desktop.xml
 .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-taskmanager.xml
+.config/xfce4/xfconf/xfce-perchannel-xml/displays.xml
+.config/xfce4/xfconf/xfce-perchannel-xml/keyboards.xml
+.config/xfce4/xfconf/xfce-perchannel-xml/thunar.xml
+.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-notifyd.xml
+.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-appfinder.xml
+.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-session.xml
+.config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-editor.xml
