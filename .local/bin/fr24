@@ -1,0 +1,58 @@
+#!/bin/bash
+
+if [[ -n "$1" ]]; then
+    response=$(curl -s "https://api.flightradar24.com/common/v1/flight/list.json?&fetchBy=flight&page=1&limit=25&query=$1" | jq -r '[.result.response.data.[] | select(.identification.id != null)][0]')
+else
+    echo "Usage: fr24 FLIGHT_NUMBER [OPTION] [h]"
+    echo ""
+    echo "  Arguments:" 
+    echo "    FLIGHT_NUMBER     Flight designator eg. QF9" 
+    echo "    OPTION            One of ['arrival', 'departure', 'status', remaining, color, fmt]"
+    echo ""
+fi
+
+remaining() {
+    arrival=$(echo "$1" | jq -r '.time.estimated.arrival')
+    now=$(date -u +%s)
+    remaining=$(( arrival - now ))
+    hours=$(( remaining / 3600 ))
+    minutes=$(( (remaining % 3600) / 60 ))
+    echo "${hours}h ${minutes}m remaining"
+}
+
+status() {
+    status=$(echo "$1" | jq -r '.status.generic.status.text')
+    if [[ $status == "estimated" ]]; then
+        # rewrite 
+        status="enroute"
+    fi
+    echo "$status"
+}
+
+if [[ -n "$2" ]]; then
+    case "$2" in
+        arrival)
+            echo "$response" | jq -r '.time.estimated.arrival' | xargs -I {} date -d @{}
+            ;;
+        departure)
+            echo "$response" | jq -r '.time.estimated.departure' | xargs -I {} date -d @{}
+            ;;
+        status)
+            status "$response"
+            ;;
+        remaining)
+            remaining "$response"
+            ;;
+        color)
+            echo "$response" | jq -r '.status.generic.status.color'
+            ;;
+        fmt)
+            echo "$1 - $(status "$response") - $(remaining "$response")"
+            ;;
+        *) 
+            echo "Not a valid OPTION"
+            ;;
+    esac
+else
+    echo "$response" | jq
+fi

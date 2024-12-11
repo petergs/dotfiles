@@ -1,0 +1,12 @@
+#!/bin/bash
+
+if [[ -n "$1" ]]; then
+    if [[ "$(uname)" == "Linux" ]]; then
+        date -u -d "@$1" +"%Y-%m-%dT%H:%M:%SZ"
+    else
+        # MacOS compatibility
+        date -u -r "$1" +"%Y-%m-%dT%H:%M:%SZ"
+    fi
+else
+    date +%s
+fi
