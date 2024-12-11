@@ -1,16 +1,5 @@
 #!/bin/bash
 
-if [[ -n "$1" ]]; then
-    response=$(curl -s "https://api.flightradar24.com/common/v1/flight/list.json?&fetchBy=flight&page=1&limit=25&query=$1" | jq -r '[.result.response.data.[] | select(.identification.id != null)][0]')
-else
-    echo "Usage: fr24 FLIGHT_NUMBER [OPTION] [h]"
-    echo ""
-    echo "  Arguments:" 
-    echo "    FLIGHT_NUMBER     Flight designator eg. QF9" 
-    echo "    OPTION            One of ['arrival', 'departure', 'status', remaining, color, fmt]"
-    echo ""
-fi
-
 remaining() {
     arrival=$(echo "$1" | jq -r '.time.estimated.arrival')
     now=$(date -u +%s)
@@ -29,30 +18,52 @@ status() {
     echo "$status"
 }
 
-if [[ -n "$2" ]]; then
-    case "$2" in
-        arrival)
-            echo "$response" | jq -r '.time.estimated.arrival' | xargs -I {} date -d @{}
+color() {
+    text_color=$(echo "$1" | jq -r '.status.generic.status.color')
+    case "$text_color" in
+        green)
+            echo "#50fa7b"
             ;;
-        departure)
-            echo "$response" | jq -r '.time.estimated.departure' | xargs -I {} date -d @{}
-            ;;
-        status)
-            status "$response"
-            ;;
-        remaining)
-            remaining "$response"
-            ;;
-        color)
-            echo "$response" | jq -r '.status.generic.status.color'
-            ;;
-        fmt)
-            echo "$1 - $(status "$response") - $(remaining "$response")"
-            ;;
-        *) 
-            echo "Not a valid OPTION"
+        *)
+            echo "#ff5555"
             ;;
     esac
-else
-    echo "$response" | jq
+}
+
+fr24_main() {
+    if [[ $1 = "" || $1 = "-h" || $1 = "--help" ]]; then
+        echo "Usage: fr24 FLIGHT_NUMBER [OPTION] [-h]"
+        echo ""
+        echo "  Arguments:" 
+        echo "    FLIGHT_NUMBER     Flight designator eg. QF9" 
+        echo "    OPTION            One of ['arrival', 'departure', 'status', remaining]"
+        echo ""
+    else 
+        response=$(curl -s "https://api.flightradar24.com/common/v1/flight/list.json?&fetchBy=flight&page=1&limit=25&query=$1" | jq -r '[.result.response.data.[] | select(.identification.id != null)][0]')
+
+        if [[ -n "$2" ]]; then case "$2" in
+                arrival)
+                    echo "$response" | jq -r '.time.estimated.arrival' | xargs -I {} date -d @{}
+                    ;;
+                departure)
+                    echo "$response" | jq -r '.time.estimated.departure' | xargs -I {} date -d @{}
+                    ;;
+                status)
+                    status "$response"
+                    ;;
+                remaining)
+                    remaining "$response"
+                    ;;
+                *) 
+                    echo "Not a valid OPTION"
+                    ;;
+            esac
+        else
+            echo "$response" | jq
+        fi
+    fi
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    fr24_main "$@"
 fi

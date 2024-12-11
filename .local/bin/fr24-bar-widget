@@ -1,0 +1,10 @@
+#!/bin/bash
+
+if [[ $1 = "" || $1 = "-h" || $1 = "--help" ]]; then
+    echo "Usage: fr24-bar-widget FLIGHT_NUMBER [-h]"
+    echo ""
+else
+    source "$HOME/.local/bin/fr24"
+    response=$(fr24 "$1")
+    echo "<txt><span color='$(color "$response")'></span>  $1 - $(status "$response") - $(remaining "$response")</txt>"
+fi
