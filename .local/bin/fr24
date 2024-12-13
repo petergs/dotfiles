@@ -1,6 +1,9 @@
 #!/bin/bash
 
-remaining() {
+# script to interact with a free endpoint of the Flightradar24 (fr24) API
+# to query flight status based on a flight designation
+
+fr24_remaining() {
     arrival=$(echo "$1" | jq -r '.time.estimated.arrival')
     now=$(date -u +%s)
     remaining=$(( arrival - now ))
@@ -9,16 +12,17 @@ remaining() {
     echo "${hours}h ${minutes}m remaining"
 }
 
-status() {
+fr24_status() {
     status=$(echo "$1" | jq -r '.status.generic.status.text')
     if [[ $status == "estimated" ]]; then
-        # rewrite 
+        # rewrite 'estimated' to 'enroute' as this is more 
+        # in line with other statuses like 'landed'
         status="enroute"
     fi
     echo "$status"
 }
 
-color() {
+fr24_color() {
     text_color=$(echo "$1" | jq -r '.status.generic.status.color')
     case "$text_color" in
         green)
@@ -50,10 +54,10 @@ fr24_main() {
                     echo "$response" | jq -r '.time.estimated.departure' | xargs -I {} date -d @{}
                     ;;
                 status)
-                    status "$response"
+                    fr24_status "$response"
                     ;;
                 remaining)
-                    remaining "$response"
+                    fr24_remaining "$response"
                     ;;
                 *) 
                     echo "Not a valid OPTION"

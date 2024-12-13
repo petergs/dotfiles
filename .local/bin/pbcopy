@@ -1,0 +1,20 @@
+#!/bin/bash
+
+if [[ $1 = "-h" || $1 = "--help" ]]; then
+    echo "Usage: echo "$INPUT" | pbcopy [-h]"
+    echo "  Cross-platform alias for pbcopy on MacOS"
+    exit 1
+else
+    input=$(cat)
+fi
+
+if [[ "$(uname)" == "Linux" &&  -n "$DISPLAY" ]]; then
+    echo -n "$input" | xclip -selection clipboard -in
+elif [[ "$(uname)" == "Linux" &&  -n "$WAYLAND_DISPLAY" ]]; then
+    echo -n "$input" | wlcopy
+elif [[  "$(uname)" == "Darwin" ]]; then
+    echo -n "$input" | pbcopy
+else
+    echo "Unmatched platform or display environment."
+    exit 1
+fi

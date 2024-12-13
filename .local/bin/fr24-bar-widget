@@ -6,5 +6,10 @@ if [[ $1 = "" || $1 = "-h" || $1 = "--help" ]]; then
 else
     source "$HOME/.local/bin/fr24"
     response=$(fr24 "$1")
-    echo "<txt><span color='$(color "$response")'></span>  $1 - $(status "$response") - $(remaining "$response")</txt>"
+    status=$(fr24_status "$response")
+    if [[ "$status" == "landed" ]]; then
+        echo "<txt><span color='$(fr24_color "$response")'></span>  $1 - $(fr24_status "$response")</txt>"
+    else
+        echo "<txt><span color='$(fr24_color "$response")'></span>  $1 - $(fr24_status "$response") - $(fr24_remaining "$response")</txt>"
+    fi
 fi

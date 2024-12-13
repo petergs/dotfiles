@@ -47,7 +47,6 @@
       <property name="size" type="uint" value="26"/>
       <property name="plugin-ids" type="array">
         <value type="int" value="16"/>
-        <value type="int" value="14"/>
         <value type="int" value="37"/>
         <value type="int" value="10"/>
         <value type="int" value="8"/>
@@ -296,14 +295,6 @@
       <property name="use-label" type="bool" value="false"/>
       <property name="text" type="string" value=""/>
       <property name="update-period" type="int" value="6000000"/>
-      <property name="enable-single-row" type="bool" value="true"/>
-      <property name="font" type="string" value="Source Code Pro 10"/>
-    </property>
-    <property name="plugin-14" type="string" value="genmon">
-      <property name="command" type="string" value="fr24-bar-widget EK204"/>
-      <property name="use-label" type="bool" value="false"/>
-      <property name="text" type="string" value="(genmon)"/>
-      <property name="update-period" type="int" value="300000"/>
       <property name="enable-single-row" type="bool" value="true"/>
       <property name="font" type="string" value="Source Code Pro 10"/>
     </property>
