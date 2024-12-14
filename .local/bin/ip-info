@@ -1,12 +1,15 @@
 #!/bin/bash
 
 if [[ $1 = "" || $1 = "-h" || $1 = "--help" ]]; then
-    echo "Usage: ip-info IP [-h]"
+    echo "Usage: ip-info IP [IP ...] [-h]"
     exit 1
 elif [[ $1 = "-" ]]; then
     input=$(cat)
 else
-    input="$1"
+    input="$@"
 fi
 
-curl --silent "https://ipinfo.io/widget/demo/$input" | jq
+for ip in $input; do
+    curl --silent "https://ipinfo.io/widget/demo/$ip"
+    sleep 1
+done

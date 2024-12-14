@@ -1,0 +1,31 @@
+#!/bin/bash
+
+if [[ "$1" = "-h" || "$1" = "--help" ]]; then
+    echo "$(tput bold)Usage: $(tput sgr0)"
+    echo "  cat INPUT | digdomains [-h]"
+    echo ""
+    echo "$(tput bold)Description: $(tput sgr0)"
+    echo "  Perform an A record lookup for domains supplied from stdin."
+    echo ""
+    exit 0
+elif [[ "$1" = "-" || -z "$1" ]]; then
+    input="/dev/stdin"
+else
+    input="$1"
+fi
+
+while read -r domain; do
+    # handle blank lines
+    if [[ -z "$domain" ]]; then
+        continue
+    fi
+
+    echo "Results for $domain:"
+    output=$(dig "$domain" A +noall +answer | tee)
+    if [ -z "$output" ]; then
+        echo "-"
+    else
+        echo "$output"
+    fi
+    echo ""
+done < "$input"
