@@ -1,0 +1,168 @@
+#!/usr/bin/env python3
+
+import psutil
+import json
+import subprocess
+import sys
+import argparse
+from enum import Enum
+from typing import Callable
+from dataclasses import dataclass
+
+
+EM = "\u2014"
+TWO_EM = "\u2e3a"
+HEAVY_BOX = "\u2501"
+DBL_HEAVY_BOX = "\u254d"
+TRPL_HEAVY_BOX = "\u2505"
+SMALL_SQ = "\u25a0"
+MED_SQ = "\u25fc"
+BAR_FG = "#BD93F9"
+BAR_BG = "#F8F8F2"
+
+
+WAYBAR = False
+
+
+class BarBackend(Enum):
+    WAYBAR = "waybar"
+    XFCE4 = "xfce4"
+
+
+@dataclass
+class WaybarFormat:
+    text: str
+    alt: str
+    tooltip: str
+    cls: str
+    percentage: float
+
+    @property
+    def __dict__(self) -> dict:
+        return {
+            "text": self.text,
+            "alt": self.alt,
+            "tooltip": self.tooltip,
+            "class": self.cls,
+            "percentage": self.percentage,
+        }
+
+    def print(self) -> None:
+        print(json.dumps(self.__dict__, ensure_ascii=False))
+
+
+@dataclass
+class GenmonFormat:
+    text: str
+    tooltip: str
+
+    def print(self) -> None:
+        print(f"<txt>{self.text}</txt>")
+
+
+def print_bar(
+    cmd: str | Callable,
+    bar_char: str = EM,
+    line_char: str = "|",
+    max_value: int = 100,
+    scale: int = 10,
+    bar_bg: str = BAR_BG,
+    bar_fg: str = BAR_FG,
+) -> tuple[str, float]:
+    if callable(cmd):
+        output = cmd()
+    elif type(cmd) in [list, str]:
+        output = int(float(subprocess.check_output(cmd, shell=True).decode().strip()))
+    elif cmd is None:
+        raise TypeError
+    else:
+        raise NotImplementedError
+
+    y = round(output / scale)
+    ramp = bar_char * int((max_value / scale))
+    line = f"<span color='{bar_fg}'>{ramp[:y]}</span>{line_char}<span color='{bar_bg}'>{ramp[y:]}</span>"
+    return line, output
+
+
+def cli() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Prints and formats bar output for display"
+    )
+
+    # Add required positional argument (command)
+    parser.add_argument(
+        "module",
+        choices=["ram", "brightness", "volume", "temp", "disk", "cpu"],
+        help="The module to display.",
+    )
+
+    # Add optional flag for verbose output
+    parser.add_argument(
+        "-b",
+        "--bar",
+        required=False,
+        default=BarBackend.XFCE4.value,
+        choices=[BarBackend.XFCE4.value, BarBackend.WAYBAR.value],
+        help="Indicate the bar backend.",
+    )
+
+    return parser
+
+
+if __name__ == "__main__":
+    args = cli().parse_args()
+
+    match str.lower(args.module):
+        case "ram":
+
+            def _ram_percent() -> float:
+                return psutil.virtual_memory().percent
+
+            cmd = _ram_percent
+            text, percentage = print_bar(cmd)
+        case "brightness":
+            cmd = "light"
+            text, percentage = print_bar(cmd, bar_char=SMALL_SQ, line_char="")
+            if str.lower(args.bar) == "xfce4":
+                text = f"<span weight='bold' color='{BAR_BG}'> {percentage}%</span> <span>{text}</span>"
+
+        case "volume":
+            cmd = "pactl get-sink-volume @DEFAULT_SINK@ | head -n1 | awk '{print $5}' | sed 's/.$//'"
+            text, percentage = print_bar(cmd, bar_char=SMALL_SQ, line_char="")
+            if str.lower(args.bar) == "xfce4":
+                text = f"<txt><span weight='bold' color='{BAR_BG}'>{percentage}%</span> {text}</txt>"
+
+        case "temp":
+            cmd = "sensors | grep 'CPU' | awk '{print $2}' | cut -c 2- | rev | cut -c 6-  | rev"
+            output = int(
+                float(subprocess.check_output(cmd, shell=True).decode().strip())
+            )
+            ramp = ["#50fa7b", "#f1fa8c", "#ffb86c", "#ff5555"]
+            if output < 40:
+                color = ramp[0]
+            elif output < 45:
+                color = ramp[1]
+            elif output < 50:
+                color = ramp[2]
+            else:
+                color = ramp[2]
+            text = f"<txt><span color='{color}'></span> <span>{output}°</span></txt>"
+        case "disk":
+            cmd = "df -k | awk '{print $5$6}' | grep -xE '[0-9]+%/' | tr -d '/% '"
+            output = int(
+                float(subprocess.check_output(cmd, shell=True).decode().strip())
+            )
+            text = f"<txt><span color='#8be9fd' weight='bold'>/</span><span>: {output}%</span></txt>"
+        case "cpu":
+            pass
+        case _:
+            print("Enter a valid module")
+
+    if str.lower(args.bar) == "waybar":
+        bar = WaybarFormat(
+            text=text, alt="alt", tooltip="", cls="", percentage=percentage
+        )
+        bar.print()
+    else:
+        bar = GenmonFormat(text=text, tooltip="")
+        bar.print()

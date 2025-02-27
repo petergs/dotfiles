@@ -9,5 +9,6 @@
     <property name="inactivity-on-battery" type="uint" value="20"/>
     <property name="lid-action-on-battery" type="uint" value="1"/>
     <property name="inactivity-sleep-mode-on-battery" type="uint" value="1"/>
+    <property name="brightness-step-count" type="uint" value="33"/>
   </property>
 </channel>

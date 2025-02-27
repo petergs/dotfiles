@@ -15,3 +15,11 @@ y = 10
 
 [general]
 import = ["/home/nibbles/.config/alacritty/dracula.toml"]
+
+#[keyboard]
+#bindings = [
+#   { key= V,mods: Control, action: Paste }
+#   { key= V,mods: Control|Shift, chars: "\x16" }
+#   { key= C,mods: Control, action: Copy }
+#   { key= C,mods: Control|Shift, chars: "\x03" }
+#  ]

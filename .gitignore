@@ -15,3 +15,6 @@ install/__pycache__/*
 .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-editor.xml
 .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-settings-manager.xml
 .config/xfce4/xfconf/xfce-perchannel-xml/xfce4-screenshooter.xml
+
+# ignore others
+.local/bin/vt-domain-report

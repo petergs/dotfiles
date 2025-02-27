@@ -29,6 +29,7 @@
       <property name="&lt;Super&gt;r" type="empty">
         <property name="startup-notify" type="empty"/>
       </property>
+      <property name="&lt;Alt&gt;&lt;Super&gt;s" type="empty"/>
     </property>
     <property name="custom" type="empty">
       <property name="&lt;Alt&gt;F2" type="string" value="xfce4-appfinder --collapsed">
@@ -49,7 +50,6 @@
       <property name="&lt;Primary&gt;&lt;Alt&gt;Delete" type="string" value="xfce4-session-logout"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;t" type="string" value="exo-open --launch TerminalEmulator"/>
       <property name="&lt;Primary&gt;&lt;Alt&gt;f" type="string" value="thunar"/>
-      <property name="&lt;Primary&gt;&lt;Alt&gt;l" type="string" value="xflock4"/>
       <property name="&lt;Alt&gt;F1" type="string" value="xfce4-popup-applicationsmenu"/>
       <property name="&lt;Super&gt;p" type="string" value="xfce4-display-settings --minimal"/>
       <property name="&lt;Primary&gt;&lt;Shift&gt;Escape" type="string" value="xfce4-taskmanager"/>
@@ -58,9 +58,11 @@
       <property name="HomePage" type="string" value="exo-open --launch WebBrowser"/>
       <property name="XF86Display" type="string" value="xfce4-display-settings --minimal"/>
       <property name="override" type="bool" value="true"/>
-      <property name="&lt;Super&gt;space" type="string" value="
-    dmenu_run -h 26 -w 800 -x 400 -nb '#1e1f29' -nf '#f8f8f2' -sb '#bd93f9' -sf '#282a36' -fn 'Source Code Pro Semibold-11'"/>
+      <property name="&lt;Super&gt;space" type="string" value="     dmenu_run -h 26 -w 800 -x 400 -nb &apos;#1e1f29&apos; -nf &apos;#f8f8f2&apos; -sb &apos;#bd93f9&apos; -sf &apos;#282a36&apos; -fn &apos;Source Code Pro Semibold-11&apos;"/>
       <property name="&lt;Super&gt;Return" type="string" value="alacritty"/>
+      <property name="&lt;Super&gt;l" type="string" value="xflock4"/>
+      <property name="&lt;Super&gt;c" type="string" value="xdotool key --clearmodifiers Ctrl+Insert"/>
+      <property name="&lt;Shift&gt;&lt;Super&gt;v" type="string" value="cmdpaste"/>
     </property>
   </property>
   <property name="xfwm4" type="empty">
@@ -119,8 +121,8 @@
       <property name="&lt;Primary&gt;F12" type="empty"/>
       <property name="&lt;Super&gt;KP_Left" type="empty"/>
       <property name="&lt;Super&gt;KP_Right" type="empty"/>
-      <property name="&lt;Super&gt;KP_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Down" type="empty"/>
+      <property name="&lt;Super&gt;KP_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Page_Up" type="empty"/>
       <property name="&lt;Super&gt;KP_Home" type="empty"/>
       <property name="&lt;Super&gt;KP_End" type="empty"/>

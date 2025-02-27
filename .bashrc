@@ -118,6 +118,11 @@ sldecode() {
     echo -n "$1" | python3 -c "import sys; from urllib.parse import unquote, urlparse, parse_qs; print(parse_qs(urlparse(unquote(sys.stdin.read())).query)['url'][0]);" | tee >($CLIPCMD)
 }
 
+# default yt-dlp command for music
+yt-music-dl() {
+    yt-dlp --embed-thumbnail -f bestaudio -x --audio-format mp3 --audio-quality 320k "$1"
+}
+
 
 # load additional environment variables
 if [ -f "$HOME/.cargo/env" ]; then

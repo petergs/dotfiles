@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.1" encoding="UTF-8"?>
 
 <channel name="xfce4-panel" version="1.0">
   <property name="configver" type="int" value="2"/>
@@ -100,6 +100,8 @@
         <value type="string" value="networkmanager applet"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="vlc"/>
+        <value type="string" value="KDE Connect Indicator"/>
         <value type="string" value="chrome_status_icon_1"/>
         <value type="string" value="blueman"/>
         <value type="string" value="steam"/>
@@ -121,11 +123,16 @@
     <property name="plugin-26" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="mpris-players" type="string" value="firefox.instance53892;firefox.instance63896"/>
-      <property name="known-players" type="string" value="firefox"/>
+      <property name="known-players" type="string" value="firefox;vlc"/>
     </property>
     <property name="clipman" type="empty">
       <property name="tweaks" type="empty">
         <property name="never-confirm-history-clear" type="bool" value="true"/>
+      </property>
+      <property name="settings" type="empty">
+        <property name="add-primary-clipboard" type="bool" value="true"/>
+        <property name="persistent-primary-clipboard" type="bool" value="true"/>
+        <property name="history-ignore-primary-clipboard" type="bool" value="false"/>
       </property>
     </property>
     <property name="plugin-28" type="string" value="genmon">
@@ -279,6 +286,7 @@
     <property name="plugin-1" type="string" value="whiskermenu">
       <property name="view-mode" type="int" value="0"/>
       <property name="recent" type="array">
+        <value type="string" value="xfce-settings-manager.desktop"/>
         <value type="string" value="xfce4-settings-editor.desktop"/>
         <value type="string" value="xfce4-screensaver-preferences.desktop"/>
         <value type="string" value="xfce4-about.desktop"/>

@@ -10,6 +10,14 @@ else
 fi
 
 for ip in $input; do
-    curl --silent "https://ipinfo.io/widget/demo/$ip"
-    sleep 1
+    if [[ -n "$IP_INFO_TOKEN" ]]; then
+        curl --silent "https://ipinfo.io/$ip?token=$IP_INFO_TOKEN" | jq
+    else
+        curl --silent "https://ipinfo.io/widget/demo/$ip" | jq
+        if [[ $? -eq 0 ]]; then
+            echo ""
+            exit 1
+        fi
+        sleep 1
+    fi
 done
