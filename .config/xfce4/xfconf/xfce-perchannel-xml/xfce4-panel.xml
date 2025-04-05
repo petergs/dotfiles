@@ -100,6 +100,7 @@
         <value type="string" value="networkmanager applet"/>
       </property>
       <property name="known-items" type="array">
+        <value type="string" value="tray-icon tray app"/>
         <value type="string" value="vlc"/>
         <value type="string" value="KDE Connect Indicator"/>
         <value type="string" value="chrome_status_icon_1"/>
@@ -123,7 +124,7 @@
     <property name="plugin-26" type="string" value="pulseaudio">
       <property name="enable-keyboard-shortcuts" type="bool" value="true"/>
       <property name="mpris-players" type="string" value="firefox.instance53892;firefox.instance63896"/>
-      <property name="known-players" type="string" value="firefox;vlc"/>
+      <property name="known-players" type="string" value="Chromium;firefox;vlc"/>
     </property>
     <property name="clipman" type="empty">
       <property name="tweaks" type="empty">
