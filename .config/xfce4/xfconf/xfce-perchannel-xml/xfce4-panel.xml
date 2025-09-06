@@ -131,13 +131,14 @@
         <property name="never-confirm-history-clear" type="bool" value="true"/>
       </property>
       <property name="settings" type="empty">
-        <property name="add-primary-clipboard" type="bool" value="true"/>
+        <property name="add-primary-clipboard" type="bool" value="false"/>
         <property name="persistent-primary-clipboard" type="bool" value="true"/>
         <property name="history-ignore-primary-clipboard" type="bool" value="false"/>
+        <property name="max-images-in-history" type="uint" value="1"/>
       </property>
     </property>
     <property name="plugin-28" type="string" value="genmon">
-      <property name="command" type="string" value="/home/nibbles/dotfiles/scripts/progress_bar.py volume"/>
+      <property name="command" type="string" value="uv run /home/nibbles/dotfiles/scripts/progress_bar.py volume"/>
       <property name="use-label" type="bool" value="false"/>
       <property name="text" type="string" value="(genmon)"/>
       <property name="update-period" type="int" value="1000"/>
@@ -155,7 +156,7 @@
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-32" type="string" value="genmon">
-      <property name="command" type="string" value="/home/nibbles/dotfiles/scripts/progress_bar.py brightness"/>
+      <property name="command" type="string" value="uv run /home/nibbles/dotfiles/scripts/progress_bar.py brightness"/>
       <property name="use-label" type="bool" value="false"/>
       <property name="text" type="string" value="(genmon)"/>
       <property name="update-period" type="int" value="1000"/>
@@ -163,7 +164,7 @@
       <property name="font" type="string" value="Source Code Pro 10"/>
     </property>
     <property name="plugin-33" type="string" value="genmon">
-      <property name="command" type="string" value="/home/nibbles/dotfiles/scripts/progress_bar.py ram"/>
+      <property name="command" type="string" value="uv run /home/nibbles/dotfiles/scripts/progress_bar.py ram"/>
       <property name="use-label" type="bool" value="true"/>
       <property name="text" type="string" value="RAM "/>
       <property name="update-period" type="int" value="1000"/>
@@ -268,7 +269,7 @@
       </property>
     </property>
     <property name="plugin-17" type="string" value="genmon">
-      <property name="command" type="string" value="/home/nibbles/dotfiles/scripts/progress_bar.py temp"/>
+      <property name="command" type="string" value="uv run /home/nibbles/dotfiles/scripts/progress_bar.py temp"/>
       <property name="use-label" type="bool" value="false"/>
       <property name="text" type="string" value=""/>
       <property name="update-period" type="int" value="30000"/>
@@ -287,6 +288,7 @@
     <property name="plugin-1" type="string" value="whiskermenu">
       <property name="view-mode" type="int" value="0"/>
       <property name="recent" type="array">
+        <value type="string" value="cups.desktop"/>
         <value type="string" value="xfce-settings-manager.desktop"/>
         <value type="string" value="xfce4-settings-editor.desktop"/>
         <value type="string" value="xfce4-screensaver-preferences.desktop"/>
@@ -300,7 +302,7 @@
       <property name="style" type="uint" value="0"/>
     </property>
     <property name="plugin-10" type="string" value="genmon">
-      <property name="command" type="string" value="/home/nibbles/dotfiles/scripts/progress_bar.py disk"/>
+      <property name="command" type="string" value="uv run /home/nibbles/dotfiles/scripts/progress_bar.py disk"/>
       <property name="use-label" type="bool" value="false"/>
       <property name="text" type="string" value=""/>
       <property name="update-period" type="int" value="6000000"/>

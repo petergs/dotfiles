@@ -65,6 +65,7 @@ alias qtile-logs='tail -n 30 ~/.local/share/qtile/qtile.log'
 alias qtile-reload='qtile cmd-obj -o cmd -f reload_config'
 alias vim='nvim' 
 alias hostname='hostnamectl hostname'
+alias open='xdg-open'
 
 # ls defaults
 alias la='ls -la --color=auto'
