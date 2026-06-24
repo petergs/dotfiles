@@ -1,0 +1,74 @@
+#!/bin/bash
+
+# script to interact with a free endpoint of the Flightradar24 (fr24) API
+# to query flight status based on a flight designation
+
+fr24_remaining() {
+    arrival=$(echo "$1" | jq -r '.time.estimated.arrival')
+    now=$(date -u +%s)
+    remaining=$(( arrival - now ))
+    hours=$(( remaining / 3600 ))
+    minutes=$(( (remaining % 3600) / 60 ))
+    echo "${hours}h ${minutes}m remaining"
+}
+
+fr24_status() {
+    status=$(echo "$1" | jq -r '.status.generic.status.text')
+    if [[ $status == "estimated" ]]; then
+        # rewrite 'estimated' to 'enroute' as this is more 
+        # in line with other statuses like 'landed'
+        status="enroute"
+    fi
+    echo "$status"
+}
+
+fr24_color() {
+    text_color=$(echo "$1" | jq -r '.status.generic.status.color')
+    case "$text_color" in
+        green)
+            echo "#50fa7b"
+            ;;
+        *)
+            echo "#ff5555"
+            ;;
+    esac
+}
+
+fr24_main() {
+    if [[ $1 = "" || $1 = "-h" || $1 = "--help" ]]; then
+        echo "Usage: fr24 FLIGHT_NUMBER [OPTION] [-h]"
+        echo ""
+        echo "  Arguments:" 
+        echo "    FLIGHT_NUMBER     Flight designator eg. QF9" 
+        echo "    OPTION            One of ['arrival', 'departure', 'status', remaining]"
+        echo ""
+    else 
+        response=$(curl -s "https://api.flightradar24.com/common/v1/flight/list.json?&fetchBy=flight&page=1&limit=25&query=$1" | jq -r '[.result.response.data.[] | select(.identification.id != null)][0]')
+
+        if [[ -n "$2" ]]; then 
+            case "$2" in
+                arrival)
+                    echo "$response" | jq -r '.time.estimated.arrival' | xargs -I {} date -d @{}
+                    ;;
+                departure)
+                    echo "$response" | jq -r '.time.estimated.departure' | xargs -I {} date -d @{}
+                    ;;
+                status)
+                    fr24_status "$response"
+                    ;;
+                remaining)
+                    fr24_remaining "$response"
+                    ;;
+                *) 
+                    echo "Not a valid OPTION"
+                    ;;
+            esac
+        else
+            echo "$response" | jq
+        fi
+    fi
+}
+
+if [[ "${BASH_SOURCE[0]}" == "${0}" ]]; then
+    fr24_main "$@"
+fi

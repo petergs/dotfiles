@@ -1,0 +1,186 @@
+#!/bin/bash
+
+# get the name of the focused input
+# returns a string value
+get_focused_output() {
+    swaymsg -t get_outputs | jq '.[] | select(.focused==true).name' | cut -d"\"" -f2
+}
+
+# get the name of the focused workspace
+# returns a string value
+get_focused_workspace() {
+    swaymsg -t get_workspaces   | jq '.[] | select(.focused==true).name'   | cut -d"\"" -f2
+}
+
+# get the number of outputs in sway
+# returns an integer value
+count_outputs() {
+    swaymsg -t get_outputs | jq '. | length'
+}
+
+# get a json array of outputs
+# each element is an object like { name, active }
+# returns a json array
+get_output_names() {
+    swaymsg -t get_outputs | jq '[.[] | {name: .name, active: .active}]'
+}
+
+# get the dimensions of the focused window
+# returns a json object with the following format
+# {
+#   "x": 0,
+#   "y": 0,
+#   "width": 800,
+#   "height": 600
+# }
+get_focused_window_dimensions() {
+    swaymsg -t get_tree | jq '.. | select(.type?) | select(.focused==true) | .rect'
+}
+
+# get the dimensions of the focused output
+# returns a json object with the following format
+# {
+#   "width": 1920,
+#   "height": 1080 
+# }
+get_focused_output_dimensions() {
+    swaymsg -t get_outputs | jq '.[] | select(.focused==true).current_mode | { width: .width, height: .height }'
+}
+
+
+# handle switching workspaces in a way that gives the appearance of a shared 
+# workspace spanning both outputs in a multimonitor setup
+#
+# relies on the output configuration set by sway-outputs 
+# or otherwise assumes workspaces named 1p, 2p, 3p, etc on a primary output
+# and 1s, 2s, 3s, etc on a secondary output
+#
+# args: $1 - workspace number
+switch_ws() {
+    focusedm=$(sway-utils get_focused_workspace | cut -c 2)
+    focusedws=$(sway-utils get_focused_workspace | cut -c 1)
+    numoutputs=$(sway-utils count_outputs)
+
+    # do nothing if we're already on the focused workspace set
+    # otherwise focus the workspace set
+    case $focusedm in
+        "p")
+            swaymsg workspace "$1"s, workspace "$1"p
+            ;;
+        "s")
+            swaymsg workspace "$1"p, workspace "$1"s
+            ;;
+        "")
+            # if we're on a 1 character workspace, it should still switch us to
+            # a 2 character workspace if there is more than 1 output
+            # this also enables dynamically switching to this mode if a new
+            # output is added
+            if [[ $numoutputs > 1 ]]
+            then
+                swaymsg workspace "$1"p, workspace "$1"s
+            else
+                swaymsg workspace "$1"
+            fi
+            ;;
+    esac
+}
+
+# handle moving windows between workspaces in a way that gives the appearance 
+# of a shared workspace spanning both outputs in a multimonitor setup
+#
+# relies on output and workspace configuration from sway-outputs
+#
+# args: $1 - workspace number
+move_win() {
+    # focusedm will be empty if there is only 1 output
+    focusedm=$(sway-utils get_focused_workspace | cut -c 2)
+    swaymsg move container to workspace "$1""$focusedm" 
+}
+
+# helper for auto tiling
+# essentially prevents creation of full-height windows that are 
+# smaller than 1/3rd of output-width
+# emits either 'swaymsg split h' or 'swaymsg split v'
+#
+# usage in sway config or cli: 
+#   'swaymsg sway-utils autotile, exec $cmd'
+#   'bindsym $mod+Return exec sway-utils autotile, exec $cmd
+autotile() {
+    output_width=$(get_focused_output_dimensions | jq '.width')
+    min_hsplit=$((output_width / 3)) 
+    dims=get_focused_window_dimensions
+    win_width=$($dims | jq '.width')
+    win_height=$($dims | jq '.height')
+    new_win_width=$((win_width / 2))
+    
+    # always split v if win_height > win_width
+    if [[ "$win_height" -ge "$win_width" ]]
+    then
+        swaymsg split v
+    else
+        # if win_height < win_width
+        # we want to avoid split h if the new window-width will be two narrow
+        # however we will still split h for sufficiently small windows
+        if [[ "$win_height" -lt "$min_hsplit" && "$new_win_width" -lt "$min_hsplit" ]]
+        then
+            swaymsg split h
+        else 
+            # otherwise only split h if the new window with have a width > min_hsplit
+            if [[ "$new_win_width" -ge "$min_hsplit" ]] 
+            then
+                swaymsg split h
+            else 
+                # split v for large windows where 
+                swaymsg split v
+            fi
+        fi
+
+    fi
+
+}
+
+
+case "$1" in
+    "")
+        echo "Usage: sway-utils CMD"
+        echo ""
+        echo "Values for CMD..."
+        echo "  get_focused_output"
+        echo "  get_focused_workspace"
+        echo "  count_outputs"
+        echo "  get_output_names"
+        echo "  get_focused_window_dimensions"
+        echo "  get_focused_output_dimensions"
+        echo "  switch_ws"
+        echo "  move_win"
+        echo "  autotile"
+        exit 1
+        ;;
+    "get_focused_output")
+        get_focused_output
+        ;;
+    "get_focused_workspace")
+        get_focused_workspace
+        ;;
+    "count_outputs")
+        count_outputs
+        ;;
+    "get_output_names")
+        get_output_names
+        ;;
+    "get_focused_window_dimensions")
+        get_focused_window_dimensions
+        ;;
+    "get_focused_output_dimensions")
+        get_focused_output_dimensions
+        ;;
+    "switch_ws")
+        switch_ws $2
+        ;; 
+    "move_win")
+        move_win $2 
+        ;;
+    "autotile")
+        autotile 
+        ;; 
+esac

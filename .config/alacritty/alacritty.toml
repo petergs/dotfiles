@@ -1,0 +1,25 @@
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 8.0
+
+[font.normal]
+family = "Source Code Pro"
+style = "Regular"
+
+[window.padding]
+x = 10
+y = 10
+
+[general]
+import = ["/home/nibbles/.config/alacritty/dracula.toml"]
+
+#[keyboard]
+#bindings = [
+#   { key= V,mods: Control, action: Paste }
+#   { key= V,mods: Control|Shift, chars: "\x16" }
+#   { key= C,mods: Control, action: Copy }
+#   { key= C,mods: Control|Shift, chars: "\x03" }
+#  ]

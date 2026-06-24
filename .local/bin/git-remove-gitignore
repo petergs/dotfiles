@@ -1,0 +1,4 @@
+#!/bin/bash
+
+# unstage and remove paths included in gitignore (only from the index - working directory files won't be affected)
+git rm --cached `git ls-files -i -c --exclude-from=.gitignore`

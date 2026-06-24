@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [[ $1 = "" || $1 = "-h" || $1 = "--help" ]]; then
+    echo "Usage: ip-info IP [IP ...] [-h]"
+    exit 1
+elif [[ $1 = "-" ]]; then
+    input=$(cat)
+else
+    input="$@"
+fi
+
+for ip in $input; do
+    if [[ -n "$IP_INFO_TOKEN" ]]; then
+        curl --silent "https://ipinfo.io/$ip?token=$IP_INFO_TOKEN" | jq
+    else
+        curl --silent "https://ipinfo.io/widget/demo/$ip" | jq
+        if [[ $? -eq 0 ]]; then
+            echo ""
+            exit 1
+        fi
+        sleep 1
+    fi
+done

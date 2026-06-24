@@ -1,49 +1,58 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+require("lazy").setup({
+  -- Telescope
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      local builtin = require('telescope.builtin')
+      vim.keymap.set('n', '<leader>ff', builtin.find_files, {})
+      vim.keymap.set('n', '<leader>fg', builtin.git_files, {})
+    end
+  },
 
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+  -- Treesitter
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdate',
+    config = function()
+      require('nvim-treesitter.configs').setup {
+        ensure_installed = { "c", "lua", "rust", "python", "javascript", "typescript", "go" },
+        sync_install = false,
+        auto_install = true,
+        highlight = {
+          enable = true,
+          additional_vim_regex_highlighting = false,
+        },
+      }
+    end
+  },
 
-return require('packer').startup(function(use)
-	use 'wbthomason/packer.nvim'
+  -- Colorscheme
+  { 'dracula/vim', name = 'dracula' },
 
-	use {
-		'nvim-telescope/telescope.nvim', tag = '0.1.1',
-		requires = { {'nvim-lua/plenary.nvim'} }
-	}
+  -- Git
+  'tpope/vim-fugitive',
 
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+  -- Language specific plugins
+  'rust-lang/rust.vim',
+  'fatih/vim-go',
+  { 'psf/black', branch = 'stable' },
 
-	use {'dracula/vim', as = 'dracula'}
+  -- LSP Support
+  {
+    'neovim/nvim-lspconfig',
+    dependencies = {
+      'williamboman/mason.nvim',
+      'williamboman/mason-lspconfig.nvim',
+    },
+  },
 
-	use('tpope/vim-fugitive')
-
-	-- language specific plugs
-	-- need that autoformatting
-	use('rust-lang/rust.vim')
-
-	use('fatih/vim-go')
-
-	use { 'psf/black', branch = 'stable' }
-
-	use {
-	  'VonHeikemen/lsp-zero.nvim',
-	  branch = 'v2.x',
-	  requires = {
-	    -- LSP Support
-	    {'neovim/nvim-lspconfig'},             -- Required
-	    {                                      -- Optional
-	      'williamboman/mason.nvim',
-	      run = function()
-		pcall(vim.cmd, 'MasonUpdate')
-	      end,
-	    },
-	    {'williamboman/mason-lspconfig.nvim'}, -- Optional
-
-	    -- Autocompletion
-	    {'hrsh7th/nvim-cmp'},     -- Required
-	    {'hrsh7th/cmp-nvim-lsp'}, -- Required
-	    {'L3MON4D3/LuaSnip'},     -- Required
-	  }
-}
-
-end)
+  -- Autocompletion
+  {
+    'hrsh7th/nvim-cmp',
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'L3MON4D3/LuaSnip',
+    },
+  },
+})

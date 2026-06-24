@@ -1,20 +1,16 @@
 # list of packages to be installed by install.py
 
-WAYLAND = False
+WAYLAND = True
+INSTALL_SECURITY_TOOLS = True
 
-AUR_PKGS = [
-    "dmenu2",
-    "font-manager-git",
-    "mozillavpn",
-    "nordic-theme-git",
-    "ttf-font-icons",
-]
+AUR_PKGS = ["dmenu2", "nordic-theme-git", "dracula-gtk-theme"]
 
 
 ARCH_PKGS = [
     "alacritty",
     "base",
     "bind",
+    "blueman",
     "brightnessctl",
     "bspwm",
     "code",
@@ -25,10 +21,14 @@ ARCH_PKGS = [
     "efibootmgr",
     "firefox",
     "glances",
+    "gnome-disk-utility",
+    "gnome-keyring",
+    "go",
     "graphicsmagick",
     "gst-plugin-pipewire",
     "gvfs-smb",
     "htop",
+    "i3lock",
     "imv",
     "intel-media-driver",
     "intel-ucode",
@@ -36,6 +36,8 @@ ARCH_PKGS = [
     "light",
     "linux-firmware",
     "linux-headers",
+    "luarocks",
+    "lxappearance",
     "man-db",
     "nano",
     "nitrogen",
@@ -45,25 +47,30 @@ ARCH_PKGS = [
     "networkmanager-l2tp",
     "networkmanager-pptp",
     "nmap",
-    "ntp",
     "openssh",
+    "openvpn",
     "otf-font-awesome",
+    "pacman-contrib",
     "papirus-icon-theme",
     "pavucontrol",
     "pipewire-alsa",
     "pipewire-jack",
     "pipewire-pulse",
     "pluma",
+    "python-neovim",
+    "python-black",
     "qemu",
     "qtile",
     "rizin",
     "rz-cutter",
     "rz-ghidra",
+    "shellcheck",
     "smartmontools",
     "strace",
     "strongswan",
     "thunar",
     "transmission-gtk",
+    "ttf-sourcecodepro-nerd",
     "unzip",
     "usbutils",
     "vala",
@@ -72,9 +79,9 @@ ARCH_PKGS = [
     "vulkan-intel",
     "wget",
     "wireless_tools",
-    "wmctl",
-    "xorg-server",
+    "xdg-user-dirs",
     "xfce4-clipman-plugin",
+    "xorg-server",
     "xorg-xinit",
 ]
 
@@ -86,17 +93,31 @@ if WAYLAND:
             "swaylock-effects",
             "wdisplays",
             "wlogout",
-            "wob",
         ]
     )
-    ARCH_PKS.extend(
+    ARCH_PKGS.extend(
         [
             "fuzzel",
+            "sway",
+            "swaybg",
+            "swayimg",
             "swayidle",
             "qt5-wayland",
             "waybar",
             "wofi",
             "wl-clipboard",
             "xorg-xwayland",
+        ]
+    )
+
+if INSTALL_SECURITY_TOOLS:
+    ARCH_PKGS.extend(
+        [
+            "metasploit",
+            "exploitdb",
+            "hydra",
+            "john",
+            "hashcat",
+            "hashcat-utils",
         ]
     )

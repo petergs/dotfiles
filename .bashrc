@@ -1,6 +1,5 @@
+#!/bin/bash
 # prompt
-#PS1='[\u@\h \W]\$ '  # Default
-#PS1='\[\e[1;32m\][\u@\h] \w\[\e[0m\]\n\$ '
 set_ps1() {
     local start="\[$(tput bold)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]"
     local host=""
@@ -13,8 +12,15 @@ set_ps1() {
     local end=":[\[$(tput sgr0)\]\[\033[38;5;4m\]\w\[$(tput sgr0)\]] \$> \[$(tput sgr0)\]"
     echo "${start}${host}${end}"
 }
-#PS1="\[$(tput bold)\]\[\033[38;5;2m\]\u\[$(tput sgr0)\]@\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;2m\]\h\[$(tput sgr0)\]:[\[$(tput sgr0)\]\[\033[38;5;4m\]\w\[$(tput sgr0)\]] \$> \[$(tput sgr0)\]"
 PS1=$(set_ps1)
+
+# set clipboard cmd
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    CLIPCMD="wl-copy -n"
+else
+    CLIPCMD="pbcopy"
+fi
+
 
 # set EDITOR
 export EDITOR="vim"
@@ -52,43 +58,84 @@ fi
 # ensure ~/.local/bin is in PATH
 PATH=~/.local/bin:~/go/bin:$PATH
 
-# other aliases
-alias hostname='hostnamectl hostname'
-
-if [[ $TERM='xterm-kitty' ]]
-then
-    alias kssh="kitty +kitten ssh"
-fi
-
 # aliases
 alias dev='cd ~/Documents/dev/'
 alias ctf='cd ~/Documents/dev/ctf'
 alias qtile-logs='tail -n 30 ~/.local/share/qtile/qtile.log'
 alias qtile-reload='qtile cmd-obj -o cmd -f reload_config'
 alias vim='nvim' 
+alias hostname='hostnamectl hostname'
+alias open='xdg-open'
 
 # ls defaults
 alias la='ls -la --color=auto'
 alias ls='ls --color=auto'
 
+# grep color
+alias grep='grep --color=auto'
+
 # misc funcs
 # compress_pdf in.pdf out.pdf
 compress_pdf() {
-    gs  -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile=$2 $1
+    gs  -sDEVICE=pdfwrite -dCompatibilityLevel=1.4 -dPDFSETTINGS=/prepress -dNOPAUSE -dQUIET -dBATCH -sOutputFile="$2" "$1"
 }
+
+# top 20 largest directories in $1
+dud() {
+    du -h "$1" 2> /dev/null | sort -n -r | head -n 20
+}
+
+# get public ip
+pubip() {
+    curl --silent https://ipinfo.io/json | jq -r '.ip'
+}
+
+
+# notes
+notes() {
+    if [[ "$1" = "" ]]; then
+        file="$(date +'%Y-%m')-notes.md"
+        if ! [ -f ~/Documents/notes/"$file" ]; then
+            touch "$file"
+        fi
+        vim ~/Documents/notes/"$file"
+    else
+        ls -la ~/Documents/notes/*"$1"*.md | awk '{print $9}' | head -1 | xargs -o nvim
+    fi
+}
+
+# unzip 7z archives with password infected
+malunzip() {
+    7z x "$1" -p"infected"
+}
+
+# urldecode
+urldecode() {
+    echo -n "$1" | python3 -c "import sys; from urllib.parse import unquote; print(unquote(sys.stdin.read()));" | tee >($COPYCMD)
+}
+
+# decode microsoft atp safelinks
+sldecode() {
+    echo -n "$1" | python3 -c "import sys; from urllib.parse import unquote, urlparse, parse_qs; print(parse_qs(urlparse(unquote(sys.stdin.read())).query)['url'][0]);" | tee >($CLIPCMD)
+}
+
+# default yt-dlp command for music
+yt-music-dl() {
+    yt-dlp --embed-thumbnail -f bestaudio -x --audio-format mp3 --audio-quality 320k "$1"
+}
+
 
 # load additional environment variables
 if [ -f "$HOME/.cargo/env" ]; then
     . "$HOME/.cargo/env"
 fi
 
-if [ -f "$HOME/.env" ]; then
-    source ~/.env
+if [ -f "$HOME/.rye/env" ]; then
+. "$HOME/.rye/env"
 fi
 
 
-
-
-
-
+if [ -f "$HOME/.env" ]; then
+    source ~/.env
+fi
 

@@ -5,6 +5,7 @@ import psutil
 import json
 
 ramp = "▁▂▃▄▅▆▇█"
+WAYBAR = False
 
 
 def print_ramp(cpus: list[float] | float) -> str:
@@ -13,7 +14,7 @@ def print_ramp(cpus: list[float] | float) -> str:
         cpus = [cpus]
     for x in cpus:
         bar = get_bar(x)
-        line = f"{bar} {line}"
+        line = f"<span color='{get_color(x)}'>{bar}</span> {line}"
     return line
 
 
@@ -43,16 +44,33 @@ def get_class(p: float) -> str:
     return c
 
 
+def get_color(p: float) -> str:
+    c = ""
+    if p >= 60:
+        c = "#ff5555"  # red color
+    elif p >= 40:
+        c = "#ffb86c"  # orange Color
+    elif p >= 20:
+        c = "#f1fa8c"  # yellow color
+    else:
+        c = "#50fa7b"  # green color
+
+    return c
+
+
 if __name__ == "__main__":
     cpus = psutil.cpu_percent(1, percpu=True)
     ramp = print_ramp(cpus)
     percentage = sum(cpus) / float(len(cpus))
     css_class = get_class(percentage)
-    res = {
-        "text": ramp,
-        "alt": "alt",
-        "tooltip": "tip",
-        "class": css_class,
-        "percentage": percentage,
-    }
-    print(json.dumps(res, ensure_ascii=False))
+    if WAYBAR:
+        res = {
+            "text": ramp,
+            "alt": "alt",
+            "tooltip": "tip",
+            "class": "",
+            "percentage": percentage,
+        }
+        print(json.dumps(res, ensure_ascii=False))
+    else:
+        print(f"<txt>{ramp}</txt>")

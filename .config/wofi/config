@@ -1,7 +1,7 @@
 show=run
 columns=1
-height=25
-yoffset=-30
+height=30
+yoffset=-32
 xoffset=150
 hide_scroll=true
 orientation=horizontal
